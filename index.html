@@ -176,6 +176,122 @@
                 animation: none !important;
             }
         }
+
+        /* Campaign Features Section Styles */
+
+        .campaign-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        }
+
+        .campaign-card img {
+            transition: transform 0.3s ease;
+        }
+
+        .campaign-card:hover img {
+            transform: scale(1.05);
+        }
+
+        /* Gradient border hover effect for all campaign cards */
+        .campaign-card {
+            position: relative;
+            border: 1px solid transparent;
+            transition: transform 0.3s ease, box-shadow 0.3s ease, border 0.3s ease;
+        }
+
+        .campaign-card::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            padding: 1px;
+            background: linear-gradient(90deg, #17B0E9 0%, #25FEB2 27.88%, #A4E7FD 59.13%, #16AFE9 100%);
+            border-radius: 16px;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            mask-composite: xor;
+            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            -webkit-mask-composite: xor;
+        }
+
+        .campaign-card:hover::before,
+        .campaign-card:focus-within::before {
+            opacity: 1;
+        }
+
+        /* Ensure focus states work properly with keyboard navigation */
+        .campaign-card:focus-within {
+            outline: none;
+        }
+
+        /* Touch device support - show gradient on tap/touch */
+        @media (hover: none) and (pointer: coarse) {
+            .campaign-card:active::before {
+                opacity: 1;
+            }
+        }
+
+        /* Reduce motion for users who prefer it */
+        @media (prefers-reduced-motion: reduce) {
+            .campaign-card::before {
+                transition: none;
+            }
+        }
+
+        /* Button responsive design */
+        @media (max-width: 640px) {
+            .campaign-buttons {
+                flex-direction: column;
+                gap: 8px;
+            }
+            
+            .campaign-buttons button {
+                width: 100%;
+                min-width: 200px;
+            }
+            
+            .campaign-card img[alt="For Brand Illustration"] {
+                width: 130px !important;
+                height: 167px !important;
+            }
+            
+            .campaign-card img[alt="For Agency Illustration"] {
+                width: 157px !important;
+                height: 133px !important;
+            }
+            
+            .campaign-card img[alt="For Creators/Publisher Illustration"] {
+                width: 137px !important;
+                height: 133px !important;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .campaign-card {
+                min-height: 350px !important;
+            }
+        }
+
+        /* Third card specific button layout */
+        .campaign-card:last-child .campaign-buttons {
+            flex-direction: row;
+        }
+
+        .campaign-card:last-child .campaign-buttons button:first-child {
+            flex: 1;
+            min-width: 0;
+        }
+
+        @media (max-width: 640px) {
+            .campaign-card:last-child .campaign-buttons {
+                flex-direction: column;
+            }
+            
+            .campaign-card:last-child .campaign-buttons button:first-child {
+                flex: none;
+                width: 100%;
+            }
+        }
     </style>
 </head>
 <body class="min-h-screen bg-white">
@@ -227,7 +343,6 @@
                 </div>
             </div>
         </section>
-
         <!-- About Section -->
         <section id="about" class="py-20 bg-white">
             <div class="container mx-auto px-32">
@@ -488,6 +603,111 @@
                         <button id="autoplay-toggle" class="px-3 py-1 text-xs bg-white/20 text-white rounded-full hover:bg-white/30 transition-colors focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-blue-600" aria-label="Toggle autoplay">
                             <span id="autoplay-text">Pause</span>
                         </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Campaign Features Section -->
+        <section id="campaign-features" class="py-20 bg-white">
+            <div class="container mx-auto px-32">
+                <!-- Section Title -->
+                <div class="text-center mb-10">
+                    <h2 class="text-4xl font-semibold text-[#12203A] mb-4 leading-[1.21] tracking-[-0.02em]">
+                        It's easy to make a good campaign when you choose BookMeNow
+                    </h2>
+                </div>
+
+                <!-- Three Column Layout -->
+                <div class="flex flex-col md:flex-row gap-0 justify-stretch max-w-[1183px] mx-auto">
+                    <!-- Column 1 - For Brand -->
+                    <div class="flex-1 mb-4 md:mb-0">
+                        <div class="campaign-card bg-[#FEFEFE] rounded-2xl p-6 flex flex-col items-center gap-6 h-full min-h-[400px] relative overflow-hidden">
+                            <!-- Illustration -->
+                            <div class="flex-shrink-0">
+                                <img src="public/for-brand-illustration.svg" alt="For Brand Illustration" class="w-[173px] h-[222px] object-contain">
+                            </div>
+                            
+                            <!-- Title -->
+                            <h3 class="text-2xl font-semibold text-[#1C1C1C] text-center tracking-[0.02em]">
+                                For Brand
+                            </h3>
+                            
+                            <!-- Description -->
+                            <p class="text-[22px] font-normal text-[#344054] opacity-80 text-center leading-[1.64] tracking-[0.02em] flex-1 flex items-center">
+                                Sign-up to plan and launch your campaigns with ease
+                            </p>
+                            
+                            <!-- Buttons -->
+                            <div class="campaign-buttons flex gap-3 w-full justify-center flex-wrap">
+                                <button class="bg-[#1262F3] text-white px-3 py-3 rounded-lg font-semibold text-base leading-6 tracking-[0.03em] h-12 flex items-center justify-center transition-colors hover:bg-blue-700">
+                                    Start Your Campaign Now
+                                </button>
+                                <button class="border border-[#1262F3] text-[#1262F3] px-3 py-3 rounded-lg font-semibold text-base leading-6 tracking-[0.03em] h-12 flex items-center justify-center transition-colors hover:bg-blue-50">
+                                    See more
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Column 2 - For Agency -->
+                    <div class="flex-1 mb-4 md:mb-0">
+                        <div class="campaign-card campaign-card-agency bg-[#FEFEFE] rounded-2xl p-6 flex flex-col items-center gap-6 h-full min-h-[400px]">
+                            <!-- Illustration -->
+                            <div class="flex-shrink-0">
+                                <img src="public/for-agency-illustration.svg" alt="For Agency Illustration" class="w-[263px] h-[222px] object-contain">
+                            </div>
+                            
+                            <!-- Title -->
+                            <h3 class="text-2xl font-semibold text-[#1C1C1C] text-center tracking-[0.02em]">
+                                For Agency
+                            </h3>
+                            
+                            <!-- Description -->
+                            <p class="text-[22px] font-normal text-[#344054] opacity-80 text-center leading-[1.64] tracking-[0.02em] flex-1 flex items-center">
+                                Sign-up to plan and launch your campaigns with ease
+                            </p>
+                            
+                            <!-- Buttons -->
+                            <div class="campaign-buttons flex gap-3 w-full justify-center flex-wrap">
+                                <button class="bg-[#1262F3] text-white px-3 py-3 rounded-lg font-semibold text-base leading-6 tracking-[0.03em] h-12 flex items-center justify-center transition-colors hover:bg-blue-700">
+                                    Start Your Campaign Now
+                                </button>
+                                <button class="border border-[#1262F3] text-[#1262F3] px-3 py-3 rounded-lg font-semibold text-base leading-6 tracking-[0.03em] h-12 flex items-center justify-center transition-colors hover:bg-blue-50">
+                                    See more
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Column 3 - For Creators/Publisher -->
+                    <div class="flex-1">
+                        <div class="campaign-card bg-[#FEFEFE] rounded-2xl p-6 flex flex-col items-center gap-6 h-full border border-gray-200 min-h-[400px]">
+                            <!-- Illustration -->
+                            <div class="flex-shrink-0">
+                                <img src="public/for-creators-illustration.svg" alt="For Creators/Publisher Illustration" class="w-[229px] h-[222px] object-contain">
+                            </div>
+                            
+                            <!-- Title -->
+                            <h3 class="text-2xl font-semibold text-[#1C1C1C] text-center tracking-[0.02em]">
+                                For Creators/ Publisher
+                            </h3>
+                            
+                            <!-- Description -->
+                            <p class="text-[22px] font-normal text-[#344054] opacity-80 text-center leading-[1.64] tracking-[0.02em] flex-1 flex items-center">
+                                Sign-up to plan and launch your campaigns with ease
+                            </p>
+                            
+                            <!-- Buttons -->
+                            <div class="campaign-buttons flex gap-3 w-full justify-center flex-wrap">
+                                <button class="bg-[#1262F3] text-white px-3 py-3 rounded-lg font-semibold text-base leading-6 tracking-[0.03em] h-12 flex items-center justify-center transition-colors hover:bg-blue-700 flex-1">
+                                    Join Us Now
+                                </button>
+                                <button class="border border-[#1262F3] text-[#1262F3] px-3 py-3 rounded-lg font-semibold text-base leading-6 tracking-[0.03em] h-12 flex items-center justify-center transition-colors hover:bg-blue-50">
+                                    See more
+                                </button>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
