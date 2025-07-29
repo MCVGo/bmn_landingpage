@@ -1,0 +1,8 @@
+{
+  "permissions": {
+    "allow": [
+      "mcp__figma-server__download_figma_images"
+    ],
+    "deny": []
+  }
+}
