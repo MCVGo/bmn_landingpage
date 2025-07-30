@@ -1,9 +1,0 @@
-{
-  "permissions": {
-    "allow": [
-      "mcp__figma-server__download_figma_images",
-      "mcp__figma-server__get_figma_data"
-    ],
-    "deny": []
-  }
-}
