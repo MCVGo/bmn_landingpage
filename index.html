@@ -1,0 +1,2405 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BMN Landing Page</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        .feature-item:not(:first-child)::before {
+            content: '';
+            position: absolute;
+            left: 16px; /* Center align with the icon (32px/2) */
+            width: 2px;
+            height: 24px; /* Reduced height to connect icon centers */
+            background-color: #CEFCF4;
+            top: -28px; /* Position to connect icon centers */
+            z-index: 1;
+        }
+        
+        .feature-item {
+            position: relative;
+            z-index: 2;
+        }
+
+        /* Logo Carousel Custom Styles */
+        #logo-carousel {
+            scroll-behavior: smooth;
+        }
+
+        .logo-item {
+            cursor: pointer;
+        }
+
+        /* Carousel slide animations */
+        #logo-slides {
+            transform-style: preserve-3d;
+            will-change: transform;
+        }
+
+        /* Custom loading animation */
+        @keyframes pulse-glow {
+            0%, 100% {
+                opacity: 1;
+                transform: scale(1);
+            }
+            50% {
+                opacity: 0.7;
+                transform: scale(1.05);
+            }
+        }
+
+        #carousel-loading {
+            animation: pulse-glow 2s ease-in-out infinite;
+        }
+
+        /* Pagination dot animations */
+        .pagination-dot {
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .pagination-dot::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            background: rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            transition: width 0.3s ease, height 0.3s ease;
+        }
+
+        .pagination-dot:hover::before {
+            width: 100%;
+            height: 100%;
+        }
+
+        .pagination-dot.active {
+            background-color: #87E5D5 !important;
+            transform: scale(1.2);
+        }
+
+        /* Button hover effects */
+        #logo-prev-btn, #logo-next-btn {
+            position: relative;
+            overflow: hidden;
+            transform: translateZ(0);
+        }
+
+        #logo-prev-btn::before, #logo-next-btn::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            transition: width 0.3s ease, height 0.3s ease;
+        }
+
+        #logo-prev-btn:hover::before, #logo-next-btn:hover::before {
+            width: 100%;
+            height: 100%;
+        }
+
+        /* Mobile optimizations */
+        @media (max-width: 640px) {
+            .logo-item {
+                min-width: 280px;
+            }
+        }
+
+        /* Tablet optimizations */
+        @media (min-width: 641px) and (max-width: 1024px) {
+            .logo-item {
+                min-width: 200px;
+            }
+        }
+
+        /* Desktop optimizations */
+        @media (min-width: 1025px) {
+            .logo-item {
+                min-width: 180px;
+            }
+        }
+
+        /* Focus states for accessibility */
+        .logo-item:focus-within {
+            outline: 2px solid #87E5D5;
+            outline-offset: 2px;
+        }
+
+        /* Smooth transitions for all interactive elements */
+        button, .logo-item, .pagination-dot {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        /* Image Carousel Styles */
+        #imageCarousel {
+            width: 100%;
+            height: 150px;
+            position: relative;
+            overflow: hidden;
+            border-radius: 0.5rem;
+        }
+        
+        .carousel-container {
+            position: relative;
+            width: 100%;
+            height: 100%;
+        }
+        
+        .carousel-slide {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            transition: opacity 0.6s ease-in-out;
+            z-index: 1;
+        }
+
+        .carousel-slide.active {
+            opacity: 1;
+            z-index: 2;
+        }
+
+        .carousel-slide img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 0.5rem;
+        }
+
+        .carousel-dot.active {
+            background-color: #87E5D5 !important;
+            transform: scale(1.2);
+        }
+
+        .carousel-prev, .carousel-next {
+            z-index: 10;
+        }
+
+        .carousel-dot {
+            z-index: 10;
+        }
+
+        /* Auto-play indicator animation */
+        @keyframes progress-bar {
+            from {
+                width: 0%;
+            }
+            to {
+                width: 100%;
+            }
+        }
+
+        .autoplay-progress {
+            height: 2px;
+            background: rgba(255, 255, 255, 0.3);
+            border-radius: 1px;
+            overflow: hidden;
+        }
+
+        .autoplay-progress::before {
+            content: '';
+            display: block;
+            height: 100%;
+            background: #87E5D5;
+            animation: progress-bar 5s linear infinite;
+        }
+
+        /* Reduced motion support */
+        @media (prefers-reduced-motion: reduce) {
+            #logo-slides {
+                transition-duration: 0.01ms !important;
+            }
+            
+            .logo-item, .pagination-dot, button {
+                transition: none !important;
+                animation: none !important;
+            }
+        }
+
+        /* Campaign Features Section Styles */
+
+        .campaign-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        }
+
+        .campaign-card img {
+            transition: transform 0.3s ease;
+        }
+
+        .campaign-card:hover img {
+            transform: scale(1.05);
+        }
+
+        /* Gradient border hover effect for all campaign cards */
+        .campaign-card {
+            position: relative;
+            border: 1px solid transparent;
+            transition: transform 0.3s ease, box-shadow 0.3s ease, border 0.3s ease;
+        }
+
+        .campaign-card::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            padding: 1px;
+            background: linear-gradient(90deg, #17B0E9 0%, #25FEB2 27.88%, #A4E7FD 59.13%, #16AFE9 100%);
+            border-radius: 16px;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            mask-composite: xor;
+            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            -webkit-mask-composite: xor;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .campaign-card:hover::before,
+        .campaign-card:focus-within::before {
+            opacity: 1;
+        }
+
+        /* Campaign expandable content styles */
+        .campaign-card [id$="-content"] {
+            transition: all 0.3s ease;
+            overflow: hidden;
+        }
+
+        .campaign-card [id$="-content"].hidden {
+            display: none !important;
+        }
+
+        .campaign-card [id$="-content"] h4 {
+            color: #1C1C1C;
+        }
+
+        .campaign-card [id$="-content"] ul li {
+            font-size: 14px;
+            line-height: 1.4;
+        }
+
+        /* Ensure cards can expand smoothly */
+        .campaign-card {
+            transition: all 0.3s ease;
+        }
+
+        /* Better visual integration */
+        .campaign-card [id$="-content"] .border-t {
+            border-color: #E5E7EB;
+        }
+
+        /* See more button styles */
+        button[id^="see-more"] {
+            cursor: pointer !important;
+            transition: all 0.3s ease !important;
+            position: relative !important;
+            z-index: 10 !important;
+            pointer-events: auto !important;
+            min-width: 100px !important;
+            width: auto !important;
+        }
+
+        button[id^="see-more"]:hover {
+            background-color: #F0F4FF !important;
+            border-color: #0B5ED7 !important;
+            color: #0B5ED7 !important;
+            cursor: pointer !important;
+            transform: translateY(-1px) !important;
+        }
+
+        button[id^="see-more"]:active {
+            transform: translateY(0) !important;
+            background-color: #E6F0FF !important;
+        }
+
+        button[id^="see-more"]:focus {
+            outline: none !important;
+        }
+
+        /* Ensure all campaign buttons are above the overlay */
+        .campaign-buttons button {
+            position: relative !important;
+            z-index: 10 !important;
+            pointer-events: auto !important;
+        }
+
+        /* Ensure focus states work properly with keyboard navigation */
+        .campaign-card:focus-within {
+            outline: none;
+        }
+
+        /* Touch device support - show gradient on tap/touch */
+        @media (hover: none) and (pointer: coarse) {
+            .campaign-card:active::before {
+                opacity: 1;
+            }
+        }
+
+        /* Reduce motion for users who prefer it */
+        @media (prefers-reduced-motion: reduce) {
+            .campaign-card::before {
+                transition: none;
+            }
+        }
+
+        /* Button responsive design */
+        @media (max-width: 640px) {
+            .campaign-buttons {
+                flex-direction: column;
+                gap: 8px;
+            }
+            
+            .campaign-buttons button {
+                width: 100%;
+                min-width: 200px;
+            }
+            
+            .campaign-card img[alt="For Brand Illustration"] {
+                width: 130px !important;
+                height: 167px !important;
+            }
+            
+            .campaign-card img[alt="For Agency Illustration"] {
+                width: 157px !important;
+                height: 133px !important;
+            }
+            
+            .campaign-card img[alt="For Creators/Publisher Illustration"] {
+                width: 137px !important;
+                height: 133px !important;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .campaign-card {
+                min-height: 350px !important;
+            }
+        }
+
+        /* Third card specific button layout */
+        .campaign-card:last-child .campaign-buttons {
+            flex-direction: row;
+        }
+
+        .campaign-card:last-child .campaign-buttons button:first-child {
+            flex: 1;
+            min-width: 0;
+        }
+
+        @media (max-width: 640px) {
+            .campaign-card:last-child .campaign-buttons {
+                flex-direction: column;
+            }
+            
+            .campaign-card:last-child .campaign-buttons button:first-child {
+                flex: none;
+                width: 100%;
+            }
+        }
+
+        /* Call to Action Section Styles */
+        .cta-card {
+            position: relative;
+            border: 1px solid transparent;
+            transition: transform 0.3s ease, box-shadow 0.3s ease, border 0.3s ease;
+        }
+
+        .cta-card::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            padding: 1px;
+            background: linear-gradient(90deg, #17B0E9 0%, #25FEB2 27.88%, #A4E7FD 59.13%, #16AFE9 100%);
+            border-radius: 20px;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            mask-composite: xor;
+            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            -webkit-mask-composite: xor;
+        }
+
+        .cta-card:hover::before,
+        .cta-card:focus-within::before {
+            opacity: 1;
+        }
+
+        .cta-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Ensure focus states work properly with keyboard navigation */
+        .cta-card:focus-within {
+            outline: none;
+        }
+
+        /* Touch device support - show gradient on tap/touch */
+        @media (hover: none) and (pointer: coarse) {
+            .cta-card:active::before {
+                opacity: 1;
+            }
+        }
+
+        /* Reduce motion for users who prefer it */
+        @media (prefers-reduced-motion: reduce) {
+            .cta-card::before {
+                transition: none;
+            }
+        }
+
+        /* FAQ Section Styles */
+        .faq-tab {
+            position: relative;
+            overflow: hidden;
+            min-height: 48px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 12px 20px;
+        }
+
+        .faq-tab.active {
+            background-color: #1262F3 !important;
+        }
+
+        .faq-tab.active span {
+            color: #FEFEFE !important;
+            font-weight: 600 !important;
+        }
+
+        .faq-tab:not(.active) {
+            background-color: #F3F6FB;
+        }
+
+        .faq-tab:not(.active) span {
+            color: #D0D5DD;
+            font-weight: 400;
+        }
+
+        .faq-tab:not(.active):hover {
+            background-color: #E5E7EB;
+        }
+
+        .faq-tab:not(.active):hover span {
+            color: #9CA3AF;
+        }
+
+        /* FAQ Content */
+        .faq-content {
+            opacity: 1;
+            transition: opacity 0.3s ease;
+        }
+
+        .faq-content.hidden {
+            display: none;
+        }
+
+        .faq-content.active {
+            display: block;
+        }
+
+        /* FAQ Accordion */
+        .faq-item {
+            border: 1px solid transparent;
+            transition: all 0.3s ease;
+        }
+
+        .faq-item:hover {
+            border-color: rgba(18, 32, 58, 0.1);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+        }
+
+        .faq-question {
+            cursor: pointer;
+            user-select: none;
+        }
+
+        .faq-answer {
+            transition: all 0.3s ease;
+        }
+
+        .faq-answer.expanded {
+            max-height: 200px !important;
+        }
+
+        /* FAQ Arrow Animation */
+        .faq-question svg {
+            transition: transform 0.3s ease;
+        }
+
+        .faq-question.expanded svg {
+            transform: rotate(180deg);
+        }
+
+        /* Bold text for expanded questions */
+        .faq-question.expanded h3 {
+            font-weight: 600 !important;
+        }
+
+        /* Responsive FAQ Styles */
+        @media (max-width: 1024px) {
+            .faq-tab {
+                padding: 12px 16px;
+            }
+            
+            .faq-tab span {
+                font-size: 18px;
+            }
+            
+            .faq-item {
+                padding: 20px;
+            }
+            
+            .faq-question h3 {
+                font-size: 18px;
+                line-height: 1.5;
+            }
+            
+            .faq-answer p {
+                font-size: 18px;
+                line-height: 1.5;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .faq-tab {
+                padding: 10px 12px;
+                gap: 4px;
+            }
+            
+            .faq-tab span {
+                font-size: 16px;
+            }
+            
+            .faq-item {
+                padding: 16px;
+            }
+            
+            .faq-question h3 {
+                font-size: 16px;
+                line-height: 1.4;
+            }
+            
+            .faq-answer p {
+                font-size: 16px;
+                line-height: 1.4;
+            }
+        }
+
+        /* Focus states for accessibility */
+        .faq-tab:focus-within,
+        .faq-question:focus-within {
+            outline: 2px solid #1262F3;
+            outline-offset: 2px;
+        }
+
+        /* Smooth transitions for all FAQ interactive elements */
+        .faq-tab, .faq-item, .faq-question, .faq-answer {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        /* Reduced motion support for FAQ */
+        @media (prefers-reduced-motion: reduce) {
+            .faq-tab, .faq-item, .faq-question, .faq-answer, .faq-question svg {
+                transition: none !important;
+                animation: none !important;
+            }
+        }
+
+        /* Screen reader only class */
+        .sr-only {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            padding: 0;
+            margin: -1px;
+            overflow: hidden;
+            clip: rect(0, 0, 0, 0);
+            white-space: nowrap;
+            border: 0;
+        }
+
+        /* Responsive design for CTA section */
+        @media (max-width: 640px) {
+            .cta-card {
+                padding: 40px 24px;
+            }
+            
+            .cta-card h2 {
+                font-size: 28px;
+                line-height: 1.3;
+            }
+            
+            .cta-card button {
+                font-size: 18px;
+                padding: 12px 20px;
+            }
+        }
+
+        @media (min-width: 641px) and (max-width: 1024px) {
+            .cta-card {
+                padding: 50px 32px;
+            }
+        }
+    </style>
+</head>
+<body class="min-h-screen bg-white">
+    <!-- Header Section -->
+    <header class="bg-[#12203A] shadow-sm">
+        <nav class="container mx-auto px-32 py-2 flex items-center justify-between">
+            <div class="flex items-center">
+                <img src="public/logo.svg" alt="BMN" class="h-8">
+            </div>
+            <ul class="hidden md:flex space-x-8">
+                <li><a href="#about" class="text-[#E4F0FE] hover:text-white font-semibold text-[22px]">About BookMeNow</a></li>
+                <li><a href="#brand" class="text-[#D0D5DD] hover:text-white text-[22px]">For Brand</a></li>
+                <li><a href="#agency" class="text-[#D0D5DD] hover:text-white text-[22px]">For Agency</a></li>
+                <li><a href="#creators" class="text-[#D0D5DD] hover:text-white text-[22px]">For Creators</a></li>
+                <li><a href="#faqs" class="text-[#D0D5DD] hover:text-white text-[22px]">FAQs</a></li>
+            </ul>
+            <div class="flex items-center gap-8">
+                <button class="bg-[#1262F3] text-white px-5 py-3 rounded-lg font-semibold text-[22px] w-[150px]">
+                    Login
+                </button>
+                <button class="md:hidden text-white">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                    </svg>
+                </button>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Main Content -->
+    <main>
+        <!-- Hero Section -->
+        <section id="home" class="bg-[#12203A] relative py-20 overflow-hidden" style="background-image: url('public/Mask group.png'); background-size: cover; background-position: center;">
+            <div class="container mx-auto px-32 flex items-center gap-8">
+                <div class="w-1/2 text-left relative z-10">
+                    <h1 class="text-5xl font-bold text-white mb-6 leading-tight">
+                        Wholesale Booking Platform For<br>
+                        Social Media Advertising Content
+                    </h1>
+                    <p class="text-xl text-gray-300 mb-8 leading-relaxed">
+                        Make targeted bookings across YouTube, Facebook, and TikTok with BookMeNow's self-service platform.
+                    </p>
+                    <button class="bg-[#1262F3] text-white px-8 py-3 rounded-lg font-semibold hover:bg-blue-700 transition text-lg">
+                        Get Started
+                    </button>
+                </div>
+                <div class="w-1/2 flex justify-start">
+                    <img src="public/Group 7405.png" alt="Platform Preview" class="max-w-full h-auto">
+                </div>
+            </div>
+        </section>
+        <!-- About Section -->
+        <section id="about" class="py-20 bg-white">
+            <div class="container mx-auto px-32">
+                <h2 class="text-4xl font-bold text-[#12203A] mb-6 uppercase">What Is BookMeNow?</h2>
+                <div class="grid md:grid-cols-2 gap-16 items-start">
+                    <div>
+                        <p class="text-xl text-[#12203A] mb-8 leading-relaxed opacity-80">
+                            BookMeNow is a one-stop platform for advertisers to book targeted advertising on social media channels with potential contributors and huge trusted premium content pools.
+                        </p>
+                        <div id="imageCarousel">
+                            <div class="carousel-container">
+                                <div class="carousel-slide active">
+                                    <img src="public/about4.png" alt="Team Celebration">
+                                </div>
+                                <!-- <div class="carousel-slide">
+                                    <img src="public/about2.png" alt="What is BookMeNow">
+                                </div>
+                                <div class="carousel-slide">
+                                    <img src="public/about3.png" alt="Team Collaboration">
+                                </div> -->
+                                
+                                <!-- Navigation arrows -->
+                                <button class="carousel-prev absolute left-4 top-1/2 transform -translate-y-1/2 bg-black bg-opacity-50 text-white p-2 rounded-full hover:bg-opacity-70 transition-all">
+                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
+                                    </svg>
+                                </button>
+                                <button class="carousel-next absolute right-4 top-1/2 transform -translate-y-1/2 bg-black bg-opacity-50 text-white p-2 rounded-full hover:bg-opacity-70 transition-all">
+                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                                    </svg>
+                                </button>
+                                
+                                <!-- Dot indicators -->
+                                <div class="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex space-x-2">
+                                    <button class="carousel-dot w-3 h-3 rounded-full bg-gray-400 hover:bg-gray-300 transition-all active"></button>
+                                    <button class="carousel-dot w-3 h-3 rounded-full bg-gray-400 hover:bg-gray-300 transition-all"></button>
+                                    <button class="carousel-dot w-3 h-3 rounded-full bg-gray-400 hover:bg-gray-300 transition-all"></button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="space-y-8 relative">
+                        <div class="flex items-start gap-4 feature-item">
+                            <div class="flex-shrink-0 w-8 h-8 bg-[#CEFCF4] rounded-full flex items-center justify-center">
+                                <div class="w-6 h-6 bg-[#87E5D5] rounded-full flex items-center justify-center">
+                                    <svg class="w-3 h-3 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path>
+                                    </svg>
+                                </div>
+                            </div>
+                            <span class="text-xl text-[#344054] opacity-80">Access a diverse pool of quality social creators</span>
+                        </div>
+                        <div class="flex items-start gap-4 feature-item">
+                            <div class="flex-shrink-0 w-8 h-8 bg-[#CEFCF4] rounded-full flex items-center justify-center">
+                                <div class="w-6 h-6 bg-[#87E5D5] rounded-full flex items-center justify-center">
+                                    <svg class="w-3 h-3 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path>
+                                    </svg>
+                                </div>
+                            </div>
+                            <span class="text-xl text-[#344054] opacity-80">Get pre-selected agency/brand bookings</span>
+                        </div>
+                        <div class="flex items-start gap-4 feature-item">
+                            <div class="flex-shrink-0 w-8 h-8 bg-[#CEFCF4] rounded-full flex items-center justify-center">
+                                <div class="w-6 h-6 bg-[#87E5D5] rounded-full flex items-center justify-center">
+                                    <svg class="w-3 h-3 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path>
+                                    </svg>
+                                </div>
+                            </div>
+                            <span class="text-xl text-[#344054] opacity-80">Automate and centralize your campaign workflows</span>
+                        </div>
+                        <div class="flex items-start gap-4 feature-item">
+                            <div class="flex-shrink-0 w-8 h-8 bg-[#CEFCF4] rounded-full flex items-center justify-center">
+                                <div class="w-6 h-6 bg-[#87E5D5] rounded-full flex items-center justify-center">
+                                    <svg class="w-3 h-3 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path>
+                                    </svg>
+                                </div>
+                            </div>
+                            <span class="text-xl text-[#344054] opacity-80">Cut costs with confirmed wholesale rates</span>
+                        </div>
+                        <div class="flex items-start gap-4 feature-item">
+                            <div class="flex-shrink-0 w-8 h-8 bg-[#CEFCF4] rounded-full flex items-center justify-center">
+                                <div class="w-6 h-6 bg-[#87E5D5] rounded-full flex items-center justify-center">
+                                    <svg class="w-3 h-3 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path>
+                                    </svg>
+                                </div>
+                            </div>
+                            <span class="text-xl text-[#344054] opacity-80">Receive support from throughout the process</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Logo Carousel Section -->
+        <section id="logo-carousel" class="py-16 bg-white">
+            <div class="container mx-auto px-4 md:px-16 lg:px-32">
+                <!-- Section Header -->
+                <div class="text-center mb-16">
+                    <h2 class="text-4xl font-bold text-[#12203A] mb-4 uppercase tracking-wide">Our Content Pools</h2>
+                    <p class="text-2xl font-semibold text-[#12203A] opacity-80 tracking-wide">Reach your audience through diverse categories</p>
+                </div>
+
+                <!-- Category Pills -->
+                <div class="mb-16">
+                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 max-w-6xl mx-auto">
+                        <!-- Row 1 -->
+                        <!-- News -->
+                        <div class="cursor-pointer transition-all duration-300 group">
+                            <div class="flex items-center gap-3 p-[1px] bg-transparent rounded-lg group-hover:bg-gradient-to-r group-hover:from-[#17B0E9] group-hover:via-[#25FEB2] group-hover:via-[#A4E7FD] group-hover:to-[#16AFE9]">
+                                <div class="flex items-center gap-3 px-[11px] py-[11px] bg-[#FEFEFE] rounded-lg w-full group-hover:bg-white">
+                                    <img src="public/news-icon.svg" alt="News" class="w-6 h-6">
+                                    <span class="text-[#12203A] font-medium text-xl">News</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Entertainment -->
+                        <div class="cursor-pointer transition-all duration-300 group">
+                            <div class="flex items-center gap-3 p-[1px] bg-transparent rounded-lg group-hover:bg-gradient-to-r group-hover:from-[#17B0E9] group-hover:via-[#25FEB2] group-hover:via-[#A4E7FD] group-hover:to-[#16AFE9]">
+                                <div class="flex items-center gap-3 px-[11px] py-[11px] bg-[#FEFEFE] rounded-lg w-full group-hover:bg-white">
+                                    <img src="public/entertainment-icon.svg" alt="Entertainment" class="w-6 h-6">
+                                    <span class="text-[#12203A] font-medium text-xl">Entertainment</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Lifestyle -->
+                        <div class="cursor-pointer transition-all duration-300 group">
+                            <div class="flex items-center gap-3 p-[1px] bg-transparent rounded-lg group-hover:bg-gradient-to-r group-hover:from-[#17B0E9] group-hover:via-[#25FEB2] group-hover:via-[#A4E7FD] group-hover:to-[#16AFE9]">
+                                <div class="flex items-center gap-3 px-[11px] py-[11px] bg-[#FEFEFE] rounded-lg w-full group-hover:bg-white">
+                                    <img src="public/lifestyle-icon.svg" alt="Lifestyle" class="w-6 h-6">
+                                    <span class="text-[#12203A] font-medium text-xl">Lifestyle</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Film & TV -->
+                        <div class="cursor-pointer transition-all duration-300 group">
+                            <div class="flex items-center gap-3 p-[1px] bg-transparent rounded-lg group-hover:bg-gradient-to-r group-hover:from-[#17B0E9] group-hover:via-[#25FEB2] group-hover:via-[#A4E7FD] group-hover:to-[#16AFE9]">
+                                <div class="flex items-center gap-3 px-[11px] py-[11px] bg-[#FEFEFE] rounded-lg w-full group-hover:bg-white">
+                                    <img src="public/film-tv-icon.svg" alt="Film & TV" class="w-6 h-6">
+                                    <span class="text-[#12203A] font-medium text-xl">Film & TV</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Row 2 -->
+                        <!-- Health & Medical -->
+                        <div class="cursor-pointer transition-all duration-300 group">
+                            <div class="flex items-center gap-3 p-[1px] bg-transparent rounded-lg group-hover:bg-gradient-to-r group-hover:from-[#17B0E9] group-hover:via-[#25FEB2] group-hover:via-[#A4E7FD] group-hover:to-[#16AFE9]">
+                                <div class="flex items-center gap-3 px-[11px] py-[11px] bg-[#FEFEFE] rounded-lg w-full group-hover:bg-white">
+                                    <img src="public/health-medical-icon.svg" alt="Health & Medical" class="w-6 h-6">
+                                    <span class="text-[#12203A] font-medium text-xl">Health & Medical</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Finance & Business -->
+                        <div class="cursor-pointer transition-all duration-300 group">
+                            <div class="flex items-center gap-3 p-[1px] bg-transparent rounded-lg group-hover:bg-gradient-to-r group-hover:from-[#17B0E9] group-hover:via-[#25FEB2] group-hover:via-[#A4E7FD] group-hover:to-[#16AFE9]">
+                                <div class="flex items-center gap-3 px-[11px] py-[11px] bg-[#FEFEFE] rounded-lg w-full group-hover:bg-white">
+                                    <img src="public/finance-business-icon.svg" alt="Finance & Business" class="w-6 h-6">
+                                    <span class="text-[#12203A] font-medium text-lg">Finance & Business</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Parenting & Society -->
+                        <div class="cursor-pointer transition-all duration-300 group">
+                            <div class="flex items-center gap-3 p-[1px] bg-transparent rounded-lg group-hover:bg-gradient-to-r group-hover:from-[#17B0E9] group-hover:via-[#25FEB2] group-hover:via-[#A4E7FD] group-hover:to-[#16AFE9]">
+                                <div class="flex items-center gap-3 px-[11px] py-[11px] bg-[#FEFEFE] rounded-lg w-full group-hover:bg-white">
+                                    <img src="public/parenting-society-icon.svg" alt="Parenting & Society" class="w-6 h-6">
+                                    <span class="text-[#12203A] font-medium text-lg">Parenting & Society</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Education -->
+                        <div class="cursor-pointer transition-all duration-300 group">
+                            <div class="flex items-center gap-3 p-[1px] bg-transparent rounded-lg group-hover:bg-gradient-to-r group-hover:from-[#17B0E9] group-hover:via-[#25FEB2] group-hover:via-[#A4E7FD] group-hover:to-[#16AFE9]">
+                                <div class="flex items-center gap-3 px-[11px] py-[11px] bg-[#FEFEFE] rounded-lg w-full group-hover:bg-white">
+                                    <img src="public/education-icon.svg" alt="Education" class="w-6 h-6">
+                                    <span class="text-[#12203A] font-medium text-xl">Education</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Logo Carousel Container -->
+                <div class="bg-gradient-to-r from-[#3B82F6] to-[#1E40AF] rounded-2xl p-8 relative overflow-hidden">
+                    <!-- Loading State -->
+                    <div id="carousel-loading" class="hidden flex justify-center items-center h-[142px]">
+                        <div class="animate-spin rounded-full h-8 w-8 border-b-2 border-white"></div>
+                    </div>
+                    
+                    <!-- Logo Container -->
+                    <div id="logo-container" class="relative">
+                        <!-- Logo Slides -->
+                        <div id="logo-slides" class="flex transition-transform duration-500 ease-in-out" style="transform: translateX(0%);">
+                            <!-- Slide 1 -->
+                            <div class="flex gap-4 md:gap-6 lg:gap-[30px] w-full flex-shrink-0 justify-center">
+                                <div class="logo-item flex-1 max-w-[200px] h-[142px] rounded-[30px] overflow-hidden bg-white/10 backdrop-blur-sm p-4 flex items-center justify-center">
+                                    <img src="public/logo-1-2f5dbe.png" alt="Partner Logo 1" class="max-w-full max-h-full object-contain" loading="lazy">
+                                </div>
+                                <div class="logo-item flex-1 max-w-[200px] h-[142px] rounded-[30px] overflow-hidden bg-white/10 backdrop-blur-sm p-4 items-center justify-center hidden sm:flex">
+                                    <img src="public/logo-2-2b2515.png" alt="Partner Logo 2" class="max-w-full max-h-full object-contain" loading="lazy">
+                                </div>
+                                <div class="logo-item flex-1 max-w-[200px] h-[142px] rounded-[30px] overflow-hidden bg-white/10 backdrop-blur-sm p-4 items-center justify-center hidden md:flex">
+                                    <img src="public/logo-3-297b54.png" alt="Partner Logo 3" class="max-w-full max-h-full object-contain" loading="lazy">
+                                </div>
+                                <div class="logo-item flex-1 max-w-[200px] h-[142px] rounded-[30px] overflow-hidden bg-white/10 backdrop-blur-sm p-4 items-center justify-center hidden lg:flex">
+                                    <img src="public/logo-4-56d628.png" alt="Partner Logo 4" class="max-w-full max-h-full object-contain" loading="lazy">
+                                </div>
+                                <div class="logo-item flex-1 max-w-[200px] h-[142px] rounded-[30px] overflow-hidden bg-white/10 backdrop-blur-sm p-4 items-center justify-center hidden xl:flex">
+                                    <img src="public/logo-5-58335f.png" alt="Partner Logo 5" class="max-w-full max-h-full object-contain" loading="lazy">
+                                </div>
+                            </div>
+                            
+                            <!-- Slide 2 -->
+                            <div class="flex gap-4 md:gap-6 lg:gap-[30px] w-full flex-shrink-0 justify-center">
+                                <div class="logo-item flex-1 max-w-[200px] h-[142px] rounded-[30px] overflow-hidden bg-white/10 backdrop-blur-sm p-4 flex items-center justify-center">
+                                    <img src="public/logo-2-2b2515.png" alt="Partner Logo 2" class="max-w-full max-h-full object-contain" loading="lazy">
+                                </div>
+                                <div class="logo-item flex-1 max-w-[200px] h-[142px] rounded-[30px] overflow-hidden bg-white/10 backdrop-blur-sm p-4 items-center justify-center hidden sm:flex">
+                                    <img src="public/logo-3-297b54.png" alt="Partner Logo 3" class="max-w-full max-h-full object-contain" loading="lazy">
+                                </div>
+                                <div class="logo-item flex-1 max-w-[200px] h-[142px] rounded-[30px] overflow-hidden bg-white/10 backdrop-blur-sm p-4 items-center justify-center hidden md:flex">
+                                    <img src="public/logo-4-56d628.png" alt="Partner Logo 4" class="max-w-full max-h-full object-contain" loading="lazy">
+                                </div>
+                                <div class="logo-item flex-1 max-w-[200px] h-[142px] rounded-[30px] overflow-hidden bg-white/10 backdrop-blur-sm p-4 items-center justify-center hidden lg:flex">
+                                    <img src="public/logo-5-58335f.png" alt="Partner Logo 5" class="max-w-full max-h-full object-contain" loading="lazy">
+                                </div>
+                                <div class="logo-item flex-1 max-w-[200px] h-[142px] rounded-[30px] overflow-hidden bg-white/10 backdrop-blur-sm p-4 items-center justify-center hidden xl:flex">
+                                    <img src="public/logo-1-2f5dbe.png" alt="Partner Logo 1" class="max-w-full max-h-full object-contain" loading="lazy">
+                                </div>
+                            </div>
+                            
+                            <!-- Slide 3 -->
+                            <div class="flex gap-4 md:gap-6 lg:gap-[30px] w-full flex-shrink-0 justify-center">
+                                <div class="logo-item flex-1 max-w-[200px] h-[142px] rounded-[30px] overflow-hidden bg-white/10 backdrop-blur-sm p-4 flex items-center justify-center">
+                                    <img src="public/logo-3-297b54.png" alt="Partner Logo 3" class="max-w-full max-h-full object-contain" loading="lazy">
+                                </div>
+                                <div class="logo-item flex-1 max-w-[200px] h-[142px] rounded-[30px] overflow-hidden bg-white/10 backdrop-blur-sm p-4 items-center justify-center hidden sm:flex">
+                                    <img src="public/logo-4-56d628.png" alt="Partner Logo 4" class="max-w-full max-h-full object-contain" loading="lazy">
+                                </div>
+                                <div class="logo-item flex-1 max-w-[200px] h-[142px] rounded-[30px] overflow-hidden bg-white/10 backdrop-blur-sm p-4 items-center justify-center hidden md:flex">
+                                    <img src="public/logo-5-58335f.png" alt="Partner Logo 5" class="max-w-full max-h-full object-contain" loading="lazy">
+                                </div>
+                                <div class="logo-item flex-1 max-w-[200px] h-[142px] rounded-[30px] overflow-hidden bg-white/10 backdrop-blur-sm p-4 items-center justify-center hidden lg:flex">
+                                    <img src="public/logo-1-2f5dbe.png" alt="Partner Logo 1" class="max-w-full max-h-full object-contain" loading="lazy">
+                                </div>
+                                <div class="logo-item flex-1 max-w-[200px] h-[142px] rounded-[30px] overflow-hidden bg-white/10 backdrop-blur-sm p-4 items-center justify-center hidden xl:flex">
+                                    <img src="public/logo-2-2b2515.png" alt="Partner Logo 2" class="max-w-full max-h-full object-contain" loading="lazy">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Navigation Controls -->
+                    <div class="flex justify-between items-center mt-6">
+                        <!-- Pagination Dots -->
+                        <div id="pagination-dots" class="flex items-center gap-[14px]" role="tablist" aria-label="Carousel pagination">
+                            <button class="pagination-dot w-[14px] h-[14px] rounded-full bg-[#87E5D5] transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-blue-600" role="tab" aria-selected="true" aria-label="Go to slide 1" data-slide="0"></button>
+                            <button class="pagination-dot w-[14px] h-[14px] rounded-full bg-[#E4F0FE] transition-all duration-300 hover:bg-[#87E5D5] focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-blue-600" role="tab" aria-selected="false" aria-label="Go to slide 2" data-slide="1"></button>
+                            <button class="pagination-dot w-[14px] h-[14px] rounded-full bg-[#E4F0FE] transition-all duration-300 hover:bg-[#87E5D5] focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-blue-600" role="tab" aria-selected="false" aria-label="Go to slide 3" data-slide="2"></button>
+                        </div>
+                        
+                        <!-- Navigation Arrows -->
+                        <div class="flex gap-4">
+                            <button id="logo-prev-btn" class="w-[29px] h-[29px] rounded bg-transparent flex items-center justify-center hover:bg-white/20 focus:bg-white/20 transition-colors focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-blue-600 disabled:opacity-50 disabled:cursor-not-allowed" aria-label="Previous slide">
+                                <img src="public/arrow-back.svg" alt="" class="w-[19px] h-[17px]" aria-hidden="true">
+                            </button>
+                            <button id="logo-next-btn" class="w-[29px] h-[29px] rounded bg-transparent flex items-center justify-center hover:bg-white/20 focus:bg-white/20 transition-colors focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-blue-600 disabled:opacity-50 disabled:cursor-not-allowed" aria-label="Next slide">
+                                <img src="public/arrow-forward.svg" alt="" class="w-[19px] h-[17px]" aria-hidden="true">
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <!-- Auto-play Toggle -->
+                    <div class="absolute top-4 right-4">
+                        <button id="autoplay-toggle" class="px-3 py-1 text-xs bg-white/20 text-white rounded-full hover:bg-white/30 transition-colors focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-blue-600" aria-label="Toggle autoplay">
+                            <span id="autoplay-text">Pause</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Campaign Features Section -->
+        <section id="campaign-features" class="py-20 bg-white">
+            <div class="container mx-auto px-32">
+                <!-- Section Title -->
+                <div class="text-center mb-10">
+                    <h2 class="text-4xl font-semibold text-[#12203A] mb-4 leading-[1.21] tracking-[-0.02em]">
+                        It's easy to make a good campaign when you choose BookMeNow
+                    </h2>
+                </div>
+
+                <!-- Three Column Layout -->
+                <div class="flex flex-col md:flex-row gap-0 justify-stretch max-w-[1183px] mx-auto">
+                    <!-- Column 1 - For Brand -->
+                    <div class="flex-1 mb-4 md:mb-0">
+                        <div class="campaign-card bg-[#FEFEFE] rounded-2xl p-6 flex flex-col items-center gap-6 h-full min-h-[400px] relative overflow-hidden">
+                            <!-- Illustration -->
+                            <div class="flex-shrink-0">
+                                <img src="public/for-brand-illustration.svg" alt="For Brand Illustration" class="w-[173px] h-[222px] object-contain">
+                            </div>
+                            
+                            <!-- Title -->
+                            <h3 class="text-2xl font-semibold text-[#1C1C1C] text-center tracking-[0.02em]">
+                                For Brand
+                            </h3>
+                            
+                            <!-- Description -->
+                            <p class="text-[22px] font-normal text-[#344054] opacity-80 text-center leading-[1.64] tracking-[0.02em] flex-1 flex items-center">
+                                Sign-up to plan and launch your campaigns with ease
+                            </p>
+                            
+                            <!-- Buttons -->
+                            <div class="campaign-buttons flex gap-3 w-full justify-center flex-wrap">
+                                <button class="bg-[#1262F3] text-white px-3 py-3 rounded-lg font-semibold text-base leading-6 tracking-[0.03em] h-12 flex items-center justify-center transition-colors hover:bg-blue-700">
+                                    Start Your Campaign Now
+                                </button>
+                                <button type="button" id="see-more-brand" class="border border-[#1262F3] text-[#1262F3] px-3 py-3 rounded-lg font-semibold text-base leading-6 tracking-[0.03em] h-12 flex items-center justify-center transition-colors hover:bg-blue-50">
+                                    See more
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Column 2 - For Agency -->
+                    <div class="flex-1 mb-4 md:mb-0">
+                        <div class="campaign-card campaign-card-agency bg-[#FEFEFE] rounded-2xl p-6 flex flex-col items-center gap-6 h-full min-h-[400px]">
+                            <!-- Illustration -->
+                            <div class="flex-shrink-0">
+                                <img src="public/for-agency-illustration.svg" alt="For Agency Illustration" class="w-[263px] h-[222px] object-contain">
+                            </div>
+                            
+                            <!-- Title -->
+                            <h3 class="text-2xl font-semibold text-[#1C1C1C] text-center tracking-[0.02em]">
+                                For Agency
+                            </h3>
+                            
+                            <!-- Description -->
+                            <p class="text-[22px] font-normal text-[#344054] opacity-80 text-center leading-[1.64] tracking-[0.02em] flex-1 flex items-center">
+                                Sign-up to plan and launch your campaigns with ease
+                            </p>
+                            
+                            <!-- Buttons -->
+                            <div class="campaign-buttons flex gap-3 w-full justify-center flex-wrap">
+                                <button class="bg-[#1262F3] text-white px-3 py-3 rounded-lg font-semibold text-base leading-6 tracking-[0.03em] h-12 flex items-center justify-center transition-colors hover:bg-blue-700">
+                                    Start Your Campaign Now
+                                </button>
+                                <button type="button" id="see-more-agency" class="border border-[#1262F3] text-[#1262F3] px-3 py-3 rounded-lg font-semibold text-base leading-6 tracking-[0.03em] h-12 flex items-center justify-center transition-colors hover:bg-blue-50">
+                                    See more
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Column 3 - For Creators/Publisher -->
+                    <div class="flex-1">
+                        <div class="campaign-card bg-[#FEFEFE] rounded-2xl p-6 flex flex-col items-center gap-6 h-full border border-gray-200 min-h-[400px]">
+                            <!-- Illustration -->
+                            <div class="flex-shrink-0">
+                                <img src="public/for-creators-illustration.svg" alt="For Creators/Publisher Illustration" class="w-[229px] h-[222px] object-contain">
+                            </div>
+                            
+                            <!-- Title -->
+                            <h3 class="text-2xl font-semibold text-[#1C1C1C] text-center tracking-[0.02em]">
+                                For Creators/ Publisher
+                            </h3>
+                            
+                            <!-- Description -->
+                            <p class="text-[22px] font-normal text-[#344054] opacity-80 text-center leading-[1.64] tracking-[0.02em] flex-1 flex items-center">
+                                Sign-up to plan and launch your campaigns with ease
+                            </p>
+                            
+                            <!-- Buttons -->
+                            <div class="campaign-buttons flex gap-3 w-full justify-center flex-wrap">
+                                <button class="bg-[#1262F3] text-white px-3 py-3 rounded-lg font-semibold text-base leading-6 tracking-[0.03em] h-12 flex items-center justify-center transition-colors hover:bg-blue-700 flex-1">
+                                    Join Us Now
+                                </button>
+                                <button type="button" id="see-more-creators" class="border border-[#1262F3] text-[#1262F3] px-3 py-3 rounded-lg font-semibold text-base leading-6 tracking-[0.03em] h-12 flex items-center justify-center transition-colors hover:bg-blue-50">
+                                    See more
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Full-Width Expandable Section for "See More" -->
+                <div id="campaign-details" class="hidden mt-12 bg-white rounded-[20px] p-12 max-w-[1183px] mx-auto">
+                    
+                    <!-- Brand Content -->
+                    <div id="brand-details" class="content-section">
+                        <div class="flex items-center gap-12">
+                            <!-- Left Content -->
+                            <div class="flex-1">
+                                <h2 class="text-4xl font-bold text-[#12203A] mb-6 leading-tight">
+                                    Welcome Brands
+                                </h2>
+                                <p class="text-lg text-[#344054] leading-relaxed mb-8">
+                                    Collaborate, launch, and track your campaigns seamlessly with BookMeNow - a data-driven content network built to maximize branded content performance. As a brand or marketing team, you need more than just exposure — you need trusted creators, optimized seeding, and real-time results. BookMeNow provides access to thousands of verified influencers across YouTube, TikTok, and Facebook, ensuring your message lands with the right audience, at the right time.
+                                </p>
+                                <button class="bg-[#1262F3] text-white px-8 py-4 rounded-lg font-semibold text-lg hover:bg-blue-700 transition-colors">
+                                    Explore Branded Campaigns
+                                </button>
+                            </div>
+                            
+                            <!-- Right Image -->
+                            <div class="flex-1 max-w-[400px]">
+                                <img src="public/about1.png" alt="Welcome Brands" class="w-full h-auto rounded-lg">
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Agency Content -->
+                    <div id="agency-details" class="content-section hidden">
+                        <div class="flex items-center gap-12">
+                            <!-- Left Content -->
+                            <div class="flex-1">
+                                <h2 class="text-4xl font-bold text-[#12203A] mb-6 leading-tight">
+                                    Welcome Agencies
+                                </h2>
+                                <p class="text-lg text-[#344054] leading-relaxed mb-8">
+                                    Scale your client campaigns with BookMeNow's comprehensive agency platform. Manage multiple brands, access white-label solutions, and streamline your workflow with our advanced campaign management tools. From client onboarding to campaign reporting, we provide the infrastructure you need to deliver exceptional results across all your accounts while maintaining your agency's brand identity.
+                                </p>
+                                <button class="bg-[#1262F3] text-white px-8 py-4 rounded-lg font-semibold text-lg hover:bg-blue-700 transition-colors">
+                                    Explore Agency Solutions
+                                </button>
+                            </div>
+                            
+                            <!-- Right Image -->
+                            <div class="flex-1 max-w-[400px]">
+                                <img src="public/about2.png" alt="Welcome Agencies" class="w-full h-auto rounded-lg">
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Creators Content -->
+                    <div id="creators-details" class="content-section hidden">
+                        <div class="flex items-center gap-12">
+                            <!-- Left Content -->
+                            <div class="flex-1">
+                                <h2 class="text-4xl font-bold text-[#12203A] mb-6 leading-tight">
+                                    Welcome Creators
+                                </h2>
+                                <p class="text-lg text-[#344054] leading-relaxed mb-8">
+                                    Monetize your content and grow your audience with BookMeNow's creator platform. Connect with premium brands, access fair compensation, and maintain creative control over your content. Our platform provides transparent pricing, automated payments, and detailed analytics to help you build a sustainable content creation business while staying true to your authentic voice.
+                                </p>
+                                <button class="bg-[#1262F3] text-white px-8 py-4 rounded-lg font-semibold text-lg hover:bg-blue-700 transition-colors">
+                                    Join Creator Network
+                                </button>
+                            </div>
+                            
+                            <!-- Right Image -->
+                            <div class="flex-1 max-w-[400px]">
+                                <img src="public/about3.png" alt="Welcome Creators" class="w-full h-auto rounded-lg">
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Navigation Dots -->
+                    <div class="flex justify-center mt-8 gap-3">
+                        <div id="dot-brand" class="w-3 h-3 bg-[#12203A] rounded-full"></div>
+                        <div id="dot-agency" class="w-3 h-3 bg-[#E5E7EB] rounded-full"></div>
+                        <div id="dot-creators" class="w-3 h-3 bg-[#E5E7EB] rounded-full"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Our Clients & Creators Section -->
+        <section id="clients-creators" class="py-20 bg-white">
+            <div class="container mx-auto px-32">
+                <!-- Two Column Layout -->
+                <div class="flex flex-col md:flex-row gap-8 justify-between max-w-[1184px] mx-auto">
+                    <!-- Left Column - Our Clients -->
+                    <div class="flex-1 flex flex-col items-center text-center">
+                        <!-- Title -->
+                        <div class="mb-6">
+                            <h2 class="text-4xl font-semibold text-[#12203A] leading-[1.21] tracking-[0.02em]">
+                                Our Clients
+                            </h2>
+                        </div>
+                        
+                        <!-- Description -->
+                        <p class="text-[22px] font-normal text-[#344054] leading-[1.64] tracking-[0.02em] text-center max-w-[507px]">
+                            Whether you're a brand or an agency, 
+                            you can be our next partner.
+                            With just 10 million VND, you'll receive a fully tailored media plan that aligns with your goals and target audience.
+                        </p>
+                    </div>
+
+                    <!-- Right Column - Our Creators -->
+                    <div class="flex-1 flex flex-col items-center text-center">
+                        <!-- Title -->
+                        <div class="mb-6">
+                            <h2 class="text-4xl font-semibold text-[#12203A] leading-[1.21] tracking-[0.02em]">
+                                Our Creators
+                            </h2>
+                        </div>
+                        
+                        <!-- Description -->
+                        <p class="text-[22px] font-normal text-[#344054] leading-[1.64] tracking-[0.02em] text-center max-w-[507px]">
+                            If you have 1,000 followers or subscribers, you're ready to start earning with BookMeNow. Let trusted brands discover your content and turn it into real bookings on TikTok, YouTube, or Facebook.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Call to Action Section -->
+        <section id="cta" class="py-20 bg-white">
+            <div class="container mx-auto px-4 md:px-16 lg:px-32">
+                <div class="max-w-[778px] mx-auto">
+                    <div class="cta-card bg-white rounded-[20px] p-[60px] relative overflow-hidden border border-transparent transition-all duration-300 hover:border-transparent">
+                        <!-- Title -->
+                        <div class="text-center mb-10">
+                            <h2 class="text-4xl font-semibold text-[#12203A] leading-[1.21] tracking-[0.02em]">
+                                Are you ready to join with us?
+                            </h2>
+                        </div>
+                        
+                        <!-- Button -->
+                        <div class="flex justify-center">
+                            <button class="bg-[#1262F3] text-white px-5 py-3 rounded-lg font-semibold text-[22px] leading-[1.64] tracking-[0.03em] transition-colors hover:bg-blue-700">
+                                Get Started
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- FAQ Section -->
+        <section id="faqs" class="py-20 bg-white">
+            <div class="container mx-auto px-4 md:px-16 lg:px-32">
+                <!-- Section Title -->
+                <div class="text-center mb-16">
+                    <h2 class="text-4xl font-semibold text-[#12203A] mb-4 leading-[1.21] tracking-[-0.02em] uppercase">
+                        Frequently Asked Questions
+                    </h2>
+                </div>
+
+                <!-- FAQ Content Layout -->
+                <div class="max-w-[981px] mx-auto">
+                    <div class="flex flex-col lg:flex-row gap-8">
+                        <!-- Left Column - Tab Buttons -->
+                        <div class="lg:w-[271px] flex lg:flex-col gap-8 lg:gap-8">
+                            <!-- For Brands Tab -->
+                            <div class="flex-1 lg:flex-none">
+                                <div class="faq-tab active bg-[#1262F3] rounded-lg cursor-pointer transition-all duration-300 hover:bg-blue-700" data-tab="brands">
+                                    <span class="text-white font-semibold text-[22px] leading-[1.09] tracking-[0.023em]">For Brands</span>
+                                    <div class="w-6 h-6 flex items-center justify-center">
+                                        <svg class="w-5 h-3 text-white transform rotate-0 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                                        </svg>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- For Agencies Tab -->
+                            <div class="flex-1 lg:flex-none">
+                                <div class="faq-tab bg-[#F3F6FB] rounded-lg cursor-pointer transition-all duration-300 hover:bg-gray-200" data-tab="agencies">
+                                    <span class="text-[#D0D5DD] font-normal text-[22px] leading-[1.64] tracking-[0.023em]">For Agencies</span>
+                                    <div class="w-6 h-6 flex items-center justify-center" style="visibility: hidden;">
+                                        <svg class="w-5 h-3 text-[#D0D5DD] transform rotate-0 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                                        </svg>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- For Creators Tab -->
+                            <div class="flex-1 lg:flex-none">
+                                <div class="faq-tab bg-[#F3F6FB] rounded-lg cursor-pointer transition-all duration-300 hover:bg-gray-200" data-tab="creators">
+                                    <span class="text-[#D0D5DD] font-normal text-[22px] leading-[1.64] tracking-[0.023em]">For Creators</span>
+                                    <div class="w-6 h-6 flex items-center justify-center" style="visibility: hidden;">
+                                        <svg class="w-5 h-3 text-[#D0D5DD] transform rotate-0 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                                        </svg>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Right Column - FAQ Content -->
+                        <div class="flex-1 lg:w-[680px]">
+                            <!-- For Brands FAQ -->
+                            <div class="faq-content active" data-content="brands">
+                                <div class="space-y-8">
+                                    <!-- FAQ Item 1 -->
+                                    <div class="faq-item bg-[#F3F6FB] rounded-xl p-6 transition-all duration-300">
+                                        <div class="faq-question flex items-center justify-between cursor-pointer" data-faq="brands-1">
+                                            <h3 class="text-[#12203A] font-normal text-[22px] leading-[1.64] tracking-[0.023em] flex-1">
+                                                Can I choose the creators myself?
+                                            </h3>
+                                            <div class="w-6 h-6 flex items-center justify-center">
+                                                <svg class="w-5 h-3 text-black transform rotate-0 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 15l7-7 7 7"></path>
+                                                </svg>
+                                            </div>
+                                        </div>
+                                        <div class="faq-answer max-h-0 overflow-hidden transition-all duration-300">
+                                            <div class="mt-4">
+                                                <p class="text-[#12203A] font-normal text-[22px] leading-[1.64] tracking-[0.023em]">
+                                                    Yes. You can either select creators manually or let our team and smart system recommend the best match.
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- FAQ Item 2 - Collapsed -->
+                                    <div class="faq-item bg-[#F3F6FB] rounded-xl p-6 transition-all duration-300">
+                                        <div class="faq-question flex items-center justify-between cursor-pointer" data-faq="brands-2">
+                                            <h3 class="text-[#12203A] font-normal text-[22px] leading-[1.64] tracking-[0.023em] flex-1">
+                                                How do I know if the campaign is working?
+                                            </h3>
+                                            <div class="w-6 h-6 flex items-center justify-center">
+                                                <svg class="w-5 h-3 text-black transform rotate-0 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 15l7-7 7 7"></path>
+                                                </svg>
+                                            </div>
+                                        </div>
+                                        <div class="faq-answer max-h-0 overflow-hidden transition-all duration-300">
+                                            <div class="mt-4">
+                                                <p class="text-[#12203A] font-normal text-[22px] leading-[1.64] tracking-[0.023em]">
+                                                    We provide real-time analytics and detailed reports showing reach, engagement, conversions, and ROI metrics for your campaigns.
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- FAQ Item 3 - Collapsed -->
+                                    <div class="faq-item bg-[#F3F6FB] rounded-xl p-6 transition-all duration-300">
+                                        <div class="faq-question flex items-center justify-between cursor-pointer" data-faq="brands-3">
+                                            <h3 class="text-[#12203A] font-normal text-[22px] leading-[1.64] tracking-[0.023em] flex-1">
+                                                Do I have to negotiate rates with each creator?
+                                            </h3>
+                                            <div class="w-6 h-6 flex items-center justify-center">
+                                                <svg class="w-5 h-3 text-black transform rotate-0 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 15l7-7 7 7"></path>
+                                                </svg>
+                                            </div>
+                                        </div>
+                                        <div class="faq-answer max-h-0 overflow-hidden transition-all duration-300">
+                                            <div class="mt-4">
+                                                <p class="text-[#12203A] font-normal text-[22px] leading-[1.64] tracking-[0.023em]">
+                                                    No, we offer wholesale rates that are pre-negotiated. You get transparent, fixed pricing without the hassle of individual negotiations.
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- For Agencies FAQ -->
+                            <div class="faq-content hidden" data-content="agencies">
+                                <div class="space-y-8">
+                                    <!-- FAQ Item 1 -->
+                                    <div class="faq-item bg-[#F3F6FB] rounded-xl p-6 transition-all duration-300">
+                                        <div class="faq-question flex items-center justify-between cursor-pointer" data-faq="agencies-1">
+                                            <h3 class="text-[#12203A] font-normal text-[22px] leading-[1.64] tracking-[0.023em] flex-1">
+                                                Can I manage multiple client campaigns?
+                                            </h3>
+                                            <div class="w-6 h-6 flex items-center justify-center">
+                                                <svg class="w-5 h-3 text-black transform rotate-0 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 15l7-7 7 7"></path>
+                                                </svg>
+                                            </div>
+                                        </div>
+                                        <div class="faq-answer max-h-0 overflow-hidden transition-all duration-300">
+                                            <div class="mt-4">
+                                                <p class="text-[#12203A] font-normal text-[22px] leading-[1.64] tracking-[0.023em]">
+                                                    Yes, our agency dashboard allows you to manage multiple client campaigns simultaneously with separate billing and reporting.
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- FAQ Item 2 -->
+                                    <div class="faq-item bg-[#F3F6FB] rounded-xl p-6 transition-all duration-300">
+                                        <div class="faq-question flex items-center justify-between cursor-pointer" data-faq="agencies-2">
+                                            <h3 class="text-[#12203A] font-normal text-[22px] leading-[1.64] tracking-[0.023em] flex-1">
+                                                Do you offer white-label solutions?
+                                            </h3>
+                                            <div class="w-6 h-6 flex items-center justify-center">
+                                                <svg class="w-5 h-3 text-black transform rotate-0 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 15l7-7 7 7"></path>
+                                                </svg>
+                                            </div>
+                                        </div>
+                                        <div class="faq-answer max-h-0 overflow-hidden transition-all duration-300">
+                                            <div class="mt-4">
+                                                <p class="text-[#12203A] font-normal text-[22px] leading-[1.64] tracking-[0.023em]">
+                                                    Yes, we provide white-label solutions for agencies wanting to offer influencer marketing services under their own brand.
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- FAQ Item 3 -->
+                                    <div class="faq-item bg-[#F3F6FB] rounded-xl p-6 transition-all duration-300">
+                                        <div class="faq-question flex items-center justify-between cursor-pointer" data-faq="agencies-3">
+                                            <h3 class="text-[#12203A] font-normal text-[22px] leading-[1.64] tracking-[0.023em] flex-1">
+                                                What reporting features are available?
+                                            </h3>
+                                            <div class="w-6 h-6 flex items-center justify-center">
+                                                <svg class="w-5 h-3 text-black transform rotate-0 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 15l7-7 7 7"></path>
+                                                </svg>
+                                            </div>
+                                        </div>
+                                        <div class="faq-answer max-h-0 overflow-hidden transition-all duration-300">
+                                            <div class="mt-4">
+                                                <p class="text-[#12203A] font-normal text-[22px] leading-[1.64] tracking-[0.023em]">
+                                                    Comprehensive reporting including campaign performance, ROI analysis, audience insights, and customizable client reports.
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- For Creators FAQ -->
+                            <div class="faq-content hidden" data-content="creators">
+                                <div class="space-y-8">
+                                    <!-- FAQ Item 1 -->
+                                    <div class="faq-item bg-[#F3F6FB] rounded-xl p-6 transition-all duration-300">
+                                        <div class="faq-question flex items-center justify-between cursor-pointer" data-faq="creators-1">
+                                            <h3 class="text-[#12203A] font-normal text-[22px] leading-[1.64] tracking-[0.023em] flex-1">
+                                                How do I get paid for collaborations?
+                                            </h3>
+                                            <div class="w-6 h-6 flex items-center justify-center">
+                                                <svg class="w-5 h-3 text-black transform rotate-0 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 15l7-7 7 7"></path>
+                                                </svg>
+                                            </div>
+                                        </div>
+                                        <div class="faq-answer max-h-0 overflow-hidden transition-all duration-300">
+                                            <div class="mt-4">
+                                                <p class="text-[#12203A] font-normal text-[22px] leading-[1.64] tracking-[0.023em]">
+                                                    Payments are processed automatically after content approval. We support multiple payment methods and ensure timely payments.
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- FAQ Item 2 -->
+                                    <div class="faq-item bg-[#F3F6FB] rounded-xl p-6 transition-all duration-300">
+                                        <div class="faq-question flex items-center justify-between cursor-pointer" data-faq="creators-2">
+                                            <h3 class="text-[#12203A] font-normal text-[22px] leading-[1.64] tracking-[0.023em] flex-1">
+                                                What are the content requirements?
+                                            </h3>
+                                            <div class="w-6 h-6 flex items-center justify-center">
+                                                <svg class="w-5 h-3 text-black transform rotate-0 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 15l7-7 7 7"></path>
+                                                </svg>
+                                            </div>
+                                        </div>
+                                        <div class="faq-answer max-h-0 overflow-hidden transition-all duration-300">
+                                            <div class="mt-4">
+                                                <p class="text-[#12203A] font-normal text-[22px] leading-[1.64] tracking-[0.023em]">
+                                                    Content requirements vary by campaign but typically include high-quality visuals, authentic messaging, and adherence to brand guidelines.
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- FAQ Item 3 -->
+                                    <div class="faq-item bg-[#F3F6FB] rounded-xl p-6 transition-all duration-300">
+                                        <div class="faq-question flex items-center justify-between cursor-pointer" data-faq="creators-3">
+                                            <h3 class="text-[#12203A] font-normal text-[22px] leading-[1.64] tracking-[0.023em] flex-1">
+                                                How do I join the platform?
+                                            </h3>
+                                            <div class="w-6 h-6 flex items-center justify-center">
+                                                <svg class="w-5 h-3 text-black transform rotate-0 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 15l7-7 7 7"></path>
+                                                </svg>
+                                            </div>
+                                        </div>
+                                        <div class="faq-answer max-h-0 overflow-hidden transition-all duration-300">
+                                            <div class="mt-4">
+                                                <p class="text-[#12203A] font-normal text-[22px] leading-[1.64] tracking-[0.023em]">
+                                                    Simply sign up with your social media profiles. If you have 1,000+ followers, you can start receiving collaboration opportunities immediately.
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="text-white py-12 relative overflow-hidden" style="background-image: url('public/Mask group.png'); background-size: cover; background-position: center;">
+        
+        <div class="container mx-auto px-4 relative z-10">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
+                <!-- Logo + Social Media Section -->
+                <div class="lg:col-span-1">
+                    <div class="mb-6">
+                        <img src="public/logo.svg" alt="BookMeNow" class="h-8 w-auto mb-4">
+                    </div>
+                    <div class="flex gap-6">
+                        <!-- Facebook -->
+                        <div class="hover:opacity-80 transition-opacity cursor-pointer">
+                            <img src="public/facebook-icon.svg" alt="Facebook" class="w-12 h-12" style="width: 48px; height: 48px;">
+                        </div>
+                        <!-- YouTube -->
+                        <div class="hover:opacity-80 transition-opacity cursor-pointer">
+                            <img src="public/youtube-icon.svg" alt="YouTube" class="w-12 h-12" style="width: 48px; height: 48px;">
+                        </div>
+                        <!-- TikTok -->
+                        <div class="hover:opacity-80 transition-opacity cursor-pointer">
+                            <img src="public/tiktok-icon.svg" alt="TikTok" class="w-12 h-12" style="width: 48px; height: 48px;">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Contact Section -->
+                <div class="lg:col-span-1">
+                    <h4 class="text-2xl font-semibold mb-8" style="color: #F3F6FB;">Contact</h4>
+                    <div class="space-y-5">
+                        <p class="text-lg leading-relaxed" style="color: #D0D5DD;">Email: support@bookmenow.vn</p>
+                        <p class="text-lg leading-relaxed" style="color: #D0D5DD;">Hotline: 1900 1234</p>
+                    </div>
+                </div>
+
+                <!-- Policy Section -->
+                <div class="lg:col-span-1">
+                    <h4 class="text-2xl font-semibold mb-8" style="color: #F3F6FB;">Policy</h4>
+                    <ul class="space-y-5">
+                        <li><a href="#" class="text-lg leading-relaxed hover:text-white transition-colors" style="color: #D0D5DD;">Privacy & Policy</a></li>
+                        <li><a href="#" class="text-lg leading-relaxed hover:text-white transition-colors" style="color: #D0D5DD;">Terms & Condition</a></li>
+                    </ul>
+                </div>
+
+                <!-- Subscribe Section -->
+                <div class="lg:col-span-1">
+                    <h4 class="text-2xl font-semibold mb-8" style="color: #F3F6FB;">Subscribe</h4>
+                    <div class="space-y-6">
+                        <div>
+                            <input type="email" 
+                                   placeholder="your_email@gmail.com" 
+                                   class="w-full px-5 py-4 text-lg bg-white border border-gray-300 rounded-lg text-gray-900 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                        </div>
+                        <div class="flex flex-col sm:flex-row gap-4">
+                            <button class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 text-lg rounded-lg font-medium transition-colors flex-1 sm:flex-none">
+                                Contact Us Now
+                            </button>
+                            <button class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 text-lg rounded-lg font-medium transition-colors flex-1 sm:flex-none">
+                                Join Us Now
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Copyright Section -->
+            <div class="border-t border-gray-600 pt-8 text-center">
+                <p class="text-gray-300">&copy; 2025 BookMeNow</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Logo Carousel Class
+        class LogoCarousel {
+            constructor() {
+                this.currentSlide = 0;
+                this.totalSlides = 3;
+                this.isAutoplay = true;
+                this.autoplayInterval = null;
+                this.autoplayDuration = 5000; // 5 seconds
+                this.touchStartX = 0;
+                this.touchEndX = 0;
+                this.isTransitioning = false;
+                
+                // Logo data structure
+                this.logoData = [
+                    { name: "Partner 1", imageUrl: "public/logo-1-2f5dbe.png", alt: "Partner Logo 1" },
+                    { name: "Partner 2", imageUrl: "public/logo-2-2b2515.png", alt: "Partner Logo 2" },
+                    { name: "Partner 3", imageUrl: "public/logo-3-297b54.png", alt: "Partner Logo 3" },
+                    { name: "Partner 4", imageUrl: "public/logo-4-56d628.png", alt: "Partner Logo 4" },
+                    { name: "Partner 5", imageUrl: "public/logo-5-58335f.png", alt: "Partner Logo 5" }
+                ];
+
+                this.init();
+            }
+
+            init() {
+                this.cacheElements();
+                this.bindEvents();
+                this.updateCarousel();
+                this.startAutoplay();
+                this.addLoadingStates();
+            }
+
+            cacheElements() {
+                this.carousel = document.getElementById('logo-slides');
+                this.prevBtn = document.getElementById('logo-prev-btn');
+                this.nextBtn = document.getElementById('logo-next-btn');
+                this.paginationDots = document.querySelectorAll('.pagination-dot');
+                this.autoplayToggle = document.getElementById('autoplay-toggle');
+                this.autoplayText = document.getElementById('autoplay-text');
+                this.carouselContainer = document.getElementById('logo-container');
+                this.loadingIndicator = document.getElementById('carousel-loading');
+            }
+
+            bindEvents() {
+                // Navigation buttons
+                this.prevBtn.addEventListener('click', () => this.goToPreviousSlide());
+                this.nextBtn.addEventListener('click', () => this.goToNextSlide());
+
+                // Pagination dots
+                this.paginationDots.forEach((dot, index) => {
+                    dot.addEventListener('click', () => this.goToSlide(index));
+                });
+
+                // Autoplay toggle
+                this.autoplayToggle.addEventListener('click', () => this.toggleAutoplay());
+
+                // Keyboard navigation
+                document.addEventListener('keydown', (e) => this.handleKeydown(e));
+
+                // Touch events for swipe support
+                this.carouselContainer.addEventListener('touchstart', (e) => this.handleTouchStart(e), { passive: true });
+                this.carouselContainer.addEventListener('touchend', (e) => this.handleTouchEnd(e), { passive: true });
+
+                // Mouse events for desktop drag support
+                this.carouselContainer.addEventListener('mousedown', (e) => this.handleMouseDown(e));
+                this.carouselContainer.addEventListener('mousemove', (e) => this.handleMouseMove(e));
+                this.carouselContainer.addEventListener('mouseup', (e) => this.handleMouseUp(e));
+                this.carouselContainer.addEventListener('mouseleave', (e) => this.handleMouseUp(e));
+
+                // Pause autoplay on hover
+                this.carouselContainer.addEventListener('mouseenter', () => this.pauseAutoplay());
+                this.carouselContainer.addEventListener('mouseleave', () => this.resumeAutoplay());
+
+                // Focus management
+                this.carouselContainer.addEventListener('focusin', () => this.pauseAutoplay());
+                this.carouselContainer.addEventListener('focusout', () => this.resumeAutoplay());
+
+                // Visibility API for pause when tab is not active
+                document.addEventListener('visibilitychange', () => {
+                    if (document.hidden) {
+                        this.pauseAutoplay();
+                    } else {
+                        this.resumeAutoplay();
+                    }
+                });
+            }
+
+            addLoadingStates() {
+                const images = this.carouselContainer.querySelectorAll('img');
+                let loadedImages = 0;
+                const totalImages = images.length;
+
+                if (totalImages === 0) return;
+
+                this.showLoading();
+
+                images.forEach(img => {
+                    if (img.complete) {
+                        loadedImages++;
+                    } else {
+                        img.addEventListener('load', () => {
+                            loadedImages++;
+                            if (loadedImages === totalImages) {
+                                this.hideLoading();
+                            }
+                        });
+                        img.addEventListener('error', () => {
+                            loadedImages++;
+                            if (loadedImages === totalImages) {
+                                this.hideLoading();
+                            }
+                        });
+                    }
+                });
+
+                if (loadedImages === totalImages) {
+                    this.hideLoading();
+                }
+            }
+
+            showLoading() {
+                this.loadingIndicator.classList.remove('hidden');
+                this.carouselContainer.style.opacity = '0.5';
+            }
+
+            hideLoading() {
+                this.loadingIndicator.classList.add('hidden');
+                this.carouselContainer.style.opacity = '1';
+            }
+
+            updateCarousel() {
+                if (this.isTransitioning) return;
+                
+                this.isTransitioning = true;
+                
+                // Update slide position
+                const translateX = -this.currentSlide * 100;
+                this.carousel.style.transform = `translateX(${translateX}%)`;
+
+                // Update pagination dots
+                this.updatePaginationDots();
+
+                // Update button states
+                this.updateButtonStates();
+
+                // Update ARIA attributes
+                this.updateAriaAttributes();
+
+                setTimeout(() => {
+                    this.isTransitioning = false;
+                }, 500);
+            }
+
+            updatePaginationDots() {
+                this.paginationDots.forEach((dot, index) => {
+                    const isActive = index === this.currentSlide;
+                    dot.classList.toggle('active', isActive);
+                    dot.setAttribute('aria-selected', isActive.toString());
+                    
+                    if (isActive) {
+                        dot.classList.remove('bg-[#E4F0FE]');
+                        dot.classList.add('bg-[#87E5D5]');
+                    } else {
+                        dot.classList.remove('bg-[#87E5D5]');
+                        dot.classList.add('bg-[#E4F0FE]');
+                    }
+                });
+            }
+
+            updateButtonStates() {
+                // Enable/disable buttons based on current slide (optional infinite loop)
+                // For infinite loop, we don't disable buttons
+                this.prevBtn.disabled = false;
+                this.nextBtn.disabled = false;
+            }
+
+            updateAriaAttributes() {
+                const slides = this.carousel.querySelectorAll('div[class*="flex gap-"]');
+                slides.forEach((slide, index) => {
+                    slide.setAttribute('aria-hidden', (index !== this.currentSlide).toString());
+                });
+            }
+
+            goToNextSlide() {
+                if (this.isTransitioning) return;
+                this.currentSlide = (this.currentSlide + 1) % this.totalSlides;
+                this.updateCarousel();
+                this.restartAutoplay();
+            }
+
+            goToPreviousSlide() {
+                if (this.isTransitioning) return;
+                this.currentSlide = (this.currentSlide - 1 + this.totalSlides) % this.totalSlides;
+                this.updateCarousel();
+                this.restartAutoplay();
+            }
+
+            goToSlide(slideIndex) {
+                if (this.isTransitioning || slideIndex === this.currentSlide) return;
+                this.currentSlide = slideIndex;
+                this.updateCarousel();
+                this.restartAutoplay();
+            }
+
+            startAutoplay() {
+                if (!this.isAutoplay) return;
+                this.autoplayInterval = setInterval(() => {
+                    this.goToNextSlide();
+                }, this.autoplayDuration);
+            }
+
+            stopAutoplay() {
+                if (this.autoplayInterval) {
+                    clearInterval(this.autoplayInterval);
+                    this.autoplayInterval = null;
+                }
+            }
+
+            pauseAutoplay() {
+                this.stopAutoplay();
+            }
+
+            resumeAutoplay() {
+                if (this.isAutoplay) {
+                    this.startAutoplay();
+                }
+            }
+
+            restartAutoplay() {
+                if (this.isAutoplay) {
+                    this.stopAutoplay();
+                    this.startAutoplay();
+                }
+            }
+
+            toggleAutoplay() {
+                this.isAutoplay = !this.isAutoplay;
+                this.autoplayText.textContent = this.isAutoplay ? 'Pause' : 'Play';
+                
+                if (this.isAutoplay) {
+                    this.startAutoplay();
+                } else {
+                    this.stopAutoplay();
+                }
+            }
+
+            handleKeydown(e) {
+                // Only handle keys when carousel is focused
+                if (!this.carouselContainer.contains(document.activeElement)) return;
+
+                switch (e.key) {
+                    case 'ArrowLeft':
+                        e.preventDefault();
+                        this.goToPreviousSlide();
+                        break;
+                    case 'ArrowRight':
+                        e.preventDefault();
+                        this.goToNextSlide();
+                        break;
+                    case ' ':
+                    case 'Enter':
+                        if (e.target.classList.contains('pagination-dot')) {
+                            e.preventDefault();
+                            const slideIndex = parseInt(e.target.dataset.slide);
+                            this.goToSlide(slideIndex);
+                        }
+                        break;
+                    case 'Home':
+                        e.preventDefault();
+                        this.goToSlide(0);
+                        break;
+                    case 'End':
+                        e.preventDefault();
+                        this.goToSlide(this.totalSlides - 1);
+                        break;
+                }
+            }
+
+            handleTouchStart(e) {
+                this.touchStartX = e.changedTouches[0].screenX;
+            }
+
+            handleTouchEnd(e) {
+                this.touchEndX = e.changedTouches[0].screenX;
+                this.handleSwipe();
+            }
+
+            handleMouseDown(e) {
+                this.isDragging = true;
+                this.touchStartX = e.clientX;
+                this.carouselContainer.style.cursor = 'grabbing';
+            }
+
+            handleMouseMove(e) {
+                if (!this.isDragging) return;
+                e.preventDefault();
+            }
+
+            handleMouseUp(e) {
+                if (!this.isDragging) return;
+                this.isDragging = false;
+                this.touchEndX = e.clientX;
+                this.carouselContainer.style.cursor = 'grab';
+                this.handleSwipe();
+            }
+
+            handleSwipe() {
+                const swipeThreshold = 50;
+                const swipeDistance = this.touchEndX - this.touchStartX;
+
+                if (Math.abs(swipeDistance) > swipeThreshold) {
+                    if (swipeDistance > 0) {
+                        this.goToPreviousSlide();
+                    } else {
+                        this.goToNextSlide();
+                    }
+                }
+            }
+
+            // Public API methods
+            next() {
+                this.goToNextSlide();
+            }
+
+            prev() {
+                this.goToPreviousSlide();
+            }
+
+            goto(index) {
+                this.goToSlide(index);
+            }
+
+            play() {
+                this.isAutoplay = true;
+                this.autoplayText.textContent = 'Pause';
+                this.startAutoplay();
+            }
+
+            pause() {
+                this.isAutoplay = false;
+                this.autoplayText.textContent = 'Play';
+                this.stopAutoplay();
+            }
+
+            destroy() {
+                this.stopAutoplay();
+                // Remove event listeners would go here in a production environment
+            }
+        }
+
+        // FAQ Section Class
+        class FAQSection {
+            constructor() {
+                this.currentTab = 'brands';
+                this.init();
+            }
+
+            init() {
+                this.cacheElements();
+                this.bindEvents();
+            }
+
+            cacheElements() {
+                this.tabs = document.querySelectorAll('.faq-tab');
+                this.contents = document.querySelectorAll('.faq-content');
+                this.questions = document.querySelectorAll('.faq-question');
+            }
+
+            bindEvents() {
+                // Tab switching
+                this.tabs.forEach(tab => {
+                    tab.addEventListener('click', (e) => this.switchTab(e));
+                    tab.addEventListener('keydown', (e) => this.handleTabKeydown(e));
+                });
+
+                // FAQ accordion
+                this.questions.forEach(question => {
+                    question.addEventListener('click', (e) => this.toggleAccordion(e));
+                    question.addEventListener('keydown', (e) => this.handleQuestionKeydown(e));
+                });
+            }
+
+
+            switchTab(e) {
+                const clickedTab = e.currentTarget;
+                const targetTab = clickedTab.dataset.tab;
+                
+                if (targetTab === this.currentTab) return;
+
+                // Update tab states
+                this.tabs.forEach(tab => {
+                    const isActive = tab.dataset.tab === targetTab;
+                    tab.classList.toggle('active', isActive);
+                    
+                    // Update arrow visibility for active tab
+                    const arrowContainer = tab.querySelector('div:last-child');
+                    if (arrowContainer) {
+                        arrowContainer.style.visibility = isActive ? 'visible' : 'hidden';
+                    }
+                    
+                    // Update arrow color based on active state
+                    const arrow = tab.querySelector('svg');
+                    if (arrow) {
+                        arrow.classList.toggle('text-white', isActive);
+                        arrow.classList.toggle('text-[#D0D5DD]', !isActive);
+                    }
+                });
+
+                // Update content visibility
+                this.contents.forEach(content => {
+                    const isActive = content.dataset.content === targetTab;
+                    content.classList.toggle('active', isActive);
+                    content.classList.toggle('hidden', !isActive);
+                });
+
+                this.currentTab = targetTab;
+
+                // Announce tab change for screen readers
+                this.announceTabChange(targetTab);
+            }
+
+            toggleAccordion(e) {
+                const question = e.currentTarget;
+                const answer = question.nextElementSibling;
+                const isExpanded = question.classList.contains('expanded');
+
+                // Close other questions in the same tab (optional - for single-open behavior)
+                // Uncomment the following lines if you want only one question open at a time
+                /*
+                const currentContent = question.closest('.faq-content');
+                const allQuestionsInTab = currentContent.querySelectorAll('.faq-question');
+                allQuestionsInTab.forEach(q => {
+                    if (q !== question) {
+                        q.classList.remove('expanded');
+                        const a = q.nextElementSibling;
+                        if (a) a.classList.remove('expanded');
+                    }
+                });
+                */
+
+                // Toggle current question
+                question.classList.toggle('expanded', !isExpanded);
+                if (answer) {
+                    answer.classList.toggle('expanded', !isExpanded);
+                }
+
+                // Update ARIA attributes
+                question.setAttribute('aria-expanded', (!isExpanded).toString());
+                
+                // Announce state change for screen readers
+                this.announceAccordionChange(question, !isExpanded);
+            }
+
+            handleTabKeydown(e) {
+                const tabs = Array.from(this.tabs);
+                const currentIndex = tabs.findIndex(tab => tab === e.currentTarget);
+                
+                switch (e.key) {
+                    case 'ArrowLeft':
+                    case 'ArrowUp':
+                        e.preventDefault();
+                        const prevIndex = currentIndex > 0 ? currentIndex - 1 : tabs.length - 1;
+                        tabs[prevIndex].click();
+                        tabs[prevIndex].focus();
+                        break;
+                    case 'ArrowRight':
+                    case 'ArrowDown':
+                        e.preventDefault();
+                        const nextIndex = currentIndex < tabs.length - 1 ? currentIndex + 1 : 0;
+                        tabs[nextIndex].click();
+                        tabs[nextIndex].focus();
+                        break;
+                    case 'Home':
+                        e.preventDefault();
+                        tabs[0].click();
+                        tabs[0].focus();
+                        break;
+                    case 'End':
+                        e.preventDefault();
+                        tabs[tabs.length - 1].click();
+                        tabs[tabs.length - 1].focus();
+                        break;
+                }
+            }
+
+            handleQuestionKeydown(e) {
+                if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault();
+                    this.toggleAccordion(e);
+                }
+            }
+
+            announceTabChange(tabName) {
+                // Create a temporary announcement for screen readers
+                const announcement = document.createElement('div');
+                announcement.setAttribute('aria-live', 'polite');
+                announcement.setAttribute('aria-atomic', 'true');
+                announcement.className = 'sr-only';
+                announcement.textContent = `Switched to ${tabName} tab`;
+                
+                document.body.appendChild(announcement);
+                setTimeout(() => {
+                    document.body.removeChild(announcement);
+                }, 1000);
+            }
+
+            announceAccordionChange(question, isExpanded) {
+                const questionText = question.querySelector('h3').textContent;
+                const announcement = document.createElement('div');
+                announcement.setAttribute('aria-live', 'polite');
+                announcement.setAttribute('aria-atomic', 'true');
+                announcement.className = 'sr-only';
+                announcement.textContent = `${questionText} ${isExpanded ? 'expanded' : 'collapsed'}`;
+                
+                document.body.appendChild(announcement);
+                setTimeout(() => {
+                    document.body.removeChild(announcement);
+                }, 1000);
+            }
+
+            // Public API methods
+            switchToTab(tabName) {
+                const tab = document.querySelector(`[data-tab="${tabName}"]`);
+                if (tab) {
+                    tab.click();
+                }
+            }
+
+            expandQuestion(questionId) {
+                const question = document.querySelector(`[data-faq="${questionId}"]`);
+                if (question && !question.classList.contains('expanded')) {
+                    question.click();
+                }
+            }
+
+            collapseQuestion(questionId) {
+                const question = document.querySelector(`[data-faq="${questionId}"]`);
+                if (question && question.classList.contains('expanded')) {
+                    question.click();
+                }
+            }
+
+            expandAllInCurrentTab() {
+                const currentContent = document.querySelector(`[data-content="${this.currentTab}"]`);
+                const questions = currentContent.querySelectorAll('.faq-question:not(.expanded)');
+                questions.forEach(question => question.click());
+            }
+
+            collapseAllInCurrentTab() {
+                const currentContent = document.querySelector(`[data-content="${this.currentTab}"]`);
+                const questions = currentContent.querySelectorAll('.faq-question.expanded');
+                questions.forEach(question => question.click());
+            }
+        }
+
+        // Initialize the carousel when DOM is loaded
+        document.addEventListener('DOMContentLoaded', () => {
+            window.logoCarousel = new LogoCarousel();
+            window.faqSection = new FAQSection();
+            window.imageCarousel = new ImageCarousel();
+        });
+
+        // Fallback for browsers that don't support DOMContentLoaded or if script runs after load
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', () => {
+                if (!window.logoCarousel) {
+                    window.logoCarousel = new LogoCarousel();
+                }
+                if (!window.faqSection) {
+                    window.faqSection = new FAQSection();
+                }
+                if (!window.imageCarousel) {
+                    window.imageCarousel = new ImageCarousel();
+                }
+            });
+        } else {
+            window.logoCarousel = new LogoCarousel();
+            window.faqSection = new FAQSection();
+            window.imageCarousel = new ImageCarousel();
+        }
+
+        // Image Carousel Class
+        class ImageCarousel {
+            constructor() {
+                this.currentSlide = 0;
+                this.slides = document.querySelectorAll('.carousel-slide');
+                this.dots = document.querySelectorAll('.carousel-dot');
+                this.prevBtn = document.querySelector('.carousel-prev');
+                this.nextBtn = document.querySelector('.carousel-next');
+                this.autoPlayInterval = null;
+                this.autoPlayDelay = 4000;
+
+                // Debug logging
+                console.log('ImageCarousel initialized');
+                console.log('Slides found:', this.slides.length);
+                console.log('Dots found:', this.dots.length);
+                console.log('Prev button:', this.prevBtn);
+                console.log('Next button:', this.nextBtn);
+
+                if (this.slides.length > 0) {
+                    this.init();
+                } else {
+                    console.error('No carousel slides found!');
+                }
+            }
+
+            init() {
+                this.bindEvents();
+                this.updateCarousel();
+                this.startAutoPlay();
+            }
+
+            bindEvents() {
+                if (this.prevBtn) {
+                    this.prevBtn.addEventListener('click', () => this.prevSlide());
+                }
+                if (this.nextBtn) {
+                    this.nextBtn.addEventListener('click', () => this.nextSlide());
+                }
+                
+                this.dots.forEach((dot, index) => {
+                    dot.addEventListener('click', () => this.goToSlide(index));
+                });
+
+                // Pause auto-play on hover
+                const carousel = document.getElementById('imageCarousel');
+                if (carousel) {
+                    carousel.addEventListener('mouseenter', () => this.stopAutoPlay());
+                    carousel.addEventListener('mouseleave', () => this.startAutoPlay());
+                }
+            }
+
+            nextSlide() {
+                this.currentSlide = (this.currentSlide + 1) % this.slides.length;
+                this.updateCarousel();
+                this.resetAutoPlay();
+            }
+
+            prevSlide() {
+                this.currentSlide = (this.currentSlide - 1 + this.slides.length) % this.slides.length;
+                this.updateCarousel();
+                this.resetAutoPlay();
+            }
+
+            goToSlide(index) {
+                this.currentSlide = index;
+                this.updateCarousel();
+                this.resetAutoPlay();
+            }
+
+            updateCarousel() {
+                // Update slides
+                this.slides.forEach((slide, index) => {
+                    slide.classList.toggle('active', index === this.currentSlide);
+                });
+
+                // Update dots
+                this.dots.forEach((dot, index) => {
+                    dot.classList.toggle('active', index === this.currentSlide);
+                });
+            }
+
+            startAutoPlay() {
+                this.autoPlayInterval = setInterval(() => {
+                    this.nextSlide();
+                }, this.autoPlayDelay);
+            }
+
+            stopAutoPlay() {
+                if (this.autoPlayInterval) {
+                    clearInterval(this.autoPlayInterval);
+                    this.autoPlayInterval = null;
+                }
+            }
+
+            resetAutoPlay() {
+                this.stopAutoPlay();
+                this.startAutoPlay();
+            }
+        }
+
+        // Campaign Features "See more" functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('See more functionality loaded');
+            
+            // Get all see more buttons
+            const seeMoreBrand = document.getElementById('see-more-brand');
+            const seeMoreAgency = document.getElementById('see-more-agency');
+            const seeMoreCreators = document.getElementById('see-more-creators');
+            
+            // Get the shared expandable section
+            const campaignDetails = document.getElementById('campaign-details');
+
+            // Debug: Check if elements are found
+            console.log('Elements found:', {
+                seeMoreBrand: !!seeMoreBrand,
+                seeMoreAgency: !!seeMoreAgency,
+                seeMoreCreators: !!seeMoreCreators,
+                campaignDetails: !!campaignDetails
+            });
+
+            // Track current state
+            let isExpanded = false;
+            let activeButton = null;
+
+            // Function to update button states and content
+            function updateButtonStates(newActiveButton) {
+                // Reset all buttons to "See more"
+                [seeMoreBrand, seeMoreAgency, seeMoreCreators].forEach(btn => {
+                    if (btn) btn.textContent = 'See more';
+                });
+                
+                // Hide all content sections
+                const brandDetails = document.getElementById('brand-details');
+                const agencyDetails = document.getElementById('agency-details');
+                const creatorsDetails = document.getElementById('creators-details');
+                
+                [brandDetails, agencyDetails, creatorsDetails].forEach(section => {
+                    if (section) section.classList.add('hidden');
+                });
+                
+                // Reset all dots
+                const dotBrand = document.getElementById('dot-brand');
+                const dotAgency = document.getElementById('dot-agency');
+                const dotCreators = document.getElementById('dot-creators');
+                
+                [dotBrand, dotAgency, dotCreators].forEach(dot => {
+                    if (dot) {
+                        dot.classList.remove('bg-[#12203A]');
+                        dot.classList.add('bg-[#E5E7EB]');
+                    }
+                });
+                
+                // Set active button and show corresponding content
+                if (newActiveButton) {
+                    newActiveButton.textContent = 'See less';
+                    
+                    // Show corresponding content and update dot
+                    if (newActiveButton.id === 'see-more-brand') {
+                        if (brandDetails) brandDetails.classList.remove('hidden');
+                        if (dotBrand) {
+                            dotBrand.classList.remove('bg-[#E5E7EB]');
+                            dotBrand.classList.add('bg-[#12203A]');
+                        }
+                    } else if (newActiveButton.id === 'see-more-agency') {
+                        if (agencyDetails) agencyDetails.classList.remove('hidden');
+                        if (dotAgency) {
+                            dotAgency.classList.remove('bg-[#E5E7EB]');
+                            dotAgency.classList.add('bg-[#12203A]');
+                        }
+                    } else if (newActiveButton.id === 'see-more-creators') {
+                        if (creatorsDetails) creatorsDetails.classList.remove('hidden');
+                        if (dotCreators) {
+                            dotCreators.classList.remove('bg-[#E5E7EB]');
+                            dotCreators.classList.add('bg-[#12203A]');
+                        }
+                    }
+                }
+                
+                activeButton = newActiveButton;
+            }
+
+            // Toggle function for shared section
+            function toggleCampaignDetails(clickedButton) {
+                console.log('Toggle clicked for:', clickedButton.id);
+                console.log('Current state - isExpanded:', isExpanded, 'activeButton:', activeButton?.id);
+                
+                if (!isExpanded) {
+                    // Show the section
+                    campaignDetails.classList.remove('hidden');
+                    campaignDetails.style.opacity = '0';
+                    campaignDetails.style.transform = 'translateY(-20px)';
+                    
+                    // Animate in
+                    setTimeout(() => {
+                        campaignDetails.style.transition = 'opacity 0.4s ease, transform 0.4s ease';
+                        campaignDetails.style.opacity = '1';
+                        campaignDetails.style.transform = 'translateY(0)';
+                    }, 10);
+                    
+                    isExpanded = true;
+                    updateButtonStates(clickedButton);
+                    
+                } else if (activeButton === clickedButton) {
+                    // Same button clicked - hide the section
+                    campaignDetails.style.transition = 'opacity 0.4s ease, transform 0.4s ease';
+                    campaignDetails.style.opacity = '0';
+                    campaignDetails.style.transform = 'translateY(-20px)';
+                    
+                    setTimeout(() => {
+                        campaignDetails.classList.add('hidden');
+                    }, 400);
+                    
+                    isExpanded = false;
+                    updateButtonStates(null);
+                    
+                } else {
+                    // Different button clicked - just switch active button (keep content visible)
+                    updateButtonStates(clickedButton);
+                }
+            }
+
+            // Add event listeners to all buttons
+            [seeMoreBrand, seeMoreAgency, seeMoreCreators].forEach(button => {
+                if (button && campaignDetails) {
+                    console.log('Adding click listener to', button.id);
+                    button.addEventListener('click', function(e) {
+                        e.preventDefault();
+                        console.log(button.id + ' clicked');
+                        toggleCampaignDetails(button);
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
