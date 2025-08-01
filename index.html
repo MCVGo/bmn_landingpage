@@ -1,22 +1,30 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>BMN Landing Page</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
+        html {
+            scroll-behavior: smooth;
+        }
+
         .feature-item:not(:first-child)::before {
             content: '';
             position: absolute;
-            left: 16px; /* Center align with the icon (32px/2) */
+            left: 16px;
+            /* Center align with the icon (32px/2) */
             width: 2px;
-            height: 24px; /* Reduced height to connect icon centers */
+            height: 24px;
+            /* Reduced height to connect icon centers */
             background-color: #CEFCF4;
-            top: -28px; /* Position to connect icon centers */
+            top: -28px;
+            /* Position to connect icon centers */
             z-index: 1;
         }
-        
+
         .feature-item {
             position: relative;
             z-index: 2;
@@ -39,10 +47,13 @@
 
         /* Custom loading animation */
         @keyframes pulse-glow {
-            0%, 100% {
+
+            0%,
+            100% {
                 opacity: 1;
                 transform: scale(1);
             }
+
             50% {
                 opacity: 0.7;
                 transform: scale(1.05);
@@ -84,13 +95,15 @@
         }
 
         /* Button hover effects */
-        #logo-prev-btn, #logo-next-btn {
+        #logo-prev-btn,
+        #logo-next-btn {
             position: relative;
             overflow: hidden;
             transform: translateZ(0);
         }
 
-        #logo-prev-btn::before, #logo-next-btn::before {
+        #logo-prev-btn::before,
+        #logo-next-btn::before {
             content: '';
             position: absolute;
             top: 50%;
@@ -103,7 +116,8 @@
             transition: width 0.3s ease, height 0.3s ease;
         }
 
-        #logo-prev-btn:hover::before, #logo-next-btn:hover::before {
+        #logo-prev-btn:hover::before,
+        #logo-next-btn:hover::before {
             width: 100%;
             height: 100%;
         }
@@ -136,25 +150,27 @@
         }
 
         /* Smooth transitions for all interactive elements */
-        button, .logo-item, .pagination-dot {
+        button,
+        .logo-item,
+        .pagination-dot {
             transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
         /* Image Carousel Styles */
         #imageCarousel {
             width: 100%;
-            height: 150px;
+            height: 230px;
             position: relative;
             overflow: hidden;
             border-radius: 0.5rem;
         }
-        
+
         .carousel-container {
             position: relative;
             width: 100%;
             height: 100%;
         }
-        
+
         .carousel-slide {
             position: absolute;
             top: 0;
@@ -183,7 +199,8 @@
             transform: scale(1.2);
         }
 
-        .carousel-prev, .carousel-next {
+        .carousel-prev,
+        .carousel-next {
             z-index: 10;
         }
 
@@ -196,6 +213,7 @@
             from {
                 width: 0%;
             }
+
             to {
                 width: 100%;
             }
@@ -218,18 +236,24 @@
 
         /* Platform Animation Styles */
         @keyframes float-gentle {
-            0%, 100% {
+
+            0%,
+            100% {
                 transform: translateY(0px);
             }
+
             50% {
                 transform: translateY(-8px);
             }
         }
 
         @keyframes float-medium {
-            0%, 100% {
+
+            0%,
+            100% {
                 transform: translateY(0px) rotate(0deg);
             }
+
             50% {
                 transform: translateY(-12px) rotate(2deg);
             }
@@ -239,15 +263,19 @@
             0% {
                 transform: translateX(0px) translateY(0px);
             }
+
             25% {
                 transform: translateX(4px) translateY(-4px);
             }
+
             50% {
                 transform: translateX(0px) translateY(-8px);
             }
+
             75% {
                 transform: translateX(-4px) translateY(-4px);
             }
+
             100% {
                 transform: translateX(0px) translateY(0px);
             }
@@ -258,6 +286,7 @@
                 opacity: 0;
                 transform: translateY(20px);
             }
+
             100% {
                 opacity: 1;
                 transform: translateY(0px);
@@ -341,21 +370,21 @@
                 width: 5rem;
                 height: 5rem;
             }
-            
+
             .floating-icon.youtube-icon img {
                 width: 6rem;
                 height: 6rem;
             }
-            
+
             .floating-icon.tiktok-icon img {
                 width: 5rem;
                 height: 5rem;
             }
-            
+
             .platform-tag img {
                 height: 2.5rem;
             }
-            
+
             .platform-tag.report-tag img {
                 height: 3rem;
             }
@@ -366,51 +395,51 @@
                 top: 1rem;
                 left: 2rem;
             }
-            
+
             .floating-icon.facebook-icon img {
                 width: 3.5rem;
                 height: 3.5rem;
             }
-            
+
             .floating-icon.youtube-icon {
                 top: 50%;
                 left: 0.5rem;
             }
-            
+
             .floating-icon.youtube-icon img {
                 width: 4rem;
                 height: 4rem;
             }
-            
+
             .floating-icon.tiktok-icon {
                 bottom: 3rem;
                 left: 50%;
             }
-            
+
             .floating-icon.tiktok-icon img {
                 width: 3.5rem;
                 height: 3.5rem;
             }
-            
+
             .platform-tag img {
                 height: 2rem;
             }
-            
+
             .platform-tag.throughtout-tag {
                 top: 0.5rem;
                 right: 1rem;
             }
-            
+
             .platform-tag.diverse-tag {
                 right: 0.5rem;
                 top: 65%;
             }
-            
+
             .platform-tag.report-tag {
                 bottom: 0.5rem;
                 right: 2rem;
             }
-            
+
             .platform-tag.report-tag img {
                 height: 2.5rem;
             }
@@ -421,33 +450,33 @@
                 width: 2.5rem;
                 height: 2.5rem;
             }
-            
+
             .floating-icon.youtube-icon img {
                 width: 3rem;
                 height: 3rem;
             }
-            
+
             .floating-icon.tiktok-icon img {
                 width: 2.5rem;
                 height: 2.5rem;
             }
-            
+
             .platform-tag img {
                 height: 1.5rem;
             }
-            
+
             .platform-tag.report-tag img {
                 height: 2rem;
             }
-            
+
             .platform-tag.throughtout-tag {
                 right: 0.5rem;
             }
-            
+
             .platform-tag.diverse-tag {
                 right: 0rem;
             }
-            
+
             .platform-tag.report-tag {
                 right: 0.5rem;
             }
@@ -458,13 +487,18 @@
             #logo-slides {
                 transition-duration: 0.01ms !important;
             }
-            
-            .logo-item, .pagination-dot, button {
+
+            .logo-item,
+            .pagination-dot,
+            button {
                 transition: none !important;
                 animation: none !important;
             }
 
-            .floating-icon, .platform-tag, .laptop-main, .animated-platform-container {
+            .floating-icon,
+            .platform-tag,
+            .laptop-main,
+            .animated-platform-container {
                 animation: none !important;
                 transition: none !important;
             }
@@ -603,22 +637,22 @@
                 flex-direction: column;
                 gap: 8px;
             }
-            
+
             .campaign-buttons button {
                 width: 100%;
                 min-width: 200px;
             }
-            
+
             .campaign-card img[alt="For Brand Illustration"] {
                 width: 130px !important;
                 height: 167px !important;
             }
-            
+
             .campaign-card img[alt="For Agency Illustration"] {
                 width: 157px !important;
                 height: 133px !important;
             }
-            
+
             .campaign-card img[alt="For Creators/Publisher Illustration"] {
                 width: 137px !important;
                 height: 133px !important;
@@ -645,7 +679,7 @@
             .campaign-card:last-child .campaign-buttons {
                 flex-direction: column;
             }
-            
+
             .campaign-card:last-child .campaign-buttons button:first-child {
                 flex: none;
                 width: 100%;
@@ -797,20 +831,20 @@
             .faq-tab {
                 padding: 12px 16px;
             }
-            
+
             .faq-tab span {
                 font-size: 18px;
             }
-            
+
             .faq-item {
                 padding: 20px;
             }
-            
+
             .faq-question h3 {
                 font-size: 18px;
                 line-height: 1.5;
             }
-            
+
             .faq-answer p {
                 font-size: 18px;
                 line-height: 1.5;
@@ -822,20 +856,20 @@
                 padding: 10px 12px;
                 gap: 4px;
             }
-            
+
             .faq-tab span {
                 font-size: 16px;
             }
-            
+
             .faq-item {
                 padding: 16px;
             }
-            
+
             .faq-question h3 {
                 font-size: 16px;
                 line-height: 1.4;
             }
-            
+
             .faq-answer p {
                 font-size: 16px;
                 line-height: 1.4;
@@ -850,13 +884,21 @@
         }
 
         /* Smooth transitions for all FAQ interactive elements */
-        .faq-tab, .faq-item, .faq-question, .faq-answer {
+        .faq-tab,
+        .faq-item,
+        .faq-question,
+        .faq-answer {
             transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
         /* Reduced motion support for FAQ */
         @media (prefers-reduced-motion: reduce) {
-            .faq-tab, .faq-item, .faq-question, .faq-answer, .faq-question svg {
+
+            .faq-tab,
+            .faq-item,
+            .faq-question,
+            .faq-answer,
+            .faq-question svg {
                 transition: none !important;
                 animation: none !important;
             }
@@ -880,12 +922,12 @@
             .cta-card {
                 padding: 40px 24px;
             }
-            
+
             .cta-card h2 {
                 font-size: 28px;
                 line-height: 1.3;
             }
-            
+
             .cta-card button {
                 font-size: 18px;
                 padding: 12px 20px;
@@ -899,18 +941,21 @@
         }
     </style>
 </head>
+
 <body class="min-h-screen bg-white">
     <!-- Header Section -->
     <header class="bg-[#12203A] shadow-sm">
         <nav class="container mx-auto px-32 py-2 flex items-center justify-between">
             <div class="flex items-center">
-                <img src="public/logo.svg" alt="BMN" class="h-8">
+                <img src="images/logo.svg" alt="BMN" class="h-8">
             </div>
             <ul class="hidden md:flex space-x-8">
-                <li><a href="#about" class="text-[#E4F0FE] hover:text-white font-semibold text-[22px]">About BookMeNow</a></li>
-                <li><a href="#brand" class="text-[#D0D5DD] hover:text-white text-[22px]">For Brand</a></li>
-                <li><a href="#agency" class="text-[#D0D5DD] hover:text-white text-[22px]">For Agency</a></li>
-                <li><a href="#creators" class="text-[#D0D5DD] hover:text-white text-[22px]">For Creators</a></li>
+                <li><a href="#about" class="text-[#E4F0FE] hover:text-white font-semibold text-[22px]">About
+                        BookMeNow</a></li>
+                <li><a href="#campaign-features" class="text-[#D0D5DD] hover:text-white text-[22px]">For Brand</a></li>
+                <li><a href="#campaign-features" class="text-[#D0D5DD] hover:text-white text-[22px]">For Agency</a></li>
+                <li><a href="#campaign-features" class="text-[#D0D5DD] hover:text-white text-[22px]">For Creators</a>
+                </li>
                 <li><a href="#faqs" class="text-[#D0D5DD] hover:text-white text-[22px]">FAQs</a></li>
             </ul>
             <div class="flex items-center gap-8">
@@ -919,7 +964,8 @@
                 </button>
                 <button class="md:hidden text-white">
                     <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M4 6h16M4 12h16M4 18h16"></path>
                     </svg>
                 </button>
             </div>
@@ -929,7 +975,8 @@
     <!-- Main Content -->
     <main>
         <!-- Hero Section -->
-        <section id="home" class="bg-[#12203A] relative py-20 overflow-hidden" style="background-image: url('public/Mask group.png'); background-size: cover; background-position: center;">
+        <section id="home" class="bg-[#12203A] relative py-20 overflow-hidden"
+            style="background-image: url('images/Mask group.png'); background-size: cover; background-position: center;">
             <div class="container mx-auto px-32 flex items-center gap-8">
                 <div class="w-1/2 text-left relative z-10">
                     <h1 class="text-5xl font-bold text-white mb-6 leading-tight">
@@ -937,9 +984,11 @@
                         Social Media Advertising Content
                     </h1>
                     <p class="text-xl text-gray-300 mb-8 leading-relaxed">
-                        Make targeted bookings across YouTube, Facebook, and TikTok with BookMeNow's self-service platform.
+                        Make targeted bookings across YouTube, Facebook, and TikTok with BookMeNow's self-service
+                        platform.
                     </p>
-                    <button class="bg-[#1262F3] text-white px-8 py-3 rounded-lg font-semibold hover:bg-blue-700 transition text-lg">
+                    <button
+                        class="bg-[#1262F3] text-white px-8 py-3 rounded-lg font-semibold hover:bg-blue-700 transition text-lg">
                         Get Started
                     </button>
                 </div>
@@ -947,33 +996,36 @@
                     <div class="relative max-w-full h-auto animated-platform-container">
                         <!-- Central Laptop -->
                         <div class="laptop-main relative z-10">
-                            <img src="public/platform/laptop.png" alt="BookMeNow Platform" class="max-w-full h-auto">
+                            <img src="images/platform/laptop.png" alt="BookMeNow Platform" class="max-w-full h-auto">
                         </div>
-                        
+
                         <!-- Floating Social Media Icons -->
                         <div class="floating-icon facebook-icon absolute top-8 left-32 z-20">
-                            <img src="public/platform/fb.svg" alt="Facebook" class="w-24 h-24">
+                            <img src="images/platform/fb.svg" alt="Facebook" class="w-24 h-24">
                         </div>
-                        
-                        <div class="floating-icon youtube-icon absolute top-1/2 left-16 transform -translate-y-1/2 z-20">
-                            <img src="public/platform/youtube.svg" alt="YouTube" class="w-28 h-28">
+
+                        <div
+                            class="floating-icon youtube-icon absolute top-1/2 left-16 transform -translate-y-1/2 z-20">
+                            <img src="images/platform/youtube.svg" alt="YouTube" class="w-28 h-28">
                         </div>
-                        
-                        <div class="floating-icon tiktok-icon absolute bottom-0 left-1/3 transform -translate-x-1/2 z-20">
-                            <img src="public/platform/tiktok.svg" alt="TikTok" class="w-24 h-24">
+
+                        <div
+                            class="floating-icon tiktok-icon absolute bottom-0 left-1/3 transform -translate-x-1/2 z-20">
+                            <img src="images/platform/tiktok.svg" alt="TikTok" class="w-24 h-24">
                         </div>
-                        
+
                         <!-- Platform Feature Tags - Behind laptop -->
                         <div class="platform-tag throughtout-tag absolute top-24 right-8 z-50">
-                            <img src="public/platform/throughtout.svg" alt="Support Throughout" class="h-12">
+                            <img src="images/platform/throughtout.svg" alt="Support Throughout" class="h-12">
                         </div>
-                        
+
                         <div class="platform-tag diverse-tag absolute right-4 top-40 z-50">
-                            <img src="public/platform/diverse.svg" alt="Pool Diverse" class="h-12">
+                            <img src="images/platform/diverse.svg" alt="Pool Diverse" class="h-12">
                         </div>
-                        
+
                         <div class="platform-tag report-tag absolute bottom-4 right-16 z-50">
-                            <img src="public/platform/report.svg" alt="Report Transparent Real time Included" class="h-16">
+                            <img src="images/platform/report.svg" alt="Report Transparent Real time Included"
+                                class="h-16">
                         </div>
                     </div>
                 </div>
@@ -986,91 +1038,131 @@
                 <div class="grid md:grid-cols-2 gap-16 items-start">
                     <div>
                         <p class="text-xl text-[#12203A] mb-8 leading-relaxed opacity-80">
-                            BookMeNow is a one-stop platform for advertisers to book targeted advertising on social media channels with potential contributors and huge trusted premium content pools.
+                            BookMeNow is a one-stop platform for advertisers to book targeted advertising on social
+                            media channels with potential contributors and huge trusted premium content pools.
                         </p>
                         <div id="imageCarousel">
                             <div class="carousel-container">
                                 <div class="carousel-slide active">
-                                    <img src="public/about4.png" alt="Team Celebration">
+                                    <img src="images/slide/s1.jpg" alt="">
+                                </div>
+                                <div class="carousel-slide active">
+                                    <img src="images/slide/s2.jpg" alt="">
+                                </div>
+                                <div class="carousel-slide active">
+                                    <img src="images/slide/s3.jpeg" alt="">
+                                </div>
+                                <div class="carousel-slide active">
+                                    <img src="images/slide/s4.jpeg" alt="">
+                                </div>
+                                <div class="carousel-slide active">
+                                    <img src="images/slide/s5.jpeg" alt="">
                                 </div>
                                 <!-- <div class="carousel-slide">
-                                    <img src="public/about2.png" alt="What is BookMeNow">
+                                    <img src="images/about2.png" alt="What is BookMeNow">
                                 </div>
                                 <div class="carousel-slide">
-                                    <img src="public/about3.png" alt="Team Collaboration">
+                                    <img src="images/about3.png" alt="Team Collaboration">
                                 </div> -->
-                                
+
                                 <!-- Navigation arrows -->
-                                <button class="carousel-prev absolute left-4 top-1/2 transform -translate-y-1/2 bg-black bg-opacity-50 text-white p-2 rounded-full hover:bg-opacity-70 transition-all">
+                                <button
+                                    class="carousel-prev absolute left-4 top-1/2 transform -translate-y-1/2 bg-black bg-opacity-50 text-white p-2 rounded-full hover:bg-opacity-70 transition-all">
                                     <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M15 19l-7-7 7-7"></path>
                                     </svg>
                                 </button>
-                                <button class="carousel-next absolute right-4 top-1/2 transform -translate-y-1/2 bg-black bg-opacity-50 text-white p-2 rounded-full hover:bg-opacity-70 transition-all">
+                                <button
+                                    class="carousel-next absolute right-4 top-1/2 transform -translate-y-1/2 bg-black bg-opacity-50 text-white p-2 rounded-full hover:bg-opacity-70 transition-all">
                                     <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M9 5l7 7-7 7"></path>
                                     </svg>
                                 </button>
-                                
+
                                 <!-- Dot indicators -->
                                 <div class="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex space-x-2">
-                                    <button class="carousel-dot w-3 h-3 rounded-full bg-gray-400 hover:bg-gray-300 transition-all active"></button>
-                                    <button class="carousel-dot w-3 h-3 rounded-full bg-gray-400 hover:bg-gray-300 transition-all"></button>
-                                    <button class="carousel-dot w-3 h-3 rounded-full bg-gray-400 hover:bg-gray-300 transition-all"></button>
+                                    <button
+                                        class="carousel-dot w-3 h-3 rounded-full bg-gray-400 hover:bg-gray-300 transition-all active"></button>
+                                    <button
+                                        class="carousel-dot w-3 h-3 rounded-full bg-gray-400 hover:bg-gray-300 transition-all"></button>
+                                    <button
+                                        class="carousel-dot w-3 h-3 rounded-full bg-gray-400 hover:bg-gray-300 transition-all"></button>
                                 </div>
                             </div>
                         </div>
                     </div>
                     <div class="space-y-8 relative">
                         <div class="flex items-start gap-4 feature-item">
-                            <div class="flex-shrink-0 w-8 h-8 bg-[#CEFCF4] rounded-full flex items-center justify-center">
+                            <div
+                                class="flex-shrink-0 w-8 h-8 bg-[#CEFCF4] rounded-full flex items-center justify-center">
                                 <div class="w-6 h-6 bg-[#87E5D5] rounded-full flex items-center justify-center">
-                                    <svg class="w-3 h-3 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path>
+                                    <svg class="w-3 h-3 text-white" fill="none" stroke="currentColor"
+                                        viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3"
+                                            d="M5 13l4 4L19 7"></path>
                                     </svg>
                                 </div>
                             </div>
-                            <span class="text-xl text-[#344054] opacity-80">Access a diverse pool of quality social creators</span>
+                            <span class="text-xl text-[#344054] opacity-80">Access a diverse pool of quality social
+                                creators</span>
                         </div>
                         <div class="flex items-start gap-4 feature-item">
-                            <div class="flex-shrink-0 w-8 h-8 bg-[#CEFCF4] rounded-full flex items-center justify-center">
+                            <div
+                                class="flex-shrink-0 w-8 h-8 bg-[#CEFCF4] rounded-full flex items-center justify-center">
                                 <div class="w-6 h-6 bg-[#87E5D5] rounded-full flex items-center justify-center">
-                                    <svg class="w-3 h-3 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path>
+                                    <svg class="w-3 h-3 text-white" fill="none" stroke="currentColor"
+                                        viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3"
+                                            d="M5 13l4 4L19 7"></path>
                                     </svg>
                                 </div>
                             </div>
-                            <span class="text-xl text-[#344054] opacity-80">Get pre-selected agency/brand bookings</span>
+                            <span class="text-xl text-[#344054] opacity-80">Get pre-selected agency/brand
+                                bookings</span>
                         </div>
                         <div class="flex items-start gap-4 feature-item">
-                            <div class="flex-shrink-0 w-8 h-8 bg-[#CEFCF4] rounded-full flex items-center justify-center">
+                            <div
+                                class="flex-shrink-0 w-8 h-8 bg-[#CEFCF4] rounded-full flex items-center justify-center">
                                 <div class="w-6 h-6 bg-[#87E5D5] rounded-full flex items-center justify-center">
-                                    <svg class="w-3 h-3 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path>
+                                    <svg class="w-3 h-3 text-white" fill="none" stroke="currentColor"
+                                        viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3"
+                                            d="M5 13l4 4L19 7"></path>
                                     </svg>
                                 </div>
                             </div>
-                            <span class="text-xl text-[#344054] opacity-80">Automate and centralize your campaign workflows</span>
+                            <span class="text-xl text-[#344054] opacity-80">Automate and centralize your campaign
+                                workflows</span>
                         </div>
                         <div class="flex items-start gap-4 feature-item">
-                            <div class="flex-shrink-0 w-8 h-8 bg-[#CEFCF4] rounded-full flex items-center justify-center">
+                            <div
+                                class="flex-shrink-0 w-8 h-8 bg-[#CEFCF4] rounded-full flex items-center justify-center">
                                 <div class="w-6 h-6 bg-[#87E5D5] rounded-full flex items-center justify-center">
-                                    <svg class="w-3 h-3 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path>
+                                    <svg class="w-3 h-3 text-white" fill="none" stroke="currentColor"
+                                        viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3"
+                                            d="M5 13l4 4L19 7"></path>
                                     </svg>
                                 </div>
                             </div>
-                            <span class="text-xl text-[#344054] opacity-80">Cut costs with confirmed wholesale rates</span>
+                            <span class="text-xl text-[#344054] opacity-80">Cut costs with confirmed wholesale
+                                rates</span>
                         </div>
                         <div class="flex items-start gap-4 feature-item">
-                            <div class="flex-shrink-0 w-8 h-8 bg-[#CEFCF4] rounded-full flex items-center justify-center">
+                            <div
+                                class="flex-shrink-0 w-8 h-8 bg-[#CEFCF4] rounded-full flex items-center justify-center">
                                 <div class="w-6 h-6 bg-[#87E5D5] rounded-full flex items-center justify-center">
-                                    <svg class="w-3 h-3 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path>
+                                    <svg class="w-3 h-3 text-white" fill="none" stroke="currentColor"
+                                        viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3"
+                                            d="M5 13l4 4L19 7"></path>
                                     </svg>
                                 </div>
                             </div>
-                            <span class="text-xl text-[#344054] opacity-80">Receive support from throughout the process</span>
+                            <span class="text-xl text-[#344054] opacity-80">Receive support from throughout the
+                                process</span>
                         </div>
                     </div>
                 </div>
@@ -1083,7 +1175,8 @@
                 <!-- Section Header -->
                 <div class="text-center mb-16">
                     <h2 class="text-4xl font-bold text-[#12203A] mb-4 uppercase tracking-wide">Our Content Pools</h2>
-                    <p class="text-2xl font-semibold text-[#12203A] opacity-80 tracking-wide">Reach your audience through diverse categories</p>
+                    <p class="text-2xl font-semibold text-[#12203A] opacity-80 tracking-wide">Reach your audience
+                        through diverse categories</p>
                 </div>
 
                 <!-- Category Pills -->
@@ -1092,80 +1185,98 @@
                         <!-- Row 1 -->
                         <!-- News -->
                         <div class="cursor-pointer transition-all duration-300 group">
-                            <div class="flex items-center gap-3 p-[1px] bg-transparent rounded-lg group-hover:bg-gradient-to-r group-hover:from-[#17B0E9] group-hover:via-[#25FEB2] group-hover:via-[#A4E7FD] group-hover:to-[#16AFE9]">
-                                <div class="flex items-center gap-3 px-[11px] py-[11px] bg-[#FEFEFE] rounded-lg w-full group-hover:bg-white">
-                                    <img src="public/news-icon.svg" alt="News" class="w-6 h-6">
+                            <div
+                                class="flex items-center gap-3 p-[1px] bg-transparent rounded-lg group-hover:bg-gradient-to-r group-hover:from-[#17B0E9] group-hover:via-[#25FEB2] group-hover:via-[#A4E7FD] group-hover:to-[#16AFE9]">
+                                <div
+                                    class="flex items-center gap-3 px-[11px] py-[11px] bg-[#FEFEFE] rounded-lg w-full group-hover:bg-white">
+                                    <img src="images/news-icon.svg" alt="News" class="w-6 h-6">
                                     <span class="text-[#12203A] font-medium text-xl">News</span>
                                 </div>
                             </div>
                         </div>
-                        
+
                         <!-- Entertainment -->
                         <div class="cursor-pointer transition-all duration-300 group">
-                            <div class="flex items-center gap-3 p-[1px] bg-transparent rounded-lg group-hover:bg-gradient-to-r group-hover:from-[#17B0E9] group-hover:via-[#25FEB2] group-hover:via-[#A4E7FD] group-hover:to-[#16AFE9]">
-                                <div class="flex items-center gap-3 px-[11px] py-[11px] bg-[#FEFEFE] rounded-lg w-full group-hover:bg-white">
-                                    <img src="public/entertainment-icon.svg" alt="Entertainment" class="w-6 h-6">
+                            <div
+                                class="flex items-center gap-3 p-[1px] bg-transparent rounded-lg group-hover:bg-gradient-to-r group-hover:from-[#17B0E9] group-hover:via-[#25FEB2] group-hover:via-[#A4E7FD] group-hover:to-[#16AFE9]">
+                                <div
+                                    class="flex items-center gap-3 px-[11px] py-[11px] bg-[#FEFEFE] rounded-lg w-full group-hover:bg-white">
+                                    <img src="images/entertainment-icon.svg" alt="Entertainment" class="w-6 h-6">
                                     <span class="text-[#12203A] font-medium text-xl">Entertainment</span>
                                 </div>
                             </div>
                         </div>
-                        
+
                         <!-- Lifestyle -->
                         <div class="cursor-pointer transition-all duration-300 group">
-                            <div class="flex items-center gap-3 p-[1px] bg-transparent rounded-lg group-hover:bg-gradient-to-r group-hover:from-[#17B0E9] group-hover:via-[#25FEB2] group-hover:via-[#A4E7FD] group-hover:to-[#16AFE9]">
-                                <div class="flex items-center gap-3 px-[11px] py-[11px] bg-[#FEFEFE] rounded-lg w-full group-hover:bg-white">
-                                    <img src="public/lifestyle-icon.svg" alt="Lifestyle" class="w-6 h-6">
+                            <div
+                                class="flex items-center gap-3 p-[1px] bg-transparent rounded-lg group-hover:bg-gradient-to-r group-hover:from-[#17B0E9] group-hover:via-[#25FEB2] group-hover:via-[#A4E7FD] group-hover:to-[#16AFE9]">
+                                <div
+                                    class="flex items-center gap-3 px-[11px] py-[11px] bg-[#FEFEFE] rounded-lg w-full group-hover:bg-white">
+                                    <img src="images/lifestyle-icon.svg" alt="Lifestyle" class="w-6 h-6">
                                     <span class="text-[#12203A] font-medium text-xl">Lifestyle</span>
                                 </div>
                             </div>
                         </div>
-                        
+
                         <!-- Film & TV -->
                         <div class="cursor-pointer transition-all duration-300 group">
-                            <div class="flex items-center gap-3 p-[1px] bg-transparent rounded-lg group-hover:bg-gradient-to-r group-hover:from-[#17B0E9] group-hover:via-[#25FEB2] group-hover:via-[#A4E7FD] group-hover:to-[#16AFE9]">
-                                <div class="flex items-center gap-3 px-[11px] py-[11px] bg-[#FEFEFE] rounded-lg w-full group-hover:bg-white">
-                                    <img src="public/film-tv-icon.svg" alt="Film & TV" class="w-6 h-6">
+                            <div
+                                class="flex items-center gap-3 p-[1px] bg-transparent rounded-lg group-hover:bg-gradient-to-r group-hover:from-[#17B0E9] group-hover:via-[#25FEB2] group-hover:via-[#A4E7FD] group-hover:to-[#16AFE9]">
+                                <div
+                                    class="flex items-center gap-3 px-[11px] py-[11px] bg-[#FEFEFE] rounded-lg w-full group-hover:bg-white">
+                                    <img src="images/film-tv-icon.svg" alt="Film & TV" class="w-6 h-6">
                                     <span class="text-[#12203A] font-medium text-xl">Film & TV</span>
                                 </div>
                             </div>
                         </div>
-                        
+
                         <!-- Row 2 -->
                         <!-- Health & Medical -->
                         <div class="cursor-pointer transition-all duration-300 group">
-                            <div class="flex items-center gap-3 p-[1px] bg-transparent rounded-lg group-hover:bg-gradient-to-r group-hover:from-[#17B0E9] group-hover:via-[#25FEB2] group-hover:via-[#A4E7FD] group-hover:to-[#16AFE9]">
-                                <div class="flex items-center gap-3 px-[11px] py-[11px] bg-[#FEFEFE] rounded-lg w-full group-hover:bg-white">
-                                    <img src="public/health-medical-icon.svg" alt="Health & Medical" class="w-6 h-6">
+                            <div
+                                class="flex items-center gap-3 p-[1px] bg-transparent rounded-lg group-hover:bg-gradient-to-r group-hover:from-[#17B0E9] group-hover:via-[#25FEB2] group-hover:via-[#A4E7FD] group-hover:to-[#16AFE9]">
+                                <div
+                                    class="flex items-center gap-3 px-[11px] py-[11px] bg-[#FEFEFE] rounded-lg w-full group-hover:bg-white">
+                                    <img src="images/health-medical-icon.svg" alt="Health & Medical" class="w-6 h-6">
                                     <span class="text-[#12203A] font-medium text-xl">Health & Medical</span>
                                 </div>
                             </div>
                         </div>
-                        
+
                         <!-- Finance & Business -->
                         <div class="cursor-pointer transition-all duration-300 group">
-                            <div class="flex items-center gap-3 p-[1px] bg-transparent rounded-lg group-hover:bg-gradient-to-r group-hover:from-[#17B0E9] group-hover:via-[#25FEB2] group-hover:via-[#A4E7FD] group-hover:to-[#16AFE9]">
-                                <div class="flex items-center gap-3 px-[11px] py-[11px] bg-[#FEFEFE] rounded-lg w-full group-hover:bg-white">
-                                    <img src="public/finance-business-icon.svg" alt="Finance & Business" class="w-6 h-6">
+                            <div
+                                class="flex items-center gap-3 p-[1px] bg-transparent rounded-lg group-hover:bg-gradient-to-r group-hover:from-[#17B0E9] group-hover:via-[#25FEB2] group-hover:via-[#A4E7FD] group-hover:to-[#16AFE9]">
+                                <div
+                                    class="flex items-center gap-3 px-[11px] py-[11px] bg-[#FEFEFE] rounded-lg w-full group-hover:bg-white">
+                                    <img src="images/finance-business-icon.svg" alt="Finance & Business"
+                                        class="w-6 h-6">
                                     <span class="text-[#12203A] font-medium text-lg">Finance & Business</span>
                                 </div>
                             </div>
                         </div>
-                        
+
                         <!-- Parenting & Society -->
                         <div class="cursor-pointer transition-all duration-300 group">
-                            <div class="flex items-center gap-3 p-[1px] bg-transparent rounded-lg group-hover:bg-gradient-to-r group-hover:from-[#17B0E9] group-hover:via-[#25FEB2] group-hover:via-[#A4E7FD] group-hover:to-[#16AFE9]">
-                                <div class="flex items-center gap-3 px-[11px] py-[11px] bg-[#FEFEFE] rounded-lg w-full group-hover:bg-white">
-                                    <img src="public/parenting-society-icon.svg" alt="Parenting & Society" class="w-6 h-6">
+                            <div
+                                class="flex items-center gap-3 p-[1px] bg-transparent rounded-lg group-hover:bg-gradient-to-r group-hover:from-[#17B0E9] group-hover:via-[#25FEB2] group-hover:via-[#A4E7FD] group-hover:to-[#16AFE9]">
+                                <div
+                                    class="flex items-center gap-3 px-[11px] py-[11px] bg-[#FEFEFE] rounded-lg w-full group-hover:bg-white">
+                                    <img src="images/parenting-society-icon.svg" alt="Parenting & Society"
+                                        class="w-6 h-6">
                                     <span class="text-[#12203A] font-medium text-lg">Parenting & Society</span>
                                 </div>
                             </div>
                         </div>
-                        
+
                         <!-- Education -->
                         <div class="cursor-pointer transition-all duration-300 group">
-                            <div class="flex items-center gap-3 p-[1px] bg-transparent rounded-lg group-hover:bg-gradient-to-r group-hover:from-[#17B0E9] group-hover:via-[#25FEB2] group-hover:via-[#A4E7FD] group-hover:to-[#16AFE9]">
-                                <div class="flex items-center gap-3 px-[11px] py-[11px] bg-[#FEFEFE] rounded-lg w-full group-hover:bg-white">
-                                    <img src="public/education-icon.svg" alt="Education" class="w-6 h-6">
+                            <div
+                                class="flex items-center gap-3 p-[1px] bg-transparent rounded-lg group-hover:bg-gradient-to-r group-hover:from-[#17B0E9] group-hover:via-[#25FEB2] group-hover:via-[#A4E7FD] group-hover:to-[#16AFE9]">
+                                <div
+                                    class="flex items-center gap-3 px-[11px] py-[11px] bg-[#FEFEFE] rounded-lg w-full group-hover:bg-white">
+                                    <img src="images/education-icon.svg" alt="Education" class="w-6 h-6">
                                     <span class="text-[#12203A] font-medium text-xl">Education</span>
                                 </div>
                             </div>
@@ -1179,93 +1290,137 @@
                     <div id="carousel-loading" class="hidden flex justify-center items-center h-[142px]">
                         <div class="animate-spin rounded-full h-8 w-8 border-b-2 border-white"></div>
                     </div>
-                    
+
                     <!-- Logo Container -->
                     <div id="logo-container" class="relative">
                         <!-- Logo Slides -->
-                        <div id="logo-slides" class="flex transition-transform duration-500 ease-in-out" style="transform: translateX(0%);">
+                        <div id="logo-slides" class="flex transition-transform duration-500 ease-in-out"
+                            style="transform: translateX(0%);">
                             <!-- Slide 1 -->
                             <div class="flex gap-4 md:gap-6 lg:gap-[30px] w-full flex-shrink-0 justify-center">
-                                <div class="logo-item flex-1 max-w-[200px] h-[142px] rounded-[30px] overflow-hidden bg-white/10 backdrop-blur-sm p-4 flex items-center justify-center">
-                                    <img src="public/logo-1-2f5dbe.png" alt="Partner Logo 1" class="max-w-full max-h-full object-contain" loading="lazy">
+                                <div
+                                    class="logo-item flex-1 max-w-[200px] h-[142px] rounded-[30px] overflow-hidden bg-white/10 backdrop-blur-sm p-4 flex items-center justify-center">
+                                    <img src="images/logo-1-2f5dbe.png" alt="Partner Logo 1"
+                                        class="max-w-full max-h-full object-contain" loading="lazy">
                                 </div>
-                                <div class="logo-item flex-1 max-w-[200px] h-[142px] rounded-[30px] overflow-hidden bg-white/10 backdrop-blur-sm p-4 items-center justify-center hidden sm:flex">
-                                    <img src="public/logo-2-2b2515.png" alt="Partner Logo 2" class="max-w-full max-h-full object-contain" loading="lazy">
+                                <div
+                                    class="logo-item flex-1 max-w-[200px] h-[142px] rounded-[30px] overflow-hidden bg-white/10 backdrop-blur-sm p-4 items-center justify-center hidden sm:flex">
+                                    <img src="images/logo-2-2b2515.png" alt="Partner Logo 2"
+                                        class="max-w-full max-h-full object-contain" loading="lazy">
                                 </div>
-                                <div class="logo-item flex-1 max-w-[200px] h-[142px] rounded-[30px] overflow-hidden bg-white/10 backdrop-blur-sm p-4 items-center justify-center hidden md:flex">
-                                    <img src="public/logo-3-297b54.png" alt="Partner Logo 3" class="max-w-full max-h-full object-contain" loading="lazy">
+                                <div
+                                    class="logo-item flex-1 max-w-[200px] h-[142px] rounded-[30px] overflow-hidden bg-white/10 backdrop-blur-sm p-4 items-center justify-center hidden md:flex">
+                                    <img src="images/logo-3-297b54.png" alt="Partner Logo 3"
+                                        class="max-w-full max-h-full object-contain" loading="lazy">
                                 </div>
-                                <div class="logo-item flex-1 max-w-[200px] h-[142px] rounded-[30px] overflow-hidden bg-white/10 backdrop-blur-sm p-4 items-center justify-center hidden lg:flex">
-                                    <img src="public/logo-4-56d628.png" alt="Partner Logo 4" class="max-w-full max-h-full object-contain" loading="lazy">
+                                <div
+                                    class="logo-item flex-1 max-w-[200px] h-[142px] rounded-[30px] overflow-hidden bg-white/10 backdrop-blur-sm p-4 items-center justify-center hidden lg:flex">
+                                    <img src="images/logo-4-56d628.png" alt="Partner Logo 4"
+                                        class="max-w-full max-h-full object-contain" loading="lazy">
                                 </div>
-                                <div class="logo-item flex-1 max-w-[200px] h-[142px] rounded-[30px] overflow-hidden bg-white/10 backdrop-blur-sm p-4 items-center justify-center hidden xl:flex">
-                                    <img src="public/logo-5-58335f.png" alt="Partner Logo 5" class="max-w-full max-h-full object-contain" loading="lazy">
+                                <div
+                                    class="logo-item flex-1 max-w-[200px] h-[142px] rounded-[30px] overflow-hidden bg-white/10 backdrop-blur-sm p-4 items-center justify-center hidden xl:flex">
+                                    <img src="images/logo-5-58335f.png" alt="Partner Logo 5"
+                                        class="max-w-full max-h-full object-contain" loading="lazy">
                                 </div>
                             </div>
-                            
+
                             <!-- Slide 2 -->
                             <div class="flex gap-4 md:gap-6 lg:gap-[30px] w-full flex-shrink-0 justify-center">
-                                <div class="logo-item flex-1 max-w-[200px] h-[142px] rounded-[30px] overflow-hidden bg-white/10 backdrop-blur-sm p-4 flex items-center justify-center">
-                                    <img src="public/logo-2-2b2515.png" alt="Partner Logo 2" class="max-w-full max-h-full object-contain" loading="lazy">
+                                <div
+                                    class="logo-item flex-1 max-w-[200px] h-[142px] rounded-[30px] overflow-hidden bg-white/10 backdrop-blur-sm p-4 flex items-center justify-center">
+                                    <img src="images/logo-2-2b2515.png" alt="Partner Logo 2"
+                                        class="max-w-full max-h-full object-contain" loading="lazy">
                                 </div>
-                                <div class="logo-item flex-1 max-w-[200px] h-[142px] rounded-[30px] overflow-hidden bg-white/10 backdrop-blur-sm p-4 items-center justify-center hidden sm:flex">
-                                    <img src="public/logo-3-297b54.png" alt="Partner Logo 3" class="max-w-full max-h-full object-contain" loading="lazy">
+                                <div
+                                    class="logo-item flex-1 max-w-[200px] h-[142px] rounded-[30px] overflow-hidden bg-white/10 backdrop-blur-sm p-4 items-center justify-center hidden sm:flex">
+                                    <img src="images/logo-3-297b54.png" alt="Partner Logo 3"
+                                        class="max-w-full max-h-full object-contain" loading="lazy">
                                 </div>
-                                <div class="logo-item flex-1 max-w-[200px] h-[142px] rounded-[30px] overflow-hidden bg-white/10 backdrop-blur-sm p-4 items-center justify-center hidden md:flex">
-                                    <img src="public/logo-4-56d628.png" alt="Partner Logo 4" class="max-w-full max-h-full object-contain" loading="lazy">
+                                <div
+                                    class="logo-item flex-1 max-w-[200px] h-[142px] rounded-[30px] overflow-hidden bg-white/10 backdrop-blur-sm p-4 items-center justify-center hidden md:flex">
+                                    <img src="images/logo-4-56d628.png" alt="Partner Logo 4"
+                                        class="max-w-full max-h-full object-contain" loading="lazy">
                                 </div>
-                                <div class="logo-item flex-1 max-w-[200px] h-[142px] rounded-[30px] overflow-hidden bg-white/10 backdrop-blur-sm p-4 items-center justify-center hidden lg:flex">
-                                    <img src="public/logo-5-58335f.png" alt="Partner Logo 5" class="max-w-full max-h-full object-contain" loading="lazy">
+                                <div
+                                    class="logo-item flex-1 max-w-[200px] h-[142px] rounded-[30px] overflow-hidden bg-white/10 backdrop-blur-sm p-4 items-center justify-center hidden lg:flex">
+                                    <img src="images/logo-5-58335f.png" alt="Partner Logo 5"
+                                        class="max-w-full max-h-full object-contain" loading="lazy">
                                 </div>
-                                <div class="logo-item flex-1 max-w-[200px] h-[142px] rounded-[30px] overflow-hidden bg-white/10 backdrop-blur-sm p-4 items-center justify-center hidden xl:flex">
-                                    <img src="public/logo-1-2f5dbe.png" alt="Partner Logo 1" class="max-w-full max-h-full object-contain" loading="lazy">
+                                <div
+                                    class="logo-item flex-1 max-w-[200px] h-[142px] rounded-[30px] overflow-hidden bg-white/10 backdrop-blur-sm p-4 items-center justify-center hidden xl:flex">
+                                    <img src="images/logo-1-2f5dbe.png" alt="Partner Logo 1"
+                                        class="max-w-full max-h-full object-contain" loading="lazy">
                                 </div>
                             </div>
-                            
+
                             <!-- Slide 3 -->
                             <div class="flex gap-4 md:gap-6 lg:gap-[30px] w-full flex-shrink-0 justify-center">
-                                <div class="logo-item flex-1 max-w-[200px] h-[142px] rounded-[30px] overflow-hidden bg-white/10 backdrop-blur-sm p-4 flex items-center justify-center">
-                                    <img src="public/logo-3-297b54.png" alt="Partner Logo 3" class="max-w-full max-h-full object-contain" loading="lazy">
+                                <div
+                                    class="logo-item flex-1 max-w-[200px] h-[142px] rounded-[30px] overflow-hidden bg-white/10 backdrop-blur-sm p-4 flex items-center justify-center">
+                                    <img src="images/logo-3-297b54.png" alt="Partner Logo 3"
+                                        class="max-w-full max-h-full object-contain" loading="lazy">
                                 </div>
-                                <div class="logo-item flex-1 max-w-[200px] h-[142px] rounded-[30px] overflow-hidden bg-white/10 backdrop-blur-sm p-4 items-center justify-center hidden sm:flex">
-                                    <img src="public/logo-4-56d628.png" alt="Partner Logo 4" class="max-w-full max-h-full object-contain" loading="lazy">
+                                <div
+                                    class="logo-item flex-1 max-w-[200px] h-[142px] rounded-[30px] overflow-hidden bg-white/10 backdrop-blur-sm p-4 items-center justify-center hidden sm:flex">
+                                    <img src="images/logo-4-56d628.png" alt="Partner Logo 4"
+                                        class="max-w-full max-h-full object-contain" loading="lazy">
                                 </div>
-                                <div class="logo-item flex-1 max-w-[200px] h-[142px] rounded-[30px] overflow-hidden bg-white/10 backdrop-blur-sm p-4 items-center justify-center hidden md:flex">
-                                    <img src="public/logo-5-58335f.png" alt="Partner Logo 5" class="max-w-full max-h-full object-contain" loading="lazy">
+                                <div
+                                    class="logo-item flex-1 max-w-[200px] h-[142px] rounded-[30px] overflow-hidden bg-white/10 backdrop-blur-sm p-4 items-center justify-center hidden md:flex">
+                                    <img src="images/logo-5-58335f.png" alt="Partner Logo 5"
+                                        class="max-w-full max-h-full object-contain" loading="lazy">
                                 </div>
-                                <div class="logo-item flex-1 max-w-[200px] h-[142px] rounded-[30px] overflow-hidden bg-white/10 backdrop-blur-sm p-4 items-center justify-center hidden lg:flex">
-                                    <img src="public/logo-1-2f5dbe.png" alt="Partner Logo 1" class="max-w-full max-h-full object-contain" loading="lazy">
+                                <div
+                                    class="logo-item flex-1 max-w-[200px] h-[142px] rounded-[30px] overflow-hidden bg-white/10 backdrop-blur-sm p-4 items-center justify-center hidden lg:flex">
+                                    <img src="images/logo-1-2f5dbe.png" alt="Partner Logo 1"
+                                        class="max-w-full max-h-full object-contain" loading="lazy">
                                 </div>
-                                <div class="logo-item flex-1 max-w-[200px] h-[142px] rounded-[30px] overflow-hidden bg-white/10 backdrop-blur-sm p-4 items-center justify-center hidden xl:flex">
-                                    <img src="public/logo-2-2b2515.png" alt="Partner Logo 2" class="max-w-full max-h-full object-contain" loading="lazy">
+                                <div
+                                    class="logo-item flex-1 max-w-[200px] h-[142px] rounded-[30px] overflow-hidden bg-white/10 backdrop-blur-sm p-4 items-center justify-center hidden xl:flex">
+                                    <img src="images/logo-2-2b2515.png" alt="Partner Logo 2"
+                                        class="max-w-full max-h-full object-contain" loading="lazy">
                                 </div>
                             </div>
                         </div>
                     </div>
-                    
+
                     <!-- Navigation Controls -->
                     <div class="flex justify-between items-center mt-6">
                         <!-- Pagination Dots -->
-                        <div id="pagination-dots" class="flex items-center gap-[14px]" role="tablist" aria-label="Carousel pagination">
-                            <button class="pagination-dot w-[14px] h-[14px] rounded-full bg-[#87E5D5] transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-blue-600" role="tab" aria-selected="true" aria-label="Go to slide 1" data-slide="0"></button>
-                            <button class="pagination-dot w-[14px] h-[14px] rounded-full bg-[#E4F0FE] transition-all duration-300 hover:bg-[#87E5D5] focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-blue-600" role="tab" aria-selected="false" aria-label="Go to slide 2" data-slide="1"></button>
-                            <button class="pagination-dot w-[14px] h-[14px] rounded-full bg-[#E4F0FE] transition-all duration-300 hover:bg-[#87E5D5] focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-blue-600" role="tab" aria-selected="false" aria-label="Go to slide 3" data-slide="2"></button>
+                        <div id="pagination-dots" class="flex items-center gap-[14px]" role="tablist"
+                            aria-label="Carousel pagination">
+                            <button
+                                class="pagination-dot w-[14px] h-[14px] rounded-full bg-[#87E5D5] transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-blue-600"
+                                role="tab" aria-selected="true" aria-label="Go to slide 1" data-slide="0"></button>
+                            <button
+                                class="pagination-dot w-[14px] h-[14px] rounded-full bg-[#E4F0FE] transition-all duration-300 hover:bg-[#87E5D5] focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-blue-600"
+                                role="tab" aria-selected="false" aria-label="Go to slide 2" data-slide="1"></button>
+                            <button
+                                class="pagination-dot w-[14px] h-[14px] rounded-full bg-[#E4F0FE] transition-all duration-300 hover:bg-[#87E5D5] focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-blue-600"
+                                role="tab" aria-selected="false" aria-label="Go to slide 3" data-slide="2"></button>
                         </div>
-                        
+
                         <!-- Navigation Arrows -->
                         <div class="flex gap-4">
-                            <button id="logo-prev-btn" class="w-[29px] h-[29px] rounded bg-transparent flex items-center justify-center hover:bg-white/20 focus:bg-white/20 transition-colors focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-blue-600 disabled:opacity-50 disabled:cursor-not-allowed" aria-label="Previous slide">
-                                <img src="public/arrow-back.svg" alt="" class="w-[19px] h-[17px]" aria-hidden="true">
+                            <button id="logo-prev-btn"
+                                class="w-[29px] h-[29px] rounded bg-transparent flex items-center justify-center hover:bg-white/20 focus:bg-white/20 transition-colors focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-blue-600 disabled:opacity-50 disabled:cursor-not-allowed"
+                                aria-label="Previous slide">
+                                <img src="images/arrow-back.svg" alt="" class="w-[19px] h-[17px]" aria-hidden="true">
                             </button>
-                            <button id="logo-next-btn" class="w-[29px] h-[29px] rounded bg-transparent flex items-center justify-center hover:bg-white/20 focus:bg-white/20 transition-colors focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-blue-600 disabled:opacity-50 disabled:cursor-not-allowed" aria-label="Next slide">
-                                <img src="public/arrow-forward.svg" alt="" class="w-[19px] h-[17px]" aria-hidden="true">
+                            <button id="logo-next-btn"
+                                class="w-[29px] h-[29px] rounded bg-transparent flex items-center justify-center hover:bg-white/20 focus:bg-white/20 transition-colors focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-blue-600 disabled:opacity-50 disabled:cursor-not-allowed"
+                                aria-label="Next slide">
+                                <img src="images/arrow-forward.svg" alt="" class="w-[19px] h-[17px]" aria-hidden="true">
                             </button>
                         </div>
                     </div>
-                    
+
                     <!-- Auto-play Toggle -->
                     <div class="absolute top-4 right-4">
-                        <button id="autoplay-toggle" class="px-3 py-1 text-xs bg-white/20 text-white rounded-full hover:bg-white/30 transition-colors focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-blue-600" aria-label="Toggle autoplay">
+                        <button id="autoplay-toggle"
+                            class="px-3 py-1 text-xs bg-white/20 text-white rounded-full hover:bg-white/30 transition-colors focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-blue-600"
+                            aria-label="Toggle autoplay">
                             <span id="autoplay-text">Pause</span>
                         </button>
                     </div>
@@ -1287,28 +1442,33 @@
                 <div class="flex flex-col md:flex-row gap-0 justify-stretch max-w-[1183px] mx-auto">
                     <!-- Column 1 - For Brand -->
                     <div class="flex-1 mb-4 md:mb-0">
-                        <div class="campaign-card bg-[#FEFEFE] rounded-2xl p-6 flex flex-col items-center gap-6 h-full min-h-[400px] relative overflow-hidden">
+                        <div
+                            class="campaign-card bg-[#FEFEFE] rounded-2xl p-6 flex flex-col items-center gap-6 h-full min-h-[400px] relative overflow-hidden">
                             <!-- Illustration -->
                             <div class="flex-shrink-0">
-                                <img src="public/for-brand-illustration.svg" alt="For Brand Illustration" class="w-[173px] h-[222px] object-contain">
+                                <img src="images/for-brand-illustration.svg" alt="For Brand Illustration"
+                                    class="w-[173px] h-[222px] object-contain">
                             </div>
-                            
+
                             <!-- Title -->
                             <h3 class="text-2xl font-semibold text-[#1C1C1C] text-center tracking-[0.02em]">
                                 For Brand
                             </h3>
-                            
+
                             <!-- Description -->
-                            <p class="text-[22px] font-normal text-[#344054] opacity-80 text-center leading-[1.64] tracking-[0.02em] flex-1 flex items-center">
+                            <p
+                                class="text-[22px] font-normal text-[#344054] opacity-80 text-center leading-[1.64] tracking-[0.02em] flex-1 flex items-center">
                                 Sign-up to plan and launch your campaigns with ease
                             </p>
-                            
+
                             <!-- Buttons -->
                             <div class="campaign-buttons flex gap-3 w-full justify-center flex-wrap">
-                                <button class="bg-[#1262F3] text-white px-3 py-3 rounded-lg font-semibold text-base leading-6 tracking-[0.03em] h-12 flex items-center justify-center transition-colors hover:bg-blue-700">
+                                <button
+                                    class="bg-[#1262F3] text-white px-3 py-3 rounded-lg font-semibold text-base leading-6 tracking-[0.03em] h-12 flex items-center justify-center transition-colors hover:bg-blue-700">
                                     Start Your Campaign Now
                                 </button>
-                                <button type="button" id="see-more-brand" class="border border-[#1262F3] text-[#1262F3] px-3 py-3 rounded-lg font-semibold text-base leading-6 tracking-[0.03em] h-12 flex items-center justify-center transition-colors hover:bg-blue-50">
+                                <button type="button" id="see-more-brand"
+                                    class="border border-[#1262F3] text-[#1262F3] px-3 py-3 rounded-lg font-semibold text-base leading-6 tracking-[0.03em] h-12 flex items-center justify-center transition-colors hover:bg-blue-50">
                                     See more
                                 </button>
                             </div>
@@ -1317,28 +1477,33 @@
 
                     <!-- Column 2 - For Agency -->
                     <div class="flex-1 mb-4 md:mb-0">
-                        <div class="campaign-card campaign-card-agency bg-[#FEFEFE] rounded-2xl p-6 flex flex-col items-center gap-6 h-full min-h-[400px]">
+                        <div
+                            class="campaign-card campaign-card-agency bg-[#FEFEFE] rounded-2xl p-6 flex flex-col items-center gap-6 h-full min-h-[400px]">
                             <!-- Illustration -->
                             <div class="flex-shrink-0">
-                                <img src="public/for-agency-illustration.svg" alt="For Agency Illustration" class="w-[263px] h-[222px] object-contain">
+                                <img src="images/for-agency-illustration.svg" alt="For Agency Illustration"
+                                    class="w-[263px] h-[222px] object-contain">
                             </div>
-                            
+
                             <!-- Title -->
                             <h3 class="text-2xl font-semibold text-[#1C1C1C] text-center tracking-[0.02em]">
                                 For Agency
                             </h3>
-                            
+
                             <!-- Description -->
-                            <p class="text-[22px] font-normal text-[#344054] opacity-80 text-center leading-[1.64] tracking-[0.02em] flex-1 flex items-center">
+                            <p
+                                class="text-[22px] font-normal text-[#344054] opacity-80 text-center leading-[1.64] tracking-[0.02em] flex-1 flex items-center">
                                 Sign-up to plan and launch your campaigns with ease
                             </p>
-                            
+
                             <!-- Buttons -->
                             <div class="campaign-buttons flex gap-3 w-full justify-center flex-wrap">
-                                <button class="bg-[#1262F3] text-white px-3 py-3 rounded-lg font-semibold text-base leading-6 tracking-[0.03em] h-12 flex items-center justify-center transition-colors hover:bg-blue-700">
+                                <button
+                                    class="bg-[#1262F3] text-white px-3 py-3 rounded-lg font-semibold text-base leading-6 tracking-[0.03em] h-12 flex items-center justify-center transition-colors hover:bg-blue-700">
                                     Start Your Campaign Now
                                 </button>
-                                <button type="button" id="see-more-agency" class="border border-[#1262F3] text-[#1262F3] px-3 py-3 rounded-lg font-semibold text-base leading-6 tracking-[0.03em] h-12 flex items-center justify-center transition-colors hover:bg-blue-50">
+                                <button type="button" id="see-more-agency"
+                                    class="border border-[#1262F3] text-[#1262F3] px-3 py-3 rounded-lg font-semibold text-base leading-6 tracking-[0.03em] h-12 flex items-center justify-center transition-colors hover:bg-blue-50">
                                     See more
                                 </button>
                             </div>
@@ -1347,38 +1512,44 @@
 
                     <!-- Column 3 - For Creators/Publisher -->
                     <div class="flex-1">
-                        <div class="campaign-card bg-[#FEFEFE] rounded-2xl p-6 flex flex-col items-center gap-6 h-full border border-gray-200 min-h-[400px]">
+                        <div
+                            class="campaign-card bg-[#FEFEFE] rounded-2xl p-6 flex flex-col items-center gap-6 h-full border border-gray-200 min-h-[400px]">
                             <!-- Illustration -->
                             <div class="flex-shrink-0">
-                                <img src="public/for-creators-illustration.svg" alt="For Creators/Publisher Illustration" class="w-[229px] h-[222px] object-contain">
+                                <img src="images/for-creators-illustration.svg"
+                                    alt="For Creators/Publisher Illustration"
+                                    class="w-[229px] h-[222px] object-contain">
                             </div>
-                            
+
                             <!-- Title -->
                             <h3 class="text-2xl font-semibold text-[#1C1C1C] text-center tracking-[0.02em]">
                                 For Creators/ Publisher
                             </h3>
-                            
+
                             <!-- Description -->
-                            <p class="text-[22px] font-normal text-[#344054] opacity-80 text-center leading-[1.64] tracking-[0.02em] flex-1 flex items-center">
+                            <p
+                                class="text-[22px] font-normal text-[#344054] opacity-80 text-center leading-[1.64] tracking-[0.02em] flex-1 flex items-center">
                                 Sign-up to plan and launch your campaigns with ease
                             </p>
-                            
+
                             <!-- Buttons -->
                             <div class="campaign-buttons flex gap-3 w-full justify-center flex-wrap">
-                                <button class="bg-[#1262F3] text-white px-3 py-3 rounded-lg font-semibold text-base leading-6 tracking-[0.03em] h-12 flex items-center justify-center transition-colors hover:bg-blue-700 flex-1">
+                                <button
+                                    class="bg-[#1262F3] text-white px-3 py-3 rounded-lg font-semibold text-base leading-6 tracking-[0.03em] h-12 flex items-center justify-center transition-colors hover:bg-blue-700 flex-1">
                                     Join Us Now
                                 </button>
-                                <button type="button" id="see-more-creators" class="border border-[#1262F3] text-[#1262F3] px-3 py-3 rounded-lg font-semibold text-base leading-6 tracking-[0.03em] h-12 flex items-center justify-center transition-colors hover:bg-blue-50">
+                                <button type="button" id="see-more-creators"
+                                    class="border border-[#1262F3] text-[#1262F3] px-3 py-3 rounded-lg font-semibold text-base leading-6 tracking-[0.03em] h-12 flex items-center justify-center transition-colors hover:bg-blue-50">
                                     See more
                                 </button>
                             </div>
                         </div>
                     </div>
                 </div>
-                
+
                 <!-- Full-Width Expandable Section for "See More" -->
                 <div id="campaign-details" class="hidden mt-12 bg-white rounded-[20px] p-12 max-w-[1183px] mx-auto">
-                    
+
                     <!-- Brand Content -->
                     <div id="brand-details" class="content-section">
                         <div class="flex items-center gap-12">
@@ -1388,16 +1559,22 @@
                                     Welcome Brands
                                 </h2>
                                 <p class="text-lg text-[#344054] leading-relaxed mb-8">
-                                    Collaborate, launch, and track your campaigns seamlessly with BookMeNow - a data-driven content network built to maximize branded content performance. As a brand or marketing team, you need more than just exposure — you need trusted creators, optimized seeding, and real-time results. BookMeNow provides access to thousands of verified influencers across YouTube, TikTok, and Facebook, ensuring your message lands with the right audience, at the right time.
+                                    Collaborate, launch, and track your campaigns seamlessly with BookMeNow - a
+                                    data-driven content network built to maximize branded content performance. As a
+                                    brand or marketing team, you need more than just exposure — you need trusted
+                                    creators, optimized seeding, and real-time results. BookMeNow provides access to
+                                    thousands of verified influencers across YouTube, TikTok, and Facebook, ensuring
+                                    your message lands with the right audience, at the right time.
                                 </p>
-                                <button class="bg-[#1262F3] text-white px-8 py-4 rounded-lg font-semibold text-lg hover:bg-blue-700 transition-colors">
+                                <button
+                                    class="bg-[#1262F3] text-white px-8 py-4 rounded-lg font-semibold text-lg hover:bg-blue-700 transition-colors">
                                     Explore Branded Campaigns
                                 </button>
                             </div>
-                            
+
                             <!-- Right Image -->
                             <div class="flex-1 max-w-[400px]">
-                                <img src="public/about1.png" alt="Welcome Brands" class="w-full h-auto rounded-lg">
+                                <img src="images/about1.png" alt="Welcome Brands" class="w-full h-auto rounded-lg">
                             </div>
                         </div>
                     </div>
@@ -1411,16 +1588,21 @@
                                     Welcome Agencies
                                 </h2>
                                 <p class="text-lg text-[#344054] leading-relaxed mb-8">
-                                    Scale your client campaigns with BookMeNow's comprehensive agency platform. Manage multiple brands, access white-label solutions, and streamline your workflow with our advanced campaign management tools. From client onboarding to campaign reporting, we provide the infrastructure you need to deliver exceptional results across all your accounts while maintaining your agency's brand identity.
+                                    Scale your client campaigns with BookMeNow's comprehensive agency platform. Manage
+                                    multiple brands, access white-label solutions, and streamline your workflow with our
+                                    advanced campaign management tools. From client onboarding to campaign reporting, we
+                                    provide the infrastructure you need to deliver exceptional results across all your
+                                    accounts while maintaining your agency's brand identity.
                                 </p>
-                                <button class="bg-[#1262F3] text-white px-8 py-4 rounded-lg font-semibold text-lg hover:bg-blue-700 transition-colors">
+                                <button
+                                    class="bg-[#1262F3] text-white px-8 py-4 rounded-lg font-semibold text-lg hover:bg-blue-700 transition-colors">
                                     Explore Agency Solutions
                                 </button>
                             </div>
-                            
+
                             <!-- Right Image -->
                             <div class="flex-1 max-w-[400px]">
-                                <img src="public/about2.png" alt="Welcome Agencies" class="w-full h-auto rounded-lg">
+                                <img src="images/about2.png" alt="Welcome Agencies" class="w-full h-auto rounded-lg">
                             </div>
                         </div>
                     </div>
@@ -1434,20 +1616,25 @@
                                     Welcome Creators
                                 </h2>
                                 <p class="text-lg text-[#344054] leading-relaxed mb-8">
-                                    Monetize your content and grow your audience with BookMeNow's creator platform. Connect with premium brands, access fair compensation, and maintain creative control over your content. Our platform provides transparent pricing, automated payments, and detailed analytics to help you build a sustainable content creation business while staying true to your authentic voice.
+                                    Monetize your content and grow your audience with BookMeNow's creator platform.
+                                    Connect with premium brands, access fair compensation, and maintain creative control
+                                    over your content. Our platform provides transparent pricing, automated payments,
+                                    and detailed analytics to help you build a sustainable content creation business
+                                    while staying true to your authentic voice.
                                 </p>
-                                <button class="bg-[#1262F3] text-white px-8 py-4 rounded-lg font-semibold text-lg hover:bg-blue-700 transition-colors">
+                                <button
+                                    class="bg-[#1262F3] text-white px-8 py-4 rounded-lg font-semibold text-lg hover:bg-blue-700 transition-colors">
                                     Join Creator Network
                                 </button>
                             </div>
-                            
+
                             <!-- Right Image -->
                             <div class="flex-1 max-w-[400px]">
-                                <img src="public/about3.png" alt="Welcome Creators" class="w-full h-auto rounded-lg">
+                                <img src="images/about3.png" alt="Welcome Creators" class="w-full h-auto rounded-lg">
                             </div>
                         </div>
                     </div>
-                    
+
                     <!-- Navigation Dots -->
                     <div class="flex justify-center mt-8 gap-3">
                         <div id="dot-brand" class="w-3 h-3 bg-[#12203A] rounded-full"></div>
@@ -1471,12 +1658,14 @@
                                 Our Clients
                             </h2>
                         </div>
-                        
+
                         <!-- Description -->
-                        <p class="text-[22px] font-normal text-[#344054] leading-[1.64] tracking-[0.02em] text-center max-w-[507px]">
-                            Whether you're a brand or an agency, 
+                        <p
+                            class="text-[22px] font-normal text-[#344054] leading-[1.64] tracking-[0.02em] text-center max-w-[507px]">
+                            Whether you're a brand or an agency,
                             you can be our next partner.
-                            With just 10 million VND, you'll receive a fully tailored media plan that aligns with your goals and target audience.
+                            With just 10 million VND, you'll receive a fully tailored media plan that aligns with your
+                            goals and target audience.
                         </p>
                     </div>
 
@@ -1488,10 +1677,13 @@
                                 Our Creators
                             </h2>
                         </div>
-                        
+
                         <!-- Description -->
-                        <p class="text-[22px] font-normal text-[#344054] leading-[1.64] tracking-[0.02em] text-center max-w-[507px]">
-                            If you have 1,000 followers or subscribers, you're ready to start earning with BookMeNow. Let trusted brands discover your content and turn it into real bookings on TikTok, YouTube, or Facebook.
+                        <p
+                            class="text-[22px] font-normal text-[#344054] leading-[1.64] tracking-[0.02em] text-center max-w-[507px]">
+                            If you have 1,000 followers or subscribers, you're ready to start earning with BookMeNow.
+                            Let trusted brands discover your content and turn it into real bookings on TikTok, YouTube,
+                            or Facebook.
                         </p>
                     </div>
                 </div>
@@ -1502,17 +1694,19 @@
         <section id="cta" class="py-20 bg-white">
             <div class="container mx-auto px-4 md:px-16 lg:px-32">
                 <div class="max-w-[778px] mx-auto">
-                    <div class="cta-card bg-white rounded-[20px] p-[60px] relative overflow-hidden border border-transparent transition-all duration-300 hover:border-transparent">
+                    <div
+                        class="cta-card bg-white rounded-[20px] p-[60px] relative overflow-hidden border border-transparent transition-all duration-300 hover:border-transparent">
                         <!-- Title -->
                         <div class="text-center mb-10">
                             <h2 class="text-4xl font-semibold text-[#12203A] leading-[1.21] tracking-[0.02em]">
                                 Are you ready to join with us?
                             </h2>
                         </div>
-                        
+
                         <!-- Button -->
                         <div class="flex justify-center">
-                            <button class="bg-[#1262F3] text-white px-5 py-3 rounded-lg font-semibold text-[22px] leading-[1.64] tracking-[0.03em] transition-colors hover:bg-blue-700">
+                            <button
+                                class="bg-[#1262F3] text-white px-5 py-3 rounded-lg font-semibold text-[22px] leading-[1.64] tracking-[0.03em] transition-colors hover:bg-blue-700">
                                 Get Started
                             </button>
                         </div>
@@ -1538,11 +1732,16 @@
                         <div class="lg:w-[271px] flex lg:flex-col gap-8 lg:gap-8">
                             <!-- For Brands Tab -->
                             <div class="flex-1 lg:flex-none">
-                                <div class="faq-tab active bg-[#1262F3] rounded-lg cursor-pointer transition-all duration-300 hover:bg-blue-700" data-tab="brands">
-                                    <span class="text-white font-semibold text-[22px] leading-[1.09] tracking-[0.023em]">For Brands</span>
+                                <div class="faq-tab active bg-[#1262F3] rounded-lg cursor-pointer transition-all duration-300 hover:bg-blue-700"
+                                    data-tab="brands">
+                                    <span
+                                        class="text-white font-semibold text-[22px] leading-[1.09] tracking-[0.023em]">For
+                                        Brands</span>
                                     <div class="w-6 h-6 flex items-center justify-center">
-                                        <svg class="w-5 h-3 text-white transform rotate-0 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                                        <svg class="w-5 h-3 text-white transform rotate-0 transition-transform duration-300"
+                                            fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                d="M9 5l7 7-7 7"></path>
                                         </svg>
                                     </div>
                                 </div>
@@ -1550,11 +1749,16 @@
 
                             <!-- For Agencies Tab -->
                             <div class="flex-1 lg:flex-none">
-                                <div class="faq-tab bg-[#F3F6FB] rounded-lg cursor-pointer transition-all duration-300 hover:bg-gray-200" data-tab="agencies">
-                                    <span class="text-[#D0D5DD] font-normal text-[22px] leading-[1.64] tracking-[0.023em]">For Agencies</span>
+                                <div class="faq-tab bg-[#F3F6FB] rounded-lg cursor-pointer transition-all duration-300 hover:bg-gray-200"
+                                    data-tab="agencies">
+                                    <span
+                                        class="text-[#D0D5DD] font-normal text-[22px] leading-[1.64] tracking-[0.023em]">For
+                                        Agencies</span>
                                     <div class="w-6 h-6 flex items-center justify-center" style="visibility: hidden;">
-                                        <svg class="w-5 h-3 text-[#D0D5DD] transform rotate-0 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                                        <svg class="w-5 h-3 text-[#D0D5DD] transform rotate-0 transition-transform duration-300"
+                                            fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                d="M9 5l7 7-7 7"></path>
                                         </svg>
                                     </div>
                                 </div>
@@ -1562,11 +1766,16 @@
 
                             <!-- For Creators Tab -->
                             <div class="flex-1 lg:flex-none">
-                                <div class="faq-tab bg-[#F3F6FB] rounded-lg cursor-pointer transition-all duration-300 hover:bg-gray-200" data-tab="creators">
-                                    <span class="text-[#D0D5DD] font-normal text-[22px] leading-[1.64] tracking-[0.023em]">For Creators</span>
+                                <div class="faq-tab bg-[#F3F6FB] rounded-lg cursor-pointer transition-all duration-300 hover:bg-gray-200"
+                                    data-tab="creators">
+                                    <span
+                                        class="text-[#D0D5DD] font-normal text-[22px] leading-[1.64] tracking-[0.023em]">For
+                                        Creators</span>
                                     <div class="w-6 h-6 flex items-center justify-center" style="visibility: hidden;">
-                                        <svg class="w-5 h-3 text-[#D0D5DD] transform rotate-0 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                                        <svg class="w-5 h-3 text-[#D0D5DD] transform rotate-0 transition-transform duration-300"
+                                            fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                d="M9 5l7 7-7 7"></path>
                                         </svg>
                                     </div>
                                 </div>
@@ -1580,20 +1789,26 @@
                                 <div class="space-y-8">
                                     <!-- FAQ Item 1 -->
                                     <div class="faq-item bg-[#F3F6FB] rounded-xl p-6 transition-all duration-300">
-                                        <div class="faq-question flex items-center justify-between cursor-pointer" data-faq="brands-1">
-                                            <h3 class="text-[#12203A] font-normal text-[22px] leading-[1.64] tracking-[0.023em] flex-1">
+                                        <div class="faq-question flex items-center justify-between cursor-pointer"
+                                            data-faq="brands-1">
+                                            <h3
+                                                class="text-[#12203A] font-normal text-[22px] leading-[1.64] tracking-[0.023em] flex-1">
                                                 Can I choose the creators myself?
                                             </h3>
                                             <div class="w-6 h-6 flex items-center justify-center">
-                                                <svg class="w-5 h-3 text-black transform rotate-0 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 15l7-7 7 7"></path>
+                                                <svg class="w-5 h-3 text-black transform rotate-0 transition-transform duration-300"
+                                                    fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                                        stroke-width="2" d="M5 15l7-7 7 7"></path>
                                                 </svg>
                                             </div>
                                         </div>
                                         <div class="faq-answer max-h-0 overflow-hidden transition-all duration-300">
                                             <div class="mt-4">
-                                                <p class="text-[#12203A] font-normal text-[22px] leading-[1.64] tracking-[0.023em]">
-                                                    Yes. You can either select creators manually or let our team and smart system recommend the best match.
+                                                <p
+                                                    class="text-[#12203A] font-normal text-[22px] leading-[1.64] tracking-[0.023em]">
+                                                    Yes. You can either select creators manually or let our team and
+                                                    smart system recommend the best match.
                                                 </p>
                                             </div>
                                         </div>
@@ -1601,20 +1816,26 @@
 
                                     <!-- FAQ Item 2 - Collapsed -->
                                     <div class="faq-item bg-[#F3F6FB] rounded-xl p-6 transition-all duration-300">
-                                        <div class="faq-question flex items-center justify-between cursor-pointer" data-faq="brands-2">
-                                            <h3 class="text-[#12203A] font-normal text-[22px] leading-[1.64] tracking-[0.023em] flex-1">
+                                        <div class="faq-question flex items-center justify-between cursor-pointer"
+                                            data-faq="brands-2">
+                                            <h3
+                                                class="text-[#12203A] font-normal text-[22px] leading-[1.64] tracking-[0.023em] flex-1">
                                                 How do I know if the campaign is working?
                                             </h3>
                                             <div class="w-6 h-6 flex items-center justify-center">
-                                                <svg class="w-5 h-3 text-black transform rotate-0 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 15l7-7 7 7"></path>
+                                                <svg class="w-5 h-3 text-black transform rotate-0 transition-transform duration-300"
+                                                    fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                                        stroke-width="2" d="M5 15l7-7 7 7"></path>
                                                 </svg>
                                             </div>
                                         </div>
                                         <div class="faq-answer max-h-0 overflow-hidden transition-all duration-300">
                                             <div class="mt-4">
-                                                <p class="text-[#12203A] font-normal text-[22px] leading-[1.64] tracking-[0.023em]">
-                                                    We provide real-time analytics and detailed reports showing reach, engagement, conversions, and ROI metrics for your campaigns.
+                                                <p
+                                                    class="text-[#12203A] font-normal text-[22px] leading-[1.64] tracking-[0.023em]">
+                                                    We provide real-time analytics and detailed reports showing reach,
+                                                    engagement, conversions, and ROI metrics for your campaigns.
                                                 </p>
                                             </div>
                                         </div>
@@ -1622,20 +1843,27 @@
 
                                     <!-- FAQ Item 3 - Collapsed -->
                                     <div class="faq-item bg-[#F3F6FB] rounded-xl p-6 transition-all duration-300">
-                                        <div class="faq-question flex items-center justify-between cursor-pointer" data-faq="brands-3">
-                                            <h3 class="text-[#12203A] font-normal text-[22px] leading-[1.64] tracking-[0.023em] flex-1">
+                                        <div class="faq-question flex items-center justify-between cursor-pointer"
+                                            data-faq="brands-3">
+                                            <h3
+                                                class="text-[#12203A] font-normal text-[22px] leading-[1.64] tracking-[0.023em] flex-1">
                                                 Do I have to negotiate rates with each creator?
                                             </h3>
                                             <div class="w-6 h-6 flex items-center justify-center">
-                                                <svg class="w-5 h-3 text-black transform rotate-0 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 15l7-7 7 7"></path>
+                                                <svg class="w-5 h-3 text-black transform rotate-0 transition-transform duration-300"
+                                                    fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                                        stroke-width="2" d="M5 15l7-7 7 7"></path>
                                                 </svg>
                                             </div>
                                         </div>
                                         <div class="faq-answer max-h-0 overflow-hidden transition-all duration-300">
                                             <div class="mt-4">
-                                                <p class="text-[#12203A] font-normal text-[22px] leading-[1.64] tracking-[0.023em]">
-                                                    No, we offer wholesale rates that are pre-negotiated. You get transparent, fixed pricing without the hassle of individual negotiations.
+                                                <p
+                                                    class="text-[#12203A] font-normal text-[22px] leading-[1.64] tracking-[0.023em]">
+                                                    No, we offer wholesale rates that are pre-negotiated. You get
+                                                    transparent, fixed pricing without the hassle of individual
+                                                    negotiations.
                                                 </p>
                                             </div>
                                         </div>
@@ -1648,20 +1876,26 @@
                                 <div class="space-y-8">
                                     <!-- FAQ Item 1 -->
                                     <div class="faq-item bg-[#F3F6FB] rounded-xl p-6 transition-all duration-300">
-                                        <div class="faq-question flex items-center justify-between cursor-pointer" data-faq="agencies-1">
-                                            <h3 class="text-[#12203A] font-normal text-[22px] leading-[1.64] tracking-[0.023em] flex-1">
+                                        <div class="faq-question flex items-center justify-between cursor-pointer"
+                                            data-faq="agencies-1">
+                                            <h3
+                                                class="text-[#12203A] font-normal text-[22px] leading-[1.64] tracking-[0.023em] flex-1">
                                                 Can I manage multiple client campaigns?
                                             </h3>
                                             <div class="w-6 h-6 flex items-center justify-center">
-                                                <svg class="w-5 h-3 text-black transform rotate-0 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 15l7-7 7 7"></path>
+                                                <svg class="w-5 h-3 text-black transform rotate-0 transition-transform duration-300"
+                                                    fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                                        stroke-width="2" d="M5 15l7-7 7 7"></path>
                                                 </svg>
                                             </div>
                                         </div>
                                         <div class="faq-answer max-h-0 overflow-hidden transition-all duration-300">
                                             <div class="mt-4">
-                                                <p class="text-[#12203A] font-normal text-[22px] leading-[1.64] tracking-[0.023em]">
-                                                    Yes, our agency dashboard allows you to manage multiple client campaigns simultaneously with separate billing and reporting.
+                                                <p
+                                                    class="text-[#12203A] font-normal text-[22px] leading-[1.64] tracking-[0.023em]">
+                                                    Yes, our agency dashboard allows you to manage multiple client
+                                                    campaigns simultaneously with separate billing and reporting.
                                                 </p>
                                             </div>
                                         </div>
@@ -1669,20 +1903,26 @@
 
                                     <!-- FAQ Item 2 -->
                                     <div class="faq-item bg-[#F3F6FB] rounded-xl p-6 transition-all duration-300">
-                                        <div class="faq-question flex items-center justify-between cursor-pointer" data-faq="agencies-2">
-                                            <h3 class="text-[#12203A] font-normal text-[22px] leading-[1.64] tracking-[0.023em] flex-1">
+                                        <div class="faq-question flex items-center justify-between cursor-pointer"
+                                            data-faq="agencies-2">
+                                            <h3
+                                                class="text-[#12203A] font-normal text-[22px] leading-[1.64] tracking-[0.023em] flex-1">
                                                 Do you offer white-label solutions?
                                             </h3>
                                             <div class="w-6 h-6 flex items-center justify-center">
-                                                <svg class="w-5 h-3 text-black transform rotate-0 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 15l7-7 7 7"></path>
+                                                <svg class="w-5 h-3 text-black transform rotate-0 transition-transform duration-300"
+                                                    fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                                        stroke-width="2" d="M5 15l7-7 7 7"></path>
                                                 </svg>
                                             </div>
                                         </div>
                                         <div class="faq-answer max-h-0 overflow-hidden transition-all duration-300">
                                             <div class="mt-4">
-                                                <p class="text-[#12203A] font-normal text-[22px] leading-[1.64] tracking-[0.023em]">
-                                                    Yes, we provide white-label solutions for agencies wanting to offer influencer marketing services under their own brand.
+                                                <p
+                                                    class="text-[#12203A] font-normal text-[22px] leading-[1.64] tracking-[0.023em]">
+                                                    Yes, we provide white-label solutions for agencies wanting to offer
+                                                    influencer marketing services under their own brand.
                                                 </p>
                                             </div>
                                         </div>
@@ -1690,20 +1930,26 @@
 
                                     <!-- FAQ Item 3 -->
                                     <div class="faq-item bg-[#F3F6FB] rounded-xl p-6 transition-all duration-300">
-                                        <div class="faq-question flex items-center justify-between cursor-pointer" data-faq="agencies-3">
-                                            <h3 class="text-[#12203A] font-normal text-[22px] leading-[1.64] tracking-[0.023em] flex-1">
+                                        <div class="faq-question flex items-center justify-between cursor-pointer"
+                                            data-faq="agencies-3">
+                                            <h3
+                                                class="text-[#12203A] font-normal text-[22px] leading-[1.64] tracking-[0.023em] flex-1">
                                                 What reporting features are available?
                                             </h3>
                                             <div class="w-6 h-6 flex items-center justify-center">
-                                                <svg class="w-5 h-3 text-black transform rotate-0 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 15l7-7 7 7"></path>
+                                                <svg class="w-5 h-3 text-black transform rotate-0 transition-transform duration-300"
+                                                    fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                                        stroke-width="2" d="M5 15l7-7 7 7"></path>
                                                 </svg>
                                             </div>
                                         </div>
                                         <div class="faq-answer max-h-0 overflow-hidden transition-all duration-300">
                                             <div class="mt-4">
-                                                <p class="text-[#12203A] font-normal text-[22px] leading-[1.64] tracking-[0.023em]">
-                                                    Comprehensive reporting including campaign performance, ROI analysis, audience insights, and customizable client reports.
+                                                <p
+                                                    class="text-[#12203A] font-normal text-[22px] leading-[1.64] tracking-[0.023em]">
+                                                    Comprehensive reporting including campaign performance, ROI
+                                                    analysis, audience insights, and customizable client reports.
                                                 </p>
                                             </div>
                                         </div>
@@ -1716,20 +1962,26 @@
                                 <div class="space-y-8">
                                     <!-- FAQ Item 1 -->
                                     <div class="faq-item bg-[#F3F6FB] rounded-xl p-6 transition-all duration-300">
-                                        <div class="faq-question flex items-center justify-between cursor-pointer" data-faq="creators-1">
-                                            <h3 class="text-[#12203A] font-normal text-[22px] leading-[1.64] tracking-[0.023em] flex-1">
+                                        <div class="faq-question flex items-center justify-between cursor-pointer"
+                                            data-faq="creators-1">
+                                            <h3
+                                                class="text-[#12203A] font-normal text-[22px] leading-[1.64] tracking-[0.023em] flex-1">
                                                 How do I get paid for collaborations?
                                             </h3>
                                             <div class="w-6 h-6 flex items-center justify-center">
-                                                <svg class="w-5 h-3 text-black transform rotate-0 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 15l7-7 7 7"></path>
+                                                <svg class="w-5 h-3 text-black transform rotate-0 transition-transform duration-300"
+                                                    fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                                        stroke-width="2" d="M5 15l7-7 7 7"></path>
                                                 </svg>
                                             </div>
                                         </div>
                                         <div class="faq-answer max-h-0 overflow-hidden transition-all duration-300">
                                             <div class="mt-4">
-                                                <p class="text-[#12203A] font-normal text-[22px] leading-[1.64] tracking-[0.023em]">
-                                                    Payments are processed automatically after content approval. We support multiple payment methods and ensure timely payments.
+                                                <p
+                                                    class="text-[#12203A] font-normal text-[22px] leading-[1.64] tracking-[0.023em]">
+                                                    Payments are processed automatically after content approval. We
+                                                    support multiple payment methods and ensure timely payments.
                                                 </p>
                                             </div>
                                         </div>
@@ -1737,20 +1989,27 @@
 
                                     <!-- FAQ Item 2 -->
                                     <div class="faq-item bg-[#F3F6FB] rounded-xl p-6 transition-all duration-300">
-                                        <div class="faq-question flex items-center justify-between cursor-pointer" data-faq="creators-2">
-                                            <h3 class="text-[#12203A] font-normal text-[22px] leading-[1.64] tracking-[0.023em] flex-1">
+                                        <div class="faq-question flex items-center justify-between cursor-pointer"
+                                            data-faq="creators-2">
+                                            <h3
+                                                class="text-[#12203A] font-normal text-[22px] leading-[1.64] tracking-[0.023em] flex-1">
                                                 What are the content requirements?
                                             </h3>
                                             <div class="w-6 h-6 flex items-center justify-center">
-                                                <svg class="w-5 h-3 text-black transform rotate-0 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 15l7-7 7 7"></path>
+                                                <svg class="w-5 h-3 text-black transform rotate-0 transition-transform duration-300"
+                                                    fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                                        stroke-width="2" d="M5 15l7-7 7 7"></path>
                                                 </svg>
                                             </div>
                                         </div>
                                         <div class="faq-answer max-h-0 overflow-hidden transition-all duration-300">
                                             <div class="mt-4">
-                                                <p class="text-[#12203A] font-normal text-[22px] leading-[1.64] tracking-[0.023em]">
-                                                    Content requirements vary by campaign but typically include high-quality visuals, authentic messaging, and adherence to brand guidelines.
+                                                <p
+                                                    class="text-[#12203A] font-normal text-[22px] leading-[1.64] tracking-[0.023em]">
+                                                    Content requirements vary by campaign but typically include
+                                                    high-quality visuals, authentic messaging, and adherence to brand
+                                                    guidelines.
                                                 </p>
                                             </div>
                                         </div>
@@ -1758,20 +2017,27 @@
 
                                     <!-- FAQ Item 3 -->
                                     <div class="faq-item bg-[#F3F6FB] rounded-xl p-6 transition-all duration-300">
-                                        <div class="faq-question flex items-center justify-between cursor-pointer" data-faq="creators-3">
-                                            <h3 class="text-[#12203A] font-normal text-[22px] leading-[1.64] tracking-[0.023em] flex-1">
+                                        <div class="faq-question flex items-center justify-between cursor-pointer"
+                                            data-faq="creators-3">
+                                            <h3
+                                                class="text-[#12203A] font-normal text-[22px] leading-[1.64] tracking-[0.023em] flex-1">
                                                 How do I join the platform?
                                             </h3>
                                             <div class="w-6 h-6 flex items-center justify-center">
-                                                <svg class="w-5 h-3 text-black transform rotate-0 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 15l7-7 7 7"></path>
+                                                <svg class="w-5 h-3 text-black transform rotate-0 transition-transform duration-300"
+                                                    fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                                        stroke-width="2" d="M5 15l7-7 7 7"></path>
                                                 </svg>
                                             </div>
                                         </div>
                                         <div class="faq-answer max-h-0 overflow-hidden transition-all duration-300">
                                             <div class="mt-4">
-                                                <p class="text-[#12203A] font-normal text-[22px] leading-[1.64] tracking-[0.023em]">
-                                                    Simply sign up with your social media profiles. If you have 1,000+ followers, you can start receiving collaboration opportunities immediately.
+                                                <p
+                                                    class="text-[#12203A] font-normal text-[22px] leading-[1.64] tracking-[0.023em]">
+                                                    Simply sign up with your social media profiles. If you have 1,000+
+                                                    followers, you can start receiving collaboration opportunities
+                                                    immediately.
                                                 </p>
                                             </div>
                                         </div>
@@ -1787,27 +2053,31 @@
     </main>
 
     <!-- Footer -->
-    <footer class="text-white py-12 relative overflow-hidden" style="background-image: url('public/Mask group.png'); background-size: cover; background-position: center;">
-        
+    <footer class="text-white py-12 relative overflow-hidden"
+        style="background-image: url('images/Mask group.png'); background-size: cover; background-position: center;">
+
         <div class="container mx-auto px-4 relative z-10">
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
                 <!-- Logo + Social Media Section -->
                 <div class="lg:col-span-1">
                     <div class="mb-6">
-                        <img src="public/logo.svg" alt="BookMeNow" class="h-8 w-auto mb-4">
+                        <img src="images/logo.svg" alt="BookMeNow" class="h-8 w-auto mb-4">
                     </div>
                     <div class="flex gap-6">
                         <!-- Facebook -->
                         <div class="hover:opacity-80 transition-opacity cursor-pointer">
-                            <img src="public/facebook-icon.svg" alt="Facebook" class="w-12 h-12" style="width: 48px; height: 48px;">
+                            <img src="images/facebook-icon.svg" alt="Facebook" class="w-12 h-12"
+                                style="width: 48px; height: 48px;">
                         </div>
                         <!-- YouTube -->
                         <div class="hover:opacity-80 transition-opacity cursor-pointer">
-                            <img src="public/youtube-icon.svg" alt="YouTube" class="w-12 h-12" style="width: 48px; height: 48px;">
+                            <img src="images/youtube-icon.svg" alt="YouTube" class="w-12 h-12"
+                                style="width: 48px; height: 48px;">
                         </div>
                         <!-- TikTok -->
                         <div class="hover:opacity-80 transition-opacity cursor-pointer">
-                            <img src="public/tiktok-icon.svg" alt="TikTok" class="w-12 h-12" style="width: 48px; height: 48px;">
+                            <img src="images/tiktok-icon.svg" alt="TikTok" class="w-12 h-12"
+                                style="width: 48px; height: 48px;">
                         </div>
                     </div>
                 </div>
@@ -1825,8 +2095,10 @@
                 <div class="lg:col-span-1">
                     <h4 class="text-2xl font-semibold mb-8" style="color: #F3F6FB;">Policy</h4>
                     <ul class="space-y-5">
-                        <li><a href="#" class="text-lg leading-relaxed hover:text-white transition-colors" style="color: #D0D5DD;">Privacy & Policy</a></li>
-                        <li><a href="#" class="text-lg leading-relaxed hover:text-white transition-colors" style="color: #D0D5DD;">Terms & Condition</a></li>
+                        <li><a href="#" class="text-lg leading-relaxed hover:text-white transition-colors"
+                                style="color: #D0D5DD;">Privacy & Policy</a></li>
+                        <li><a href="#" class="text-lg leading-relaxed hover:text-white transition-colors"
+                                style="color: #D0D5DD;">Terms & Condition</a></li>
                     </ul>
                 </div>
 
@@ -1835,15 +2107,16 @@
                     <h4 class="text-2xl font-semibold mb-8" style="color: #F3F6FB;">Subscribe</h4>
                     <div class="space-y-6">
                         <div>
-                            <input type="email" 
-                                   placeholder="your_email@gmail.com" 
-                                   class="w-full px-5 py-4 text-lg bg-white border border-gray-300 rounded-lg text-gray-900 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                            <input type="email" placeholder="your_email@gmail.com"
+                                class="w-full px-5 py-4 text-lg bg-white border border-gray-300 rounded-lg text-gray-900 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent">
                         </div>
                         <div class="flex flex-col sm:flex-row gap-4">
-                            <button class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 text-lg rounded-lg font-medium transition-colors flex-1 sm:flex-none">
+                            <button
+                                class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 text-lg rounded-lg font-medium transition-colors flex-1 sm:flex-none">
                                 Contact Us Now
                             </button>
-                            <button class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 text-lg rounded-lg font-medium transition-colors flex-1 sm:flex-none">
+                            <button
+                                class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 text-lg rounded-lg font-medium transition-colors flex-1 sm:flex-none">
                                 Join Us Now
                             </button>
                         </div>
@@ -1870,14 +2143,14 @@
                 this.touchStartX = 0;
                 this.touchEndX = 0;
                 this.isTransitioning = false;
-                
+
                 // Logo data structure
                 this.logoData = [
-                    { name: "Partner 1", imageUrl: "public/logo-1-2f5dbe.png", alt: "Partner Logo 1" },
-                    { name: "Partner 2", imageUrl: "public/logo-2-2b2515.png", alt: "Partner Logo 2" },
-                    { name: "Partner 3", imageUrl: "public/logo-3-297b54.png", alt: "Partner Logo 3" },
-                    { name: "Partner 4", imageUrl: "public/logo-4-56d628.png", alt: "Partner Logo 4" },
-                    { name: "Partner 5", imageUrl: "public/logo-5-58335f.png", alt: "Partner Logo 5" }
+                    { name: "Partner 1", imageUrl: "images/logo-1-2f5dbe.png", alt: "Partner Logo 1" },
+                    { name: "Partner 2", imageUrl: "images/logo-2-2b2515.png", alt: "Partner Logo 2" },
+                    { name: "Partner 3", imageUrl: "images/logo-3-297b54.png", alt: "Partner Logo 3" },
+                    { name: "Partner 4", imageUrl: "images/logo-4-56d628.png", alt: "Partner Logo 4" },
+                    { name: "Partner 5", imageUrl: "images/logo-5-58335f.png", alt: "Partner Logo 5" }
                 ];
 
                 this.init();
@@ -1991,9 +2264,9 @@
 
             updateCarousel() {
                 if (this.isTransitioning) return;
-                
+
                 this.isTransitioning = true;
-                
+
                 // Update slide position
                 const translateX = -this.currentSlide * 100;
                 this.carousel.style.transform = `translateX(${translateX}%)`;
@@ -2017,7 +2290,7 @@
                     const isActive = index === this.currentSlide;
                     dot.classList.toggle('active', isActive);
                     dot.setAttribute('aria-selected', isActive.toString());
-                    
+
                     if (isActive) {
                         dot.classList.remove('bg-[#E4F0FE]');
                         dot.classList.add('bg-[#87E5D5]');
@@ -2097,7 +2370,7 @@
             toggleAutoplay() {
                 this.isAutoplay = !this.isAutoplay;
                 this.autoplayText.textContent = this.isAutoplay ? 'Pause' : 'Play';
-                
+
                 if (this.isAutoplay) {
                     this.startAutoplay();
                 } else {
@@ -2245,20 +2518,20 @@
             switchTab(e) {
                 const clickedTab = e.currentTarget;
                 const targetTab = clickedTab.dataset.tab;
-                
+
                 if (targetTab === this.currentTab) return;
 
                 // Update tab states
                 this.tabs.forEach(tab => {
                     const isActive = tab.dataset.tab === targetTab;
                     tab.classList.toggle('active', isActive);
-                    
+
                     // Update arrow visibility for active tab
                     const arrowContainer = tab.querySelector('div:last-child');
                     if (arrowContainer) {
                         arrowContainer.style.visibility = isActive ? 'visible' : 'hidden';
                     }
-                    
+
                     // Update arrow color based on active state
                     const arrow = tab.querySelector('svg');
                     if (arrow) {
@@ -2307,7 +2580,7 @@
 
                 // Update ARIA attributes
                 question.setAttribute('aria-expanded', (!isExpanded).toString());
-                
+
                 // Announce state change for screen readers
                 this.announceAccordionChange(question, !isExpanded);
             }
@@ -2315,7 +2588,7 @@
             handleTabKeydown(e) {
                 const tabs = Array.from(this.tabs);
                 const currentIndex = tabs.findIndex(tab => tab === e.currentTarget);
-                
+
                 switch (e.key) {
                     case 'ArrowLeft':
                     case 'ArrowUp':
@@ -2358,7 +2631,7 @@
                 announcement.setAttribute('aria-atomic', 'true');
                 announcement.className = 'sr-only';
                 announcement.textContent = `Switched to ${tabName} tab`;
-                
+
                 document.body.appendChild(announcement);
                 setTimeout(() => {
                     document.body.removeChild(announcement);
@@ -2372,7 +2645,7 @@
                 announcement.setAttribute('aria-atomic', 'true');
                 announcement.className = 'sr-only';
                 announcement.textContent = `${questionText} ${isExpanded ? 'expanded' : 'collapsed'}`;
-                
+
                 document.body.appendChild(announcement);
                 setTimeout(() => {
                     document.body.removeChild(announcement);
@@ -2478,7 +2751,7 @@
                 if (this.nextBtn) {
                     this.nextBtn.addEventListener('click', () => this.nextSlide());
                 }
-                
+
                 this.dots.forEach((dot, index) => {
                     dot.addEventListener('click', () => this.goToSlide(index));
                 });
@@ -2541,14 +2814,14 @@
         }
 
         // Campaign Features "See more" functionality
-        document.addEventListener('DOMContentLoaded', function() {
+        document.addEventListener('DOMContentLoaded', function () {
             console.log('See more functionality loaded');
-            
+
             // Get all see more buttons
             const seeMoreBrand = document.getElementById('see-more-brand');
             const seeMoreAgency = document.getElementById('see-more-agency');
             const seeMoreCreators = document.getElementById('see-more-creators');
-            
+
             // Get the shared expandable section
             const campaignDetails = document.getElementById('campaign-details');
 
@@ -2570,32 +2843,32 @@
                 [seeMoreBrand, seeMoreAgency, seeMoreCreators].forEach(btn => {
                     if (btn) btn.textContent = 'See more';
                 });
-                
+
                 // Hide all content sections
                 const brandDetails = document.getElementById('brand-details');
                 const agencyDetails = document.getElementById('agency-details');
                 const creatorsDetails = document.getElementById('creators-details');
-                
+
                 [brandDetails, agencyDetails, creatorsDetails].forEach(section => {
                     if (section) section.classList.add('hidden');
                 });
-                
+
                 // Reset all dots
                 const dotBrand = document.getElementById('dot-brand');
                 const dotAgency = document.getElementById('dot-agency');
                 const dotCreators = document.getElementById('dot-creators');
-                
+
                 [dotBrand, dotAgency, dotCreators].forEach(dot => {
                     if (dot) {
                         dot.classList.remove('bg-[#12203A]');
                         dot.classList.add('bg-[#E5E7EB]');
                     }
                 });
-                
+
                 // Set active button and show corresponding content
                 if (newActiveButton) {
                     newActiveButton.textContent = 'See less';
-                    
+
                     // Show corresponding content and update dot
                     if (newActiveButton.id === 'see-more-brand') {
                         if (brandDetails) brandDetails.classList.remove('hidden');
@@ -2617,7 +2890,7 @@
                         }
                     }
                 }
-                
+
                 activeButton = newActiveButton;
             }
 
@@ -2625,36 +2898,36 @@
             function toggleCampaignDetails(clickedButton) {
                 console.log('Toggle clicked for:', clickedButton.id);
                 console.log('Current state - isExpanded:', isExpanded, 'activeButton:', activeButton?.id);
-                
+
                 if (!isExpanded) {
                     // Show the section
                     campaignDetails.classList.remove('hidden');
                     campaignDetails.style.opacity = '0';
                     campaignDetails.style.transform = 'translateY(-20px)';
-                    
+
                     // Animate in
                     setTimeout(() => {
                         campaignDetails.style.transition = 'opacity 0.4s ease, transform 0.4s ease';
                         campaignDetails.style.opacity = '1';
                         campaignDetails.style.transform = 'translateY(0)';
                     }, 10);
-                    
+
                     isExpanded = true;
                     updateButtonStates(clickedButton);
-                    
+
                 } else if (activeButton === clickedButton) {
                     // Same button clicked - hide the section
                     campaignDetails.style.transition = 'opacity 0.4s ease, transform 0.4s ease';
                     campaignDetails.style.opacity = '0';
                     campaignDetails.style.transform = 'translateY(-20px)';
-                    
+
                     setTimeout(() => {
                         campaignDetails.classList.add('hidden');
                     }, 400);
-                    
+
                     isExpanded = false;
                     updateButtonStates(null);
-                    
+
                 } else {
                     // Different button clicked - just switch active button (keep content visible)
                     updateButtonStates(clickedButton);
@@ -2665,7 +2938,7 @@
             [seeMoreBrand, seeMoreAgency, seeMoreCreators].forEach(button => {
                 if (button && campaignDetails) {
                     console.log('Adding click listener to', button.id);
-                    button.addEventListener('click', function(e) {
+                    button.addEventListener('click', function (e) {
                         e.preventDefault();
                         console.log(button.id + ' clicked');
                         toggleCampaignDetails(button);
@@ -2675,4 +2948,5 @@
         });
     </script>
 </body>
+
 </html>
