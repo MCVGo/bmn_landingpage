@@ -33,4 +33,17 @@
   - Added click-outside-to-close functionality
   - Maintained form validation compatibility
   - Added visual feedback with arrow rotation and focus states
-  - Ensured accessibility with proper ARIA attributes and keyboard support 
+  - Ensured accessibility with proper ARIA attributes and keyboard support
+
+### 2025-01-17
+- **Added "Popup 1" button and modal functionality**: Implemented a new popup modal based on the Figma design for account type selection:
+  - Added "Popup 1" buttons next to both "Get Started" buttons on the banner and CTA sections
+  - Created a new modal with account type selection interface (Brand, Agency, Creator)
+  - Implemented interactive account type selection with visual feedback
+  - Added proper modal animations and transitions
+  - Included progress indicator (1/2 steps) and "Back to Home" functionality
+  - Added gradient background on the right side matching the Figma design
+  - Implemented proper form validation and continue button functionality
+  - Added accessibility features (ARIA attributes, keyboard navigation, focus management)
+  - Ensured responsive design for mobile and desktop
+  - Added proper error handling and user feedback 
