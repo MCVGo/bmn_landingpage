@@ -1184,6 +1184,12 @@
                             <button id="popup1Btn" class="bg-[#36BFFA] text-white px-8 py-3 rounded-lg font-semibold hover:bg-blue-400 transition text-lg">
                                 Popup 1
                             </button>
+                            <button id="popup2Btn" class="bg-[#10B981] text-white px-8 py-3 rounded-lg font-semibold hover:bg-green-600 transition text-lg">
+                                Popup 2
+                            </button>
+                            <button id="popup3Btn" class="bg-[#F59E0B] text-white px-8 py-3 rounded-lg font-semibold hover:bg-yellow-600 transition text-lg">
+                                Popup 3
+                            </button>
                         </div>
                     </div>
                     <div class="w-1/2 flex justify-start">
@@ -1796,6 +1802,12 @@
                                 </button>
                                 <button id="popup1Btn2" class="bg-[#36BFFA] text-white px-5 py-3 rounded-lg font-semibold text-[22px] leading-[1.64] tracking-[0.03em] transition-colors hover:bg-blue-400">
                                     Popup 1
+                                </button>
+                                <button id="popup2Btn2" class="bg-[#10B981] text-white px-5 py-3 rounded-lg font-semibold text-[22px] leading-[1.64] tracking-[0.03em] transition-colors hover:bg-green-600">
+                                    Popup 2
+                                </button>
+                                <button id="popup3Btn2" class="bg-[#F59E0B] text-white px-5 py-3 rounded-lg font-semibold text-[22px] leading-[1.64] tracking-[0.03em] transition-colors hover:bg-yellow-600">
+                                    Popup 3
                                 </button>
                             </div>
                         </div>
@@ -3515,13 +3527,9 @@
 
                     console.log('Selected account type:', this.selectedAccountType);
                     
-                    // Here you can add logic to proceed to the next step
-                    // For now, just show an alert
-                    alert(`Selected account type: ${this.selectedAccountType}. Proceeding to next step...`);
-                    
-                    // You can redirect to a form or show another modal here
-                    // this.hideModal();
-                    // showNextStepModal();
+                    // Hide popup 1 and show popup 2
+                    this.hideModal();
+                    showPopup2();
                 }
             }
 
@@ -3537,18 +3545,414 @@
                 }
             }
 
+            // Popup 2 Modal Functionality
+            class Popup2Modal {
+                constructor() {
+                    this.modal = document.getElementById('popup2Modal');
+                    this.modalContent = this.modal?.querySelector('.modal-content');
+                    this.closeButton = document.getElementById('closePopup2Modal');
+                    this.backButton = document.getElementById('backToHomeBtn2');
+                    this.getOtpButton = document.getElementById('getOtpBtn');
+                    this.fullNameInput = document.getElementById('fullName2');
+                    this.emailInput = document.getElementById('email2');
+
+                    if (this.modal) {
+                        this.init();
+                    } else {
+                        console.error('Popup 2 Modal setup failed - missing elements');
+                    }
+                }
+
+                init() {
+                    this.bindEvents();
+                    this.setupAccessibility();
+                }
+
+                bindEvents() {
+                    // Popup 2 button events
+                    document.getElementById('popup2Btn')?.addEventListener('click', () => this.showModal());
+                    document.getElementById('popup2Btn2')?.addEventListener('click', () => this.showModal());
+
+                    // Close modal events
+                    this.closeButton?.addEventListener('click', () => this.hideModal());
+                    this.backButton?.addEventListener('click', () => this.goBack());
+
+                    // Click outside to close
+                    this.modal?.addEventListener('click', (e) => {
+                        if (e.target === this.modal) {
+                            this.hideModal();
+                        }
+                    });
+
+                    // ESC key to close
+                    document.addEventListener('keydown', (e) => {
+                        if (e.key === 'Escape' && !this.modal.classList.contains('hidden')) {
+                            this.hideModal();
+                        }
+                    });
+
+                    // Get OTP button
+                    this.getOtpButton?.addEventListener('click', () => this.handleGetOtp());
+                }
+
+                setupAccessibility() {
+                    if (this.modal) {
+                        this.modal.setAttribute('role', 'dialog');
+                        this.modal.setAttribute('aria-modal', 'true');
+                        this.modal.setAttribute('aria-labelledby', 'popup2-title');
+                    }
+                }
+
+                showModal() {
+                    console.log('showPopup2Modal called');
+
+                    // Show modal with animation
+                    this.modal.classList.remove('hidden');
+
+                    // Trigger reflow for animation
+                    this.modal.offsetHeight;
+
+                    // Add active classes for animation
+                    this.modal.classList.remove('opacity-0');
+                    this.modal.classList.add('opacity-100');
+                    this.modalContent.classList.remove('scale-95');
+                    this.modalContent.classList.add('scale-100');
+
+                    // Prevent body scroll and add modal-open class
+                    document.body.classList.add('modal-open');
+
+                    // Focus first input
+                    if (this.fullNameInput) {
+                        setTimeout(() => this.fullNameInput.focus(), 100);
+                    }
+                }
+
+                hideModal() {
+                    // Add closing animation classes
+                    this.modal.classList.add('opacity-0');
+                    this.modal.classList.remove('opacity-100');
+                    this.modalContent.classList.add('scale-95');
+                    this.modalContent.classList.remove('scale-100');
+
+                    // Hide modal after animation
+                    setTimeout(() => {
+                        this.modal.classList.add('hidden');
+                        // Restore body scroll and remove modal-open class
+                        document.body.classList.remove('modal-open');
+                    }, 300);
+
+                    // Reset form
+                    this.resetForm();
+                }
+
+                goBack() {
+                    // Go back to popup 1
+                    this.hideModal();
+                    showPopup1();
+                }
+
+                resetForm() {
+                    if (this.fullNameInput) this.fullNameInput.value = '';
+                    if (this.emailInput) this.emailInput.value = '';
+                }
+
+                handleGetOtp() {
+                    const fullName = this.fullNameInput?.value?.trim();
+                    const email = this.emailInput?.value?.trim();
+
+                    if (!fullName || !email) {
+                        alert('Please fill in all required fields');
+                        return;
+                    }
+
+                    if (!this.isValidEmail(email)) {
+                        alert('Please enter a valid email address');
+                        return;
+                    }
+
+                    console.log('Getting OTP for:', { fullName, email });
+                    
+                    // Hide popup 2 and show popup 3
+                    this.hideModal();
+                    showPopup3();
+                }
+
+                isValidEmail(email) {
+                    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                    return emailRegex.test(email);
+                }
+            }
+
+            // Popup 3 Modal Functionality
+            class Popup3Modal {
+                constructor() {
+                    this.modal = document.getElementById('popup3Modal');
+                    this.modalContent = this.modal?.querySelector('.modal-content');
+                    this.closeButton = document.getElementById('closePopup3Modal');
+                    this.backButton = document.getElementById('backToHomeBtn3');
+                    this.confirmButton = document.getElementById('confirmOtpBtn');
+                    this.resendButton = document.getElementById('resendCodeBtn');
+                    this.otpInputs = [
+                        document.getElementById('otp1'),
+                        document.getElementById('otp2'),
+                        document.getElementById('otp3'),
+                        document.getElementById('otp4'),
+                        document.getElementById('otp5'),
+                        document.getElementById('otp6')
+                    ];
+
+                    if (this.modal) {
+                        this.init();
+                    } else {
+                        console.error('Popup 3 Modal setup failed - missing elements');
+                    }
+                }
+
+                init() {
+                    this.bindEvents();
+                    this.setupAccessibility();
+                    this.setupOtpInputs();
+                }
+
+                bindEvents() {
+                    // Popup 3 button events
+                    document.getElementById('popup3Btn')?.addEventListener('click', () => this.showModal());
+                    document.getElementById('popup3Btn2')?.addEventListener('click', () => this.showModal());
+
+                    // Close modal events
+                    this.closeButton?.addEventListener('click', () => this.hideModal());
+                    this.backButton?.addEventListener('click', () => this.goBack());
+
+                    // Click outside to close
+                    this.modal?.addEventListener('click', (e) => {
+                        if (e.target === this.modal) {
+                            this.hideModal();
+                        }
+                    });
+
+                    // ESC key to close
+                    document.addEventListener('keydown', (e) => {
+                        if (e.key === 'Escape' && !this.modal.classList.contains('hidden')) {
+                            this.hideModal();
+                        }
+                    });
+
+                    // Confirm button
+                    this.confirmButton?.addEventListener('click', () => this.handleConfirm());
+
+                    // Resend code button
+                    this.resendButton?.addEventListener('click', () => this.handleResendCode());
+                }
+
+                setupAccessibility() {
+                    if (this.modal) {
+                        this.modal.setAttribute('role', 'dialog');
+                        this.modal.setAttribute('aria-modal', 'true');
+                        this.modal.setAttribute('aria-labelledby', 'popup3-title');
+                    }
+                }
+
+                setupOtpInputs() {
+                    this.otpInputs.forEach((input, index) => {
+                        if (!input) return;
+
+                        // Handle input
+                        input.addEventListener('input', (e) => {
+                            const value = e.target.value;
+                            if (value.length === 1) {
+                                // Move to next input
+                                if (index < this.otpInputs.length - 1) {
+                                    this.otpInputs[index + 1]?.focus();
+                                }
+                            }
+                            this.checkOtpComplete();
+                        });
+
+                        // Handle backspace
+                        input.addEventListener('keydown', (e) => {
+                            if (e.key === 'Backspace' && !e.target.value) {
+                                // Move to previous input
+                                if (index > 0) {
+                                    this.otpInputs[index - 1]?.focus();
+                                }
+                            }
+                        });
+
+                        // Handle paste
+                        input.addEventListener('paste', (e) => {
+                            e.preventDefault();
+                            const pastedData = e.clipboardData.getData('text');
+                            const numbers = pastedData.replace(/\D/g, '').slice(0, 6);
+                            
+                            this.otpInputs.forEach((input, i) => {
+                                if (input && numbers[i]) {
+                                    input.value = numbers[i];
+                                }
+                            });
+                            
+                            this.checkOtpComplete();
+                            this.otpInputs[Math.min(numbers.length, 5)]?.focus();
+                        });
+                    });
+                }
+
+                checkOtpComplete() {
+                    const isComplete = this.otpInputs.every(input => input && input.value.length === 1);
+                    
+                    if (isComplete) {
+                        this.confirmButton.disabled = false;
+                        this.confirmButton.classList.remove('bg-gray-200', 'text-gray-500');
+                        this.confirmButton.classList.add('bg-blue-500', 'text-white', 'hover:bg-blue-600');
+                    } else {
+                        this.confirmButton.disabled = true;
+                        this.confirmButton.classList.add('bg-gray-200', 'text-gray-500');
+                        this.confirmButton.classList.remove('bg-blue-500', 'text-white', 'hover:bg-blue-600');
+                    }
+                }
+
+                showModal() {
+                    console.log('showPopup3Modal called');
+
+                    // Show modal with animation
+                    this.modal.classList.remove('hidden');
+
+                    // Trigger reflow for animation
+                    this.modal.offsetHeight;
+
+                    // Add active classes for animation
+                    this.modal.classList.remove('opacity-0');
+                    this.modal.classList.add('opacity-100');
+                    this.modalContent.classList.remove('scale-95');
+                    this.modalContent.classList.add('scale-100');
+
+                    // Prevent body scroll and add modal-open class
+                    document.body.classList.add('modal-open');
+
+                    // Focus first OTP input
+                    if (this.otpInputs[0]) {
+                        setTimeout(() => this.otpInputs[0].focus(), 100);
+                    }
+                }
+
+                hideModal() {
+                    // Add closing animation classes
+                    this.modal.classList.add('opacity-0');
+                    this.modal.classList.remove('opacity-100');
+                    this.modalContent.classList.add('scale-95');
+                    this.modalContent.classList.remove('scale-100');
+
+                    // Hide modal after animation
+                    setTimeout(() => {
+                        this.modal.classList.add('hidden');
+                        // Restore body scroll and remove modal-open class
+                        document.body.classList.remove('modal-open');
+                    }, 300);
+
+                    // Reset form
+                    this.resetForm();
+                }
+
+                goBack() {
+                    // Go back to popup 2
+                    this.hideModal();
+                    showPopup2();
+                }
+
+                resetForm() {
+                    this.otpInputs.forEach(input => {
+                        if (input) input.value = '';
+                    });
+                    this.checkOtpComplete();
+                }
+
+                handleConfirm() {
+                    const otp = this.otpInputs.map(input => input?.value || '').join('');
+                    
+                    if (otp.length !== 6) {
+                        alert('Please enter the complete 6-digit OTP');
+                        return;
+                    }
+
+                    console.log('Confirming OTP:', otp);
+                    
+                    // Here you can add logic to verify OTP
+                    alert(`OTP ${otp} confirmed successfully! Registration completed.`);
+                    
+                    // You can add logic to proceed to success page here
+                    // this.hideModal();
+                    // showSuccessPage();
+                }
+
+                handleResendCode() {
+                    console.log('Resending OTP code...');
+                    
+                    // Here you can add logic to resend OTP
+                    alert('New OTP code has been sent to your email!');
+                    
+                    // Reset form
+                    this.resetForm();
+                    if (this.otpInputs[0]) {
+                        this.otpInputs[0].focus();
+                    }
+                }
+            }
+
+            // Global functions to show popups
+            function showPopup1() {
+                const popup1 = new Popup1Modal();
+                popup1.showModal();
+            }
+
+            function showPopup2() {
+                const popup2 = new Popup2Modal();
+                popup2.showModal();
+            }
+
+            function showPopup3() {
+                const popup3 = new Popup3Modal();
+                popup3.showModal();
+            }
+
+            // Initialize popup 2 modal
+            function initializePopup2Modal() {
+                console.log('Attempting to initialize popup 2 modal...');
+                try {
+                    new Popup2Modal();
+                } catch (error) {
+                    console.error('Error initializing popup 2 modal:', error);
+                    // Retry after a short delay
+                    setTimeout(initializePopup2Modal, 500);
+                }
+            }
+
+            // Initialize popup 3 modal
+            function initializePopup3Modal() {
+                console.log('Attempting to initialize popup 3 modal...');
+                try {
+                    new Popup3Modal();
+                } catch (error) {
+                    console.error('Error initializing popup 3 modal:', error);
+                    // Retry after a short delay
+                    setTimeout(initializePopup3Modal, 500);
+                }
+            }
+
             // Try multiple initialization methods
             if (document.readyState === 'loading') {
                 document.addEventListener('DOMContentLoaded', () => {
                     initializeModal();
                     initializeCustomDropdown();
                     initializePopup1Modal();
+                    initializePopup2Modal();
+                    initializePopup3Modal();
                 });
             } else {
                 // DOM is already loaded
                 initializeModal();
                 initializeCustomDropdown();
                 initializePopup1Modal();
+                initializePopup2Modal();
+                initializePopup3Modal();
             }
         </script>
 
@@ -3827,6 +4231,215 @@
             </div>
         </div>
         <!-- End Popup 1 Modal -->
+
+        <!-- Popup 2 Modal -->
+        <div id="popup2Modal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 hidden opacity-0 transition-opacity duration-300">
+            <div class="rounded-3xl max-w-6xl w-full mx-4 transform scale-95 transition-transform duration-300 modal-content relative shadow-xl overflow-hidden max-h-[90vh]" style="max-width: 1440px; height: 900px;">
+                
+                <!-- Close button -->
+                <button id="closePopup2Modal" class="absolute top-4 right-4 text-gray-400 hover:text-gray-600 transition-colors z-20">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                    </svg>
+                </button>
+
+                <div class="flex flex-col lg:flex-row h-full">
+                    <!-- Left Section - Content -->
+                    <div class="lg:w-[623px] w-full bg-white p-12 flex flex-col" style="width: 623px;">
+                        <!-- Back to Home -->
+                        <div class="flex items-center gap-4 mb-6">
+                            <button id="backToHomeBtn2" class="w-6 h-6 flex items-center justify-center">
+                                <svg class="w-4 h-4 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
+                                </svg>
+                            </button>
+                            <span class="text-gray-600 font-semibold text-base">Back</span>
+                        </div>
+
+                        <!-- Header with Logo -->
+                        <div class="flex flex-col items-start gap-4 mb-6">
+                            <div class="relative">
+                                <img src="images/logo_bl.svg" alt="BookMeNow" class="h-10 w-auto" />
+                            </div>
+                        </div>
+
+                        <!-- Main Content -->
+                        <div class="flex-1 flex flex-col">
+                            <!-- Title Section -->
+                            <div class="text-left mb-6">
+                                <h2 class="text-3xl font-semibold text-gray-900 mb-2">Let's get started</h2>
+                                <p class="text-base text-gray-600">Choose your account type</p>
+                            </div>
+
+                            <!-- Form Fields -->
+                            <div class="space-y-6 mb-6">
+                                <!-- Full Name Field -->
+                                <div class="space-y-1">
+                                    <label class="text-base font-medium text-gray-900">Full Name *</label>
+                                    <div class="relative">
+                                        <input type="text" id="fullName2" name="fullName2" required class="w-full px-3 py-3 bg-white border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-300 focus:border-transparent outline-none transition-all text-gray-700 placeholder-gray-400 shadow-sm" placeholder="Type your full name" />
+                                    </div>
+                                </div>
+
+                                <!-- Email Field -->
+                                <div class="space-y-1">
+                                    <label class="text-base font-medium text-gray-900">Email *</label>
+                                    <div class="relative">
+                                        <input type="email" id="email2" name="email2" required class="w-full px-3 py-3 bg-white border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-300 focus:border-transparent outline-none transition-all text-gray-700 placeholder-gray-400 shadow-sm" placeholder="Type your email" />
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Get OTP Button -->
+                            <button id="getOtpBtn" class="w-full bg-blue-500 text-white py-3 px-6 rounded-lg font-semibold text-base hover:bg-blue-600 transition-all duration-200 mb-4">
+                                Get OTP
+                            </button>
+
+                            <!-- Login Link -->
+                            <div class="text-center">
+                                <span class="text-sm text-gray-600">Already have an account? </span>
+                                <button class="text-sm text-blue-500 font-medium hover:underline">Login</button>
+                            </div>
+                        </div>
+
+                        <!-- Progress Indicator -->
+                        <div class="mt-8">
+                            <div class="flex items-center justify-between mb-2">
+                                <span class="text-xs text-gray-600">Almost done!</span>
+                                <span class="text-xs font-medium text-blue-500">2/2</span>
+                            </div>
+                            <div class="flex gap-3">
+                                <div class="h-1 bg-blue-500 rounded-full" style="width: 167px;"></div>
+                                <div class="h-1 bg-blue-500 rounded-full" style="width: 167px;"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Right Section - Background Image -->
+                    <div class="lg:w-[817px] w-full rounded-r-3xl relative overflow-hidden" style="width: 817px; height: 900px; background: linear-gradient(180deg, rgba(0, 91, 255, 1) 0%, rgba(21, 68, 155, 1) 81%, rgba(37, 38, 40, 1) 100%);">
+                        <!-- Background Image with proper sizing -->
+                        <div class="absolute inset-0 flex flex-col items-center justify-center">
+                            <img src="images/popup/popup-right-image.png" alt="Campaign Launch" class="max-w-full max-h-full object-contain mb-8" style="width: 740px; height: auto;" />
+                            
+                            <!-- Text below image -->
+                            <div class="flex flex-col items-center gap-2 px-8">
+                                <h3 class="text-2xl font-semibold text-white text-center leading-tight" style="max-width: 560px;">
+                                    Sign up to launch your first campaign
+                                </h3>
+                                <p class="text-base text-gray-300 text-center leading-relaxed" style="max-width: 559px;">
+                                    Reach your audience on digital articles with<br>BookMeNow contextual targeting
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- End Popup 2 Modal -->
+
+        <!-- Popup 3 Modal -->
+        <div id="popup3Modal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 hidden opacity-0 transition-opacity duration-300">
+            <div class="rounded-3xl max-w-6xl w-full mx-4 transform scale-95 transition-transform duration-300 modal-content relative shadow-xl overflow-hidden max-h-[90vh]" style="max-width: 1440px; height: 900px;">
+                
+                <!-- Close button -->
+                <button id="closePopup3Modal" class="absolute top-4 right-4 text-gray-400 hover:text-gray-600 transition-colors z-20">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                    </svg>
+                </button>
+
+                <div class="flex flex-col lg:flex-row h-full">
+                    <!-- Left Section - Content -->
+                    <div class="lg:w-[623px] w-full bg-white p-12 flex flex-col" style="width: 623px;">
+                        <!-- Back to Home -->
+                        <div class="flex items-center gap-4 mb-6">
+                            <button id="backToHomeBtn3" class="w-6 h-6 flex items-center justify-center">
+                                <svg class="w-4 h-4 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
+                                </svg>
+                            </button>
+                            <span class="text-gray-600 font-semibold text-base">Back</span>
+                        </div>
+
+                        <!-- Header with Logo -->
+                        <div class="flex flex-col items-start gap-4 mb-6">
+                            <div class="relative">
+                                <img src="images/logo_bl.svg" alt="BookMeNow" class="h-10 w-auto" />
+                            </div>
+                        </div>
+
+                        <!-- Main Content -->
+                        <div class="flex-1 flex flex-col">
+                            <!-- Title Section -->
+                            <div class="text-center mb-6">
+                                <h2 class="text-3xl font-semibold text-gray-900 mb-2">Enter Verification Code</h2>
+                                <p class="text-base text-gray-600">Please enter the verification code sent to the entered email</p>
+                            </div>
+
+                            <!-- OTP Input Fields -->
+                            <div class="flex flex-col items-center gap-6 mb-6">
+                                <div class="flex items-center gap-2">
+                                    <input type="text" id="otp1" class="w-11 h-11 text-center text-xl font-semibold border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-300 focus:border-transparent outline-none transition-all" maxlength="1" />
+                                    <input type="text" id="otp2" class="w-11 h-11 text-center text-xl font-semibold border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-300 focus:border-transparent outline-none transition-all" maxlength="1" />
+                                    <input type="text" id="otp3" class="w-11 h-11 text-center text-xl font-semibold border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-300 focus:border-transparent outline-none transition-all" maxlength="1" />
+                                    <input type="text" id="otp4" class="w-11 h-11 text-center text-xl font-semibold border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-300 focus:border-transparent outline-none transition-all" maxlength="1" />
+                                    <input type="text" id="otp5" class="w-11 h-11 text-center text-xl font-semibold border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-300 focus:border-transparent outline-none transition-all" maxlength="1" />
+                                    <input type="text" id="otp6" class="w-11 h-11 text-center text-xl font-semibold border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-300 focus:border-transparent outline-none transition-all" maxlength="1" />
+                                </div>
+
+                                <!-- Resend Code -->
+                                <div class="text-center">
+                                    <span class="text-xs text-gray-600">Didn't receive the code? </span>
+                                    <button id="resendCodeBtn" class="text-xs text-blue-400 font-medium hover:underline">Resend Code (42)</button>
+                                </div>
+                            </div>
+
+                            <!-- Confirm Button -->
+                            <button id="confirmOtpBtn" class="w-full bg-gray-200 text-gray-500 py-3 px-6 rounded-lg font-semibold text-base transition-all duration-200 mb-4" disabled>
+                                Confirm
+                            </button>
+
+                            <!-- Login Link -->
+                            <div class="text-center">
+                                <span class="text-sm text-gray-600">Already have an account? </span>
+                                <button class="text-sm text-blue-500 font-medium hover:underline">Login</button>
+                            </div>
+                        </div>
+
+                        <!-- Progress Indicator -->
+                        <div class="mt-8">
+                            <div class="flex items-center justify-between mb-2">
+                                <span class="text-xs text-gray-600">Almost done!</span>
+                                <span class="text-xs font-medium text-blue-500">2/2</span>
+                            </div>
+                            <div class="flex gap-3">
+                                <div class="h-1 bg-blue-500 rounded-full" style="width: 167px;"></div>
+                                <div class="h-1 bg-blue-500 rounded-full" style="width: 167px;"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Right Section - Background Image -->
+                    <div class="lg:w-[817px] w-full rounded-r-3xl relative overflow-hidden" style="width: 817px; height: 900px; background: linear-gradient(180deg, rgba(0, 91, 255, 1) 0%, rgba(21, 68, 155, 1) 81%, rgba(37, 38, 40, 1) 100%);">
+                        <!-- Background Image with proper sizing -->
+                        <div class="absolute inset-0 flex flex-col items-center justify-center">
+                            <img src="images/popup/popup-right-image.png" alt="Campaign Launch" class="max-w-full max-h-full object-contain mb-8" style="width: 740px; height: auto;" />
+                            
+                            <!-- Text below image -->
+                            <div class="flex flex-col items-center gap-2 px-8">
+                                <h3 class="text-2xl font-semibold text-white text-center leading-tight" style="max-width: 560px;">
+                                    Sign up to launch your first campaign
+                                </h3>
+                                <p class="text-base text-gray-300 text-center leading-relaxed" style="max-width: 559px;">
+                                    Reach your audience on digital articles with<br>BookMeNow contextual targeting
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- End Popup 3 Modal -->
     </body>
 
 </html>

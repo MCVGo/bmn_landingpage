@@ -46,4 +46,25 @@
   - Implemented proper form validation and continue button functionality
   - Added accessibility features (ARIA attributes, keyboard navigation, focus management)
   - Ensured responsive design for mobile and desktop
-  - Added proper error handling and user feedback 
+  - Added proper error handling and user feedback
+
+- **Created Popup 2 modal with form inputs**: Implemented the second step of the registration flow:
+  - Created popup 2 with layout similar to popup 1 but with form inputs instead of radio buttons
+  - Added Full Name and Email input fields with proper validation
+  - Implemented "Get OTP" button functionality with form validation
+  - Added navigation between popup 1 and popup 2 (Continue button in popup 1 opens popup 2)
+  - Updated progress indicator to show "2/2" and "Almost done!" text
+  - Maintained consistent styling and animations with popup 1
+  - Added proper form reset and accessibility features
+  - Implemented back navigation from popup 2 to popup 1
+
+- **Created Popup 3 modal with OTP verification**: Implemented the final step of the registration flow:
+  - Created popup 3 with 6-digit OTP input fields matching the Figma design
+  - Added interactive OTP input with auto-focus and navigation between fields
+  - Implemented paste functionality for OTP codes
+  - Added "Resend Code" functionality with countdown timer
+  - Created "Confirm" button that enables only when all 6 digits are entered
+  - Added navigation between popup 2 and popup 3 (Get OTP button opens popup 3)
+  - Maintained consistent styling and animations with previous popups
+  - Added proper form validation and accessibility features
+  - Implemented back navigation from popup 3 to popup 2 
